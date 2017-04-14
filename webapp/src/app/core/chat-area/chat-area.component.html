@@ -20,18 +20,11 @@
           type="iscomming">
           <span message-body>ไม่อะ แดกแล้ววววว</span>
         </app-message-bubble>
-        <app-message-bubble
-          *ngFor="let message of (chatMessages | async)"
-          class="conversation-message incomming"
-          [name]="message.username"
-          type="iscomming">
-          <span message-body>{{message.message}}</span>
-        </app-message-bubble>
       </div>
     </div>
     <div class="send-message-container">
       <form class="send-message-form">
-        <input class="message-input" name="messageInput" type="text" id="message-input" placeholder="พิมพ์ข้อความ..." (keyup.enter)="sendMessage()" [(ngModel)]="messageInput">
+        <input class="message-input" type="text" id="message-input" placeholder="พิมพ์ข้อความ...">
       </form>
     </div>
   </div>
