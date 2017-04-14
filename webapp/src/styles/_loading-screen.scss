@@ -1,0 +1,32 @@
+.loading-screen {
+  position: fixed;
+  top: 0;
+  left:0;
+  right:0;
+  bottom:0;
+  z-index: 1000;
+  background: #CCC;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .spinner {
+    width: 5rem;
+    height: 5rem;
+    border-left: 3px solid #FFF;
+    border-right: 3px solid #FFF;
+    border-top: 3px solid #FFF;
+    border-bottom: 3px solid #333;
+    border-radius: 100%;
+    animation: spinner-anim 0.5s linear infinite;
+  }
+}
+
+@keyframes spinner-anim {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
