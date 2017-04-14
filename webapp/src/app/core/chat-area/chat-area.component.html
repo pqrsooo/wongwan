@@ -23,8 +23,8 @@
       </div>
     </div>
     <div class="send-message-container">
-      <form class="send-message-form">
-        <input class="message-input" type="text" id="message-input" placeholder="พิมพ์ข้อความ...">
+      <form class="send-message-form" [formGroup]="sendMessageForm">
+        <input class="message-input" type="text" formControlName="message" placeholder="พิมพ์ข้อความ...">
       </form>
     </div>
   </div>
