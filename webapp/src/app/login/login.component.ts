@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 import { LoginService } from './login.service';
 
@@ -11,7 +12,11 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   errorMessage = '';
 
-  constructor(private loginService: LoginService, private fb: FormBuilder) { }
+  constructor(
+    private loginService: LoginService,
+    private fb: FormBuilder,
+    private router: Router
+  ) { }
 
   ngOnInit() {
     this.loginForm = this.fb.group({
@@ -33,7 +38,7 @@ export class LoginComponent implements OnInit {
     this.loginService.login(username, password)
       .subscribe(result => {
         if (result.success) {
-          console.log('Success', result.message);
+          this.router.navigate(['']);
         } else {
           this.loginForm.enable();
           this.errorMessage = result.message;

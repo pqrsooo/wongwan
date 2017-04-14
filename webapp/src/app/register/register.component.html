@@ -1,7 +1,7 @@
 <div class="row">
   <div class="columns">
     <h1>Register</h1>
-    <div *ngIf="errorMessage" class="login-error-msg">{{errorMessage}}</div>
+    <div *ngIf="errorMessage" class="register-error-msg">{{errorMessage}}</div>
     <form [formGroup]="registerForm" (submit)="register()">
       <label>
         Username:
