@@ -2,9 +2,12 @@ const config = require('./config');
 const app = require('./app');
 const db = require('./db');
 const ioServer = require('socket.io');
+const http = require('http');
+
+const appServer = http.Server(app);
 
 db.setUpDatabase().then(() => {
-  app.listen(config.express.port, config.express.ip, (err) => {
+  appServer.listen(config.express.port, config.express.ip, (err) => {
     if (err) {
       console.error('Unable to listen for connections', err);
       process.exit(10);
@@ -16,14 +19,18 @@ db.setUpDatabase().then(() => {
   process.exit(10);
 });
 
-const io = ioServer(app.server);
+const io = ioServer(appServer);
+const chat = io.of('/chat');
+
+let clientListNames = [];
 let numUsers = 0;
 
 io.on('connection', (socket) => {
   let addedUser = false;
 
   socket.on('new message', (data) => {
-    socket.broadcast.emit('new message', {
+    console.log('Hello', data);
+    io.emit('new message', {
       username: socket.username,
       message: data
     })

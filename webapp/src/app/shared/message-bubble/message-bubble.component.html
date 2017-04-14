@@ -1,0 +1,13 @@
+<div class="row">
+  <div class="columns flex-container align-top">
+    <div *ngIf="!isOutgoing()" class="profile-img">
+      <img src="assets/images/profile-img/3.jpg" width="35" height="35">
+    </div>
+    <div class="message-wrapper">
+      <span *ngIf="!isOutgoing()" class="sender">{{ name }}<br></span>
+      <div class="message-bubble" [class.highlighted]="isOutgoing()">
+        <ng-content select="[message-body]"></ng-content>
+      </div>
+    </div>
+  </div>
+</div>

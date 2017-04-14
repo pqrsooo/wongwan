@@ -1,0 +1,13 @@
+@import 'font';
+@import 'color';
+@import 'variables';
+@import 'helper';
+
+html {
+  @extend ._font-heading;
+  font-size: 14px;
+}
+
+html, body {
+  height: 100% !important;
+}
