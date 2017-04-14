@@ -1,3 +1,4 @@
-// @import '../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap';
+@import '~foundation-sites/scss/foundation';
+@include foundation-everything(true);
 
 @import './global';
