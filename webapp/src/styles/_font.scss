@@ -1,0 +1,111 @@
+/* ==========================================================================
+   Font face
+   ========================================================================== */
+
+/* Lato
+   -------------------------------------------------------------------------- */
+@font-face {
+  // Lato-Regular
+	font-family: 'Lato';
+	src: url('/assets/fonts/Lato/subset-Lato-Regular.eot');
+	src: local('Lato Regular'), local('Lato-Regular'),
+		url('/assets/fonts/Lato/subset-Lato-Regular.eot?#iefix') format('embedded-opentype'),
+		url('/assets/fonts/Lato/subset-Lato-Regular.woff') format('woff'),
+		url('/assets/fonts/Lato/subset-Lato-Regular.ttf') format('truetype');
+	font-weight: 300;
+	font-style: normal;
+}
+
+@font-face {
+  // Lato-Bold
+	font-family: 'Lato';
+	src: url('/assets/fonts/Lato/subset-Lato-Bold.eot');
+	src: local('Lato Bold'), local('Lato-Bold'),
+		url('/assets/fonts/Lato/subset-Lato-Bold.eot?#iefix') format('embedded-opentype'),
+		url('/assets/fonts/Lato/subset-Lato-Bold.woff') format('woff'),
+		url('/assets/fonts/Lato/subset-Lato-Bold.ttf') format('truetype');
+	font-weight: 400;
+	font-style: normal;
+}
+
+@font-face {
+  // Lato-Black
+	font-family: 'Lato';
+	src: url('/assets/fonts/Lato/subset-Lato-Black.eot');
+	src: local('Lato Black'), local('Lato-Black'),
+		url('/assets/fonts/Lato/subset-Lato-Black.eot?#iefix') format('embedded-opentype'),
+		url('/assets/fonts/Lato/subset-Lato-Black.woff') format('woff'),
+		url('/assets/fonts/Lato/subset-Lato-Black.ttf') format('truetype');
+	font-weight: 500;
+	font-style: normal;
+}
+
+/* Mitr
+   -------------------------------------------------------------------------- */
+@font-face {
+  // Mitr-Light
+	font-family: 'Mitr';
+	src: url('/assets/fonts/Mitr/subset-Mitr-Light.eot');
+	src: local('Mitr Light'), local('Mitr-Light'),
+		url('/assets/fonts/Mitr/subset-Mitr-Light.eot?#iefix') format('embedded-opentype'),
+		url('/assets/fonts/Mitr/subset-Mitr-Light.woff') format('woff'),
+		url('/assets/fonts/Mitr/subset-Mitr-Light.ttf') format('truetype');
+	font-weight: 300;
+	font-style: normal;
+}
+
+@font-face {
+  // Mitr-Regular
+	font-family: 'Mitr';
+	src: url('/assets/fonts/Mitr/subset-Mitr-Regular.eot');
+	src: local('Mitr Regular'), local('Mitr-Regular'),
+		url('/assets/fonts/Mitr/subset-Mitr-Regular.eot?#iefix') format('embedded-opentype'),
+		url('/assets/fonts/Mitr/subset-Mitr-Regular.woff') format('woff'),
+		url('/assets/fonts/Mitr/subset-Mitr-Regular.ttf') format('truetype');
+	font-weight: 400;
+	font-style: normal;
+}
+
+@font-face {
+  // Mitr-Medium
+	font-family: 'Mitr';
+	src: url('/assets/fonts/Mitr/subset-Mitr-Medium.eot');
+	src: local('Mitr Medium'), local('Mitr-Medium'),
+		url('/assets/fonts/Mitr/subset-Mitr-Medium.eot?#iefix') format('embedded-opentype'),
+		url('/assets/fonts/Mitr/subset-Mitr-Medium.woff') format('woff'),
+		url('/assets/fonts/Mitr/subset-Mitr-Medium.ttf') format('truetype');
+	font-weight: 500;
+	font-style: normal;
+}
+
+/* Thonburi
+   -------------------------------------------------------------------------- */
+@font-face {
+  font-family: 'Thonburi';
+	src: local('Thonburi Regular'), local('Thonburi-Regular');
+	font-weight: 400;
+	font-style: normal;
+}
+
+@font-face {
+  font-family: 'Thonburi';
+	src: local('Thonburi Bold'), local('Thonburi-Bold');
+	font-weight: 500;
+	font-style: normal;
+}
+
+/* Tahoma
+   -------------------------------------------------------------------------- */
+@font-face {
+  font-family: 'Tahoma';
+	src: local('Tahoma'), local('Tahoma Regular'), local('Tahoma-Regular');
+	font-weight: 400;
+	font-style: normal;
+}
+
+@font-face {
+  font-family: 'Tahoma';
+	src: local('Tahoma Bold'), local('Tahoma-Bold');
+	font-weight: 500;
+	font-style: normal;
+}
