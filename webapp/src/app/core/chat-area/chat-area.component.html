@@ -1,30 +1,89 @@
 <div class="row">
   <div class="chat-area-container">
-    <div class="conversation-container">
+    <div #conversationContainer class="conversation-container">
       <div class="conversation">
-        <app-message-bubble class="conversation-message incomming"
+        <app-message-bubble class="conversation-message incoming"
           name="Thanat"
-          type="iscomming">
+          type="iscomming"
+          timestamp="12:56">
           <span message-body>ทำไรอยู่?</span>
         </app-message-bubble>
         <app-message-bubble class="conversation-message outgoing"
-          type="outgoing">
+          type="outgoing"
+          timestamp="12:58">
           <span message-body>แดกบะหมี่</span>
         </app-message-bubble>
         <app-message-bubble class="conversation-message outgoing"
-          type="outgoing">
+          type="outgoing"
+          timestamp="12:58">
           <span message-body>ฝากสั่งป่าว?</span>
         </app-message-bubble>
-        <app-message-bubble class="conversation-message incomming"
+        <app-message-bubble class="conversation-message incoming"
           name="Thanat"
-          type="iscomming">
+          type="iscomming"
+          timestamp="13:04">
           <span message-body>ไม่อะ แดกแล้ววววว</span>
+        </app-message-bubble>
+        <app-message-bubble class="conversation-message outgoing"
+          type="outgoing"
+          timestamp="09:12">
+          <span message-body>ส่ง Stat ของ Flight Delay มาให้หน่อย<br>จะ export ส่งละ</span>
+        </app-message-bubble>
+        <app-message-bubble class="conversation-message incoming"
+          name="Thanat"
+          type="iscomming"
+          timestamp="09:13">
+          <span message-body>แปปป</span>
+        </app-message-bubble>
+        <app-message-bubble class="conversation-message incoming"
+          name="Thanat"
+          type="iscomming"
+          timestamp="09:37">
+          <span message-body>
+            Accuracy:  0.693291260063<br>
+            Precision:  0.272694058366<br>
+            Recall:  0.188292303488<br>
+            F1:  0.222766644075
+          </span>
+        </app-message-bubble>
+        <app-message-bubble class="conversation-message incoming"
+          name="Thanat"
+          type="iscomming"
+          timestamp="09:50">
+          <span message-body>
+            interface g0/0<br>
+            description R2 G0/0<br>
+            ip address 192.168.2.1 255.255.255.0<br>
+            no shutdown<br>
+            <br>
+            interface s0/0/0<br>
+            description R2 s0/0/0<br>
+            ip address 192.168.12.2 255.255.255.252<br>
+            no shutdown<br>
+            <br>
+            interface s0/0/1<br>
+            description R2 S0/0/1<br>
+            ip address 192.168.23.1 255.255.255.252<br>
+            clock rate 128000<br>
+            no shutdown
+          </span>
+        </app-message-bubble>
+        <app-message-bubble class="conversation-message outgoing"
+          type="outgoing"
+          timestamp="18:23"
+          [waitForServerResponse]="true">
+          <span message-body>ข้อความนี้ยังไม่ถึง Server</span>
         </app-message-bubble>
       </div>
     </div>
     <div class="send-message-container">
-      <form class="send-message-form">
-        <input class="message-input" type="text" id="message-input" placeholder="พิมพ์ข้อความ...">
+      <form class="send-message-form" [formGroup]="sendMessageForm">
+        <input class="message-input" type="text" formControlName="message" placeholder="พิมพ์ข้อความ...">
+        <span class="send-icon">
+          <button type="submit" class="" tabindex="-1">
+            <img src="assets/icons/send.svg" width="22" height="22">
+          </button>
+        </span>
       </form>
     </div>
   </div>

@@ -1,4 +1,17 @@
 // Place your settings in this file to overwrite default and user settings.
 {
-    "editor.tabSize": 2
+  "editor.tabSize": 2,
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/bower_components": true,
+    "**/chrome": true
+  },
+  "typescript.tsdk": "webapp/node_modules/typescript/lib",
+  "typescript.referencesCodeLens.enabled": true,
+  "tslint.nodePath": "./webapp/node_modules",
+  "tslint.configFile": "./webapp/tslint.json",
+  "editor.rulers": [
+    100,
+    120
+  ]
 }

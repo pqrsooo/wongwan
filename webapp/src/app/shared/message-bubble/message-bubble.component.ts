@@ -8,6 +8,8 @@ import { Component, Input, OnInit } from '@angular/core';
 export class MessageBubbleComponent implements OnInit {
   @Input() name: string | undefined;
   @Input() type: string;
+  @Input() timestamp: string;
+  @Input() waitForServerResponse: boolean | undefined;
 
   constructor() { }
 
