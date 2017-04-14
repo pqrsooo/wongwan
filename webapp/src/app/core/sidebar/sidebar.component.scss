@@ -23,12 +23,12 @@
   display: inline-block;
 }
 
-.time-unread-number {
+.timestamp-unread-number {
   flex-grow: 1;
   text-align: right;
-  .time {
+  .timestamp {
     font-size: 13px;
-    color: $grey;
+    color: $light-grey;
   }
   .unread-number {
     @extend ._font-bold;
