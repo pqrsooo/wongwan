@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 
-import { RegisterComponent } from './register.component';
-import { RegisterRoutingModule } from './register-routing.module';
-import { RegisterService } from './register.service';
 import { SharedModule } from '../shared/shared.module';
+import { RegisterRoutingModule } from './register-routing.module';
+import { RegisterComponent } from './register.component';
+import { RegisterService } from './register.service';
 
 @NgModule({
   imports: [RegisterRoutingModule, SharedModule],
