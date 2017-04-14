@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
+import { MessageBubbleComponent } from './message-bubble/message-bubble.component';
 
 @NgModule({
   imports: [
@@ -12,12 +13,13 @@ import { RouterModule } from '@angular/router';
     RouterModule
   ],
   declarations: [
-
+    MessageBubbleComponent
   ],
   exports: [
     CommonModule,
     FormsModule,
-    RouterModule
+    RouterModule,
+    MessageBubbleComponent
   ]
 })
 export class SharedModule { }

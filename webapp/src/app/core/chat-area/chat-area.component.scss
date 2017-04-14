@@ -14,6 +14,23 @@
 
   .conversation-container {
     flex-grow: 1;
+    padding: 0px 15px;
+    padding-top: 15px;
+  }
+
+  .conversation {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.conversation-message {
+  margin-bottom: 10px;
+  &.incoming {
+    align-self: flex-start;
+  }
+  &.outgoing {
+    align-self: flex-end;
   }
 }
 
@@ -26,7 +43,6 @@
     padding: 0 35px 0 15px;
     margin: 0;
     @extend ._font-serif;
-    font-size: 14px;
     background: rgba(250, 250, 250, 1) !important;
     appearance: none !important;
     box-shadow: none !important;
