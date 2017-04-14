@@ -4,21 +4,17 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 import { MessageBubbleComponent } from './message-bubble/message-bubble.component';
+import { BaseModule } from './base/base.module';
 
 @NgModule({
   imports: [
-    CommonModule,
-    FormsModule,
-    HttpModule,
-    RouterModule
+    BaseModule
   ],
   declarations: [
     MessageBubbleComponent
   ],
   exports: [
-    CommonModule,
-    FormsModule,
-    RouterModule,
+    BaseModule,
     MessageBubbleComponent
   ]
 })

@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
 import { SharedModule } from '../shared/shared.module';
@@ -7,7 +6,6 @@ import { ChatAreaComponent } from './chat-area/chat-area.component';
 
 @NgModule({
   imports: [
-    CommonModule,
     SharedModule
   ],
   declarations: [
@@ -15,7 +13,6 @@ import { ChatAreaComponent } from './chat-area/chat-area.component';
     ChatAreaComponent
   ],
   exports: [
-    CommonModule,
     SidebarComponent,
     ChatAreaComponent
   ]
