@@ -23,6 +23,10 @@
     display: flex;
     flex-direction: row;
     align-items: flex-end;
+
+    &.inactive {
+      opacity: 0.55;
+    }
   }
 
   .message-bubble {

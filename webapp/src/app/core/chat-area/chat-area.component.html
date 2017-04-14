@@ -46,11 +46,10 @@
             F1:  0.222766644075
           </span>
         </app-message-bubble>
-
         <app-message-bubble class="conversation-message incoming"
           name="Thanat"
           type="iscomming"
-          timestamp="09:37">
+          timestamp="09:50">
           <span message-body>
             interface g0/0<br>
             description R2 G0/0<br>
@@ -68,6 +67,12 @@
             clock rate 128000<br>
             no shutdown
           </span>
+        </app-message-bubble>
+        <app-message-bubble class="conversation-message outgoing"
+          type="outgoing"
+          timestamp="18:23"
+          [waitForServerResponse]="true">
+          <span message-body>ข้อความนี้ยังไม่ถึง Server</span>
         </app-message-bubble>
       </div>
     </div>
