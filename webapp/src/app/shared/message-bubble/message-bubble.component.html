@@ -3,10 +3,13 @@
     <div *ngIf="!isOutgoing()" class="profile-img">
       <img src="assets/images/profile-img/3.jpg" width="35" height="35">
     </div>
-    <div class="message-wrapper">
+    <div class="message-wrapper" [class.outgoing]="isOutgoing()">
       <span *ngIf="!isOutgoing()" class="sender">{{ name }}<br></span>
-      <div class="message-bubble" [class.highlighted]="isOutgoing()">
-        <ng-content select="[message-body]"></ng-content>
+      <div class="message-with-timestamp" [class.inactive]="waitForServerResponse">
+        <div class="message-bubble" [class.outgoing]="isOutgoing()">
+          <ng-content select="[message-body]"></ng-content>
+        </div>
+        <div class="timestamp">{{ timestamp }}</div>
       </div>
     </div>
   </div>

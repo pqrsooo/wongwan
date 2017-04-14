@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ElementRef, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
@@ -6,8 +6,9 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
   templateUrl: './chat-area.component.html',
   styleUrls: ['./chat-area.component.scss']
 })
-export class ChatAreaComponent implements OnInit {
+export class ChatAreaComponent implements OnInit, AfterViewInit {
   sendMessageForm: FormGroup;
+  @ViewChild('conversationContainer') conversationContainer: ElementRef;
 
   constructor(private fb: FormBuilder) { }
 
@@ -15,5 +16,13 @@ export class ChatAreaComponent implements OnInit {
     this.sendMessageForm = this.fb.group({
       message: this.fb.control('', Validators.required)
     });
+  }
+
+  ngAfterViewInit() {
+    this.scrollToBottom();
+  }
+
+  scrollToBottom() {
+    this.conversationContainer.nativeElement.scrollTop = this.conversationContainer.nativeElement.scrollHeight;
   }
 }
