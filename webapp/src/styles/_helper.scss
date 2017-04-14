@@ -1,0 +1,49 @@
+/* ==========================================================================
+    Typography
+   ========================================================================== */
+
+._font-sans-serif {
+  font-family: 'Lato', 'Mitr', sans-serif;
+}
+
+._font-serif {
+  font-family: 'Thonburi', 'Tahoma', serif;
+}
+
+._font-light {
+  font-weight: 300 !important;
+}
+
+._font-regular {
+  font-weight: 400 !important;
+}
+
+._font-bold {
+  font-weight: 500 !important;
+}
+
+strong, b {
+  @extend ._font-bold;
+}
+
+/* ==========================================================================
+    Element
+   ========================================================================== */
+
+._invisible {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  clip: rect(0 0 0 0);
+  overflow: hidden;
+}
+
+/* ==========================================================================
+    Transition
+   ========================================================================== */
+._transition-fast {
+  transition: all 0.15s ease-out !important;
+}

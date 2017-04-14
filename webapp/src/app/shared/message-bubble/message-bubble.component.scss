@@ -1,0 +1,29 @@
+@import 'color';
+
+.profile-img {
+  border-radius: 100%;
+  overflow: hidden;
+  display: inline-block;
+}
+
+.message-wrapper {
+  margin-left: 10px;
+  display: inline-block;
+
+  .sender {
+    font-size: 13px;
+    color: rgba(158, 158, 158, 1);
+  }
+
+  .message-bubble {
+    padding: 8px 12px;
+    background: rgba(226, 226, 226, 1);
+    border-radius: 15px;
+    color: black;
+
+    &.highlighted {
+      color: white;
+      background: $primary-color;
+    }
+  }
+}
