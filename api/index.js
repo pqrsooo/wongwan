@@ -17,9 +17,6 @@ db.setUpDatabase().then(() => {
 });
 
 const io = ioServer(app.server);
-const chat = io.of('/chat');
-
-let clientListNames = [];
 let numUsers = 0;
 
 io.on('connection', (socket) => {
