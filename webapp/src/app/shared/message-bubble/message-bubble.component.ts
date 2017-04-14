@@ -6,7 +6,7 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./message-bubble.component.scss']
 })
 export class MessageBubbleComponent implements OnInit {
-  @Input() name: string;
+  @Input() name: string | undefined;
   @Input() type: string;
 
   constructor() { }
