@@ -5,7 +5,7 @@ const chatRoomSchema = new mongoose.Schema({
     room: String,
     users: [{
         username: String,
-        lastSeenMessege: objID,
+        lastSeenMessage: objID,
     }],
 });
 
