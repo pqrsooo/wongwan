@@ -1,0 +1,22 @@
+{
+  "name": "wongwan-api",
+  "version": "0.0.0",
+  "license": "UNLICENSED",
+  "main": ".",
+  "scripts": {
+    "start": "node .",
+    "dev": "nodemon --delay 1 --inspect=0.0.0.0:9229 ."
+  },
+  "private": true,
+  "dependencies": {
+    "async": "2.3.0",
+    "compression": "1.6.2",
+    "express": "4.15.2",
+    "express-session": "1.15.2",
+    "helmet": "3.5.0",
+    "mongoose": "4.9.4"
+  },
+  "devDependencies": {
+    "nodemon": "1.11.0"
+  }
+}
