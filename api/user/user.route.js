@@ -14,8 +14,10 @@ router.get('/:username', (req, res) => {
     username: findingUsername
   }).then((count) => {
     if (count > 0) {
+      //TODO - Make it more general when we have more information
       res.status(200).json({
-        available: 'NO'
+        available: 'NO',
+        username: findingUsername
       });
     } else {
       res.status(200).json({
@@ -23,9 +25,10 @@ router.get('/:username', (req, res) => {
       });
     }
   }).catch((err) => {
+    console.error(err);
     res.status(500).send({
       error: 'Internal Error'
-    })
+    });
   });
 });
 

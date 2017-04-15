@@ -1,12 +1,13 @@
 const mongoose = require('mongoose');
-const objID = mongoose.Types.ObjectId;
+const objID = mongoose.Schema.Types.ObjectId;
 
 const chatRoomSchema = new mongoose.Schema({
     room: String,
+    token: String,
     users: [{
         username: String,
         lastSeenMessage: objID,
     }],
 });
-
-module.exports = chatRoomSchema;
+const m = mongoose.model('chatRoom',chatRoomSchema);
+module.exports = m;
