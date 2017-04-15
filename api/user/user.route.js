@@ -26,6 +26,11 @@ router.post('/signup', (req, res) => {
     })
     newUser.save().then((user) => {
       console.log('Successfully create new user')
+      req.session.user = {
+        username: user.username,
+        firstName: user.firstName,
+        lastName: user.lastName
+      };
       res.status(200).send({
         success: true,
         message: 'Successfully register user.',
@@ -61,10 +66,23 @@ router.post('/login', (req, res) => {
   }).then((user) => {
     bcrypt.compare(req.body.password, user.password).then((result) => {
       if (result) {
-        const { username, firstName, lastName } = user;
+        const {
+          username,
+          firstName,
+          lastName
+        } = user;
+        req.session.user = {
+          username: user.username,
+          firstName: user.firstName,
+          lastName: user.lastName
+        }
         res.status(200).json({
           success: true,
-          user: { username, firstName, lastName }
+          user: {
+            username,
+            firstName,
+            lastName
+          }
         });
       } else {
         res.status(400).json({
@@ -86,6 +104,14 @@ router.post('/login', (req, res) => {
       message: 'Could not find user'
     });
   });
+});
+
+router.get('/logout', (req, res) => {
+  req.session.destroy();
+  res.status(200).json({
+    success: true,
+    message: 'Successfully Log Out'
+  })
 });
 
 router.get('/validate-username', (req, res) => {

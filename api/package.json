@@ -13,9 +13,10 @@
     "bcrypt": "^1.0.2",
     "body-parser": "^1.17.1",
     "compression": "1.6.2",
+    "connect-redis": "^3.2.0",
     "cors": "^2.8.3",
     "express": "4.15.2",
-    "express-session": "1.15.2",
+    "express-session": "^1.15.2",
     "helmet": "3.5.0",
     "mongoose": "4.9.4",
     "socket.io": "^1.7.3"
