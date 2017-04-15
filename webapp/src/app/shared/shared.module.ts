@@ -1,20 +1,20 @@
-import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
-import { RouterModule } from '@angular/router';
-import { MessageBubbleComponent } from './message-bubble/message-bubble.component';
+
 import { BaseModule } from './base/base.module';
+import { MessageBubbleComponent } from './message-bubble/message-bubble.component';
+import { UserModule } from './user/user.module';
 
 @NgModule({
   imports: [
-    BaseModule
+    BaseModule,
+    UserModule
   ],
   declarations: [
     MessageBubbleComponent
   ],
   exports: [
     BaseModule,
+    UserModule,
     MessageBubbleComponent
   ]
 })

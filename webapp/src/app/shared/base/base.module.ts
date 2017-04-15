@@ -1,10 +1,11 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 
 import { APISocketService } from './api-socket.service';
+import { APIService } from './api.service';
 
 @NgModule({
   imports: [
@@ -16,10 +17,9 @@ import { APISocketService } from './api-socket.service';
   exports: [
     CommonModule,
     ReactiveFormsModule,
-    HttpModule,
     RouterModule
   ],
   declarations: [],
-  providers: [APISocketService],
+  providers: [APISocketService, APIService],
 })
 export class BaseModule { }
