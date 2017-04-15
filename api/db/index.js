@@ -12,7 +12,7 @@ function setUpDatabase() {
   isDatabaseSetUp = true;
   mongoose.Promise = Promise;
 
-  const mongoURI = `${config.mongodb.host}:${config.mongodb.port}`;
+  const mongoURI = `${config.mongodb.host}:${config.mongodb.port}/${config.mongodb.dbName}`;
   console.info('Connecting to MongoDB server', { connectionString: mongoURI });
   return mongoose.connect(mongoURI);
 }
