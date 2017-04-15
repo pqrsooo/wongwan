@@ -31,11 +31,6 @@ let numUsers = 0;
 
 io.on('connection', (socket) => {
   let addedUser = false;
-  // server listen on message 'createGroup'
-  socket.on('new group', (groupName) => {
-
-  })
-
   // emit 'new message' when user type in
   socket.on('new message', (data) => {
     socket.broadcast.emit('new message', {
