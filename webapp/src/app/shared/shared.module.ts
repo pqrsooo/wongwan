@@ -4,6 +4,7 @@ import { BaseModule } from './base/base.module';
 import { DaySeparatorStaticComponent } from './day-separator-static/day-separator-static.component';
 import { DaySeparatorComponent } from './day-separator/day-separator.component';
 import { SendIconComponent } from './icons/send-icon/send-icon.component';
+import { MessageBubbleCornerComponent } from './message-bubble/message-bubble-corner/message-bubble-corner.component';
 import { MessageBubbleComponent } from './message-bubble/message-bubble.component';
 import { UserModule } from './user/user.module';
 
@@ -16,7 +17,8 @@ import { UserModule } from './user/user.module';
     MessageBubbleComponent,
     DaySeparatorStaticComponent,
     DaySeparatorComponent,
-    SendIconComponent
+    SendIconComponent,
+    MessageBubbleCornerComponent
   ],
   exports: [
     BaseModule,
