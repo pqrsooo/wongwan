@@ -79,20 +79,20 @@ router.post('/login', (req, res) => {
   });
 });
 
-router.get('/:username', (req, res) => {
-  const findingUsername = req.params.username;
+router.get('/validateUsername', (req, res) => {
+  const findingUsername = req.body.username;
   User.count({
     username: findingUsername
   }).then((count) => {
     if (count > 0) {
       //TODO - Make it more general when we have more information
       res.status(200).json({
-        available: 'NO',
+        available: false,
         username: findingUsername
       });
     } else {
       res.status(200).json({
-        available: 'YES'
+        available: true
       });
     }
   }).catch((err) => {
