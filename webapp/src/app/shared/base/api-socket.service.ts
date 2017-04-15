@@ -2,14 +2,12 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import * as io from 'socket.io-client';
 
-import { environment } from '../../../environments/environment';
-
 @Injectable()
 export class APISocketService {
   private socket: SocketIOClient.Socket;
 
   constructor() {
-    this.socket = io(); //environment.socketURL , { path: environment.socketPath });
+    this.socket = io();
   }
 
   getEvent<T>(eventName: string) {
@@ -21,8 +19,8 @@ export class APISocketService {
       this.socket.on(eventName, listener);
 
       return () => {
-        this.socket.off(eventName, listener)
-      }
+        this.socket.off(eventName, listener);
+      };
     });
   }
 

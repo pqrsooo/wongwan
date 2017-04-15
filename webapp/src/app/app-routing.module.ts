@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { HomeComponent } from './home/home.component';
-import { LoginModule } from "app/login/login.module";
+import { UserLoginGuard } from './shared/user/user-login-guard.service';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent },
-  { path: 'login', loadChildren: 'app/login/login.module#LoginModule' }
+  { path: '', loadChildren: 'app/home/home.module#HomeModule', canActivate: [UserLoginGuard]},
+  { path: 'login', loadChildren: 'app/login/login.module#LoginModule' },
+  { path: 'register', loadChildren: 'app/register/register.module#RegisterModule' }
 ];
 
 @NgModule({

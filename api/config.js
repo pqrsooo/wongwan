@@ -39,6 +39,7 @@ module.exports = {
      *
      * @type {string}
      */
-    host: process.env.MONGODB_HOST || 'mongodb://db/wongwan-dev',
+    host: process.env.MONGODB_HOST || 'mongodb://db_ww',
+    dbName: process.env.MONGODB_DBNAME || 'wongwan-dev'
   },
 };

@@ -1,0 +1,57 @@
+<div class="row">
+  <div class="columns">
+    <h1>Register</h1>
+    <div *ngIf="errorMessage" class="register-error-msg">{{errorMessage}}</div>
+    <form [formGroup]="registerForm" (submit)="register()">
+      <label>
+        Username:
+        <input type="text"
+          formControlName="username"
+          required
+          #username
+          placeholder="Username">
+      </label>
+      <div *ngIf="registerForm.get('username').pending">Checking username...</div>
+      <div *ngIf="registerForm.get('username').valid">Valid username :)</div>
+      <div *ngIf="registerForm.get('username').invalid && username.value !== ''">Invalid username :(</div>
+
+      <label>
+        Password:
+        <input type="password"
+          formControlName="password"
+          required
+          placeholder="Password">
+      </label>
+
+      <label>
+        Confirm Password:
+        <input type="password"
+          formControlName="passwordConfirm"
+          required
+          #passwordConfirm
+          placeholder="Confirm Password">
+      </label>
+      <div *ngIf="registerForm.hasError('mismatch') && passwordConfirm.value !== ''">Mismatch password</div>
+
+      <label>
+        First Name:
+        <input type="text"
+          formControlName="firstName"
+          required
+          placeholder="First Name">
+      </label>
+
+      <label>
+        Last Name:
+        <input type="text"
+          formControlName="lastName"
+          required
+          placeholder="Last Name">
+      </label>
+
+      <button class="button" [disabled]="registerForm.disabled">Register</button>
+    </form>
+
+    {{registerForm.valid ? 'Valid' : 'Invalid'}}
+  </div>
+</div>

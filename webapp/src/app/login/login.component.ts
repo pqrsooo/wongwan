@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 import { LoginService } from './login.service';
 
@@ -7,27 +9,40 @@ import { LoginService } from './login.service';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  username: string = '';
-  password: string = '';
-  isAuthenticating = false;
-  errorMessage: string = '';
+  loginForm: FormGroup;
+  errorMessage = '';
 
-  constructor(private loginService: LoginService) { }
+  constructor(
+    private loginService: LoginService,
+    private fb: FormBuilder,
+    private router: Router
+  ) { }
 
-  ngOnInit(): void {
-    // throw new Error('Method not implemented.');
+  ngOnInit() {
+    this.loginForm = this.fb.group({
+      username: this.fb.control('', [Validators.required]),
+      password: this.fb.control('', [Validators.required])
+    });
   }
 
   login() {
-    this.isAuthenticating = true;
+    if (!this.loginForm.valid) {
+      this.errorMessage = 'Please enter username and password.';
+      return;
+    }
+
     this.errorMessage = '';
-    this.loginService.login(this.username, this.password).subscribe(result => {
-      if (result.success) {
-        console.log('Success', result.message);
-      } else {
-        this.isAuthenticating = false;
-        this.errorMessage = result.message;
-      }
-    });
+    this.loginForm.disable();
+
+    const { username, password } = this.loginForm.value;
+    this.loginService.login(username, password)
+      .subscribe(result => {
+        this.loginForm.enable();
+        if (result.success) {
+          this.router.navigate(['/']);
+        } else {
+          this.errorMessage = result.message;
+        }
+      });
   }
 }

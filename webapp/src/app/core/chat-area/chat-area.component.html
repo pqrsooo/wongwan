@@ -165,8 +165,8 @@
       </div>
     </div>
     <div class="send-message-container">
-      <form class="send-message-form">
-        <textarea auto-height class="message-input" type="text" id="message-input" placeholder="พิมพ์ข้อความ..."></textarea>
+      <form class="send-message-form" [formGroup]="sendMessageForm">
+        <textarea auto-height class="message-input" type="text" formControlName="message" placeholder="พิมพ์ข้อความ..."></textarea>
         <span class="send-icon">
           <button type="submit" class="" tabindex="-1">
             <app-send-icon class="send-icon-svg"

@@ -6,6 +6,10 @@ const http = require('http');
 
 const appServer = http.Server(app);
 
+const chatRoomSchema = require('./chatroom/chatroom.model');
+const userSchema = require('./user/user.model');
+const messageSchema = require('./message/message.model');
+
 db.setUpDatabase().then(() => {
   appServer.listen(config.express.port, config.express.ip, (err) => {
     if (err) {
@@ -19,7 +23,7 @@ db.setUpDatabase().then(() => {
   process.exit(10);
 });
 
-const io = ioServer(appServer);
+const io = ioServer(appServer, { serveClient:false });
 const chat = io.of('/chat');
 
 let clientListNames = [];
@@ -27,10 +31,14 @@ let numUsers = 0;
 
 io.on('connection', (socket) => {
   let addedUser = false;
+  // server listen on message 'createGroup'
+  socket.on('new group', (groupName) => {
 
+  })
+
+  // emit 'new message' when user type in
   socket.on('new message', (data) => {
-    console.log('Hello', data);
-    io.emit('new message', {
+    socket.broadcast.emit('new message', {
       username: socket.username,
       message: data
     })

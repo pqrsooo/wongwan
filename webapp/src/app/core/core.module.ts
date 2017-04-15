@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 
 import { SharedModule } from '../shared/shared.module';
-import { SidebarComponent } from './sidebar/sidebar.component';
-import { ChatAreaComponent } from './chat-area/chat-area.component';
 import { AutoHeightDirective } from './chat-area/auto-height.directive';
+import { ChatAreaComponent } from './chat-area/chat-area.component';
+import { SidebarComponent } from './sidebar/sidebar.component';
 
 @NgModule({
   imports: [

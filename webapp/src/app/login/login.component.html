@@ -2,16 +2,17 @@
   <div class="columns">
     <h1>Login</h1>
     <div *ngIf="errorMessage" class="login-error-msg">{{errorMessage}}</div>
-    <form (submit)="login()">
+    <form [formGroup]="loginForm" (submit)="login()">
       <label>
         Username:
-        <input type="text" name="username" [(ngModel)]="username" placeholder="Username" [disabled]="isAuthenticating">
+        <input type="text" formControlName="username" placeholder="Username" required>
       </label>
       <label>
         Password:
-        <input type="password" name="password" [(ngModel)]="password" placeholder="Password" [disabled]="isAuthenticating">
+        <input type="password" formControlName="password" placeholder="Password" required>
       </label>
-      <button class="button" [disabled]="isAuthenticating">Login</button>
+      <button class="button" [disabled]="loginForm.disabled">Login</button>
     </form>
+    <a routerLink="/register">Register</a>
   </div>
 </div>
