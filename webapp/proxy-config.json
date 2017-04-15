@@ -4,8 +4,6 @@
   },
   "/socket.io/*": {
     "target": "http://localhost:3000",
-    "logLevel": "debug",
-    "changeOrigin": true,
     "secure": false
   }
 }
