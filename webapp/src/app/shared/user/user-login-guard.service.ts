@@ -10,7 +10,7 @@ export class UserLoginGuard implements CanActivate {
   canActivate() {
     return this.userService.isLoggedIn().do(isLoggedIn => {
       if (!isLoggedIn) {
-        this.router.navigate(['/login']);
+        this.router.navigate(['/login'], { skipLocationChange: true });
       }
     });
   }

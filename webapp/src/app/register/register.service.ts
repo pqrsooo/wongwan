@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 
+import { APIService } from '../shared/base/api.service';
+
 interface RegisterResult {
   success: boolean;
   message: string;
@@ -9,22 +11,31 @@ interface RegisterResult {
 interface RegisterDetail {
   username: string;
   password: string;
-  displayName: string;
+  firstName: string;
+  lastName: string;
 }
+
+interface UsernameCheckResult {
+  available: boolean;
+}
+
+const checkUsernameDebounceTime = 300;
 
 @Injectable()
 export class RegisterService {
-  register(detail: RegisterDetail): Observable<RegisterResult> {
-    console.log(detail);
+  constructor(private api: APIService) { }
 
-    return Observable.of({
-      success: false,
-      message: 'The system is not opened for registration yet. :)'
-    }).delay(1000);
+  register(detail: RegisterDetail): Observable<RegisterResult> {
+    return this.api.requestPOST<RegisterResult>('/api/user/signup', detail, true);
   }
 
   isUsernameUsable(username: string) {
-    console.log('Start');
-    return Observable.of(username !== 'futurizing').delay(500);
+    return Observable.of({})
+      .delay(checkUsernameDebounceTime)
+      .mergeMap(() => this.api.requestGET<UsernameCheckResult>(
+        '/api/user/validate-username',
+        { username }
+      ))
+      .map(result => result.available);
   }
 }

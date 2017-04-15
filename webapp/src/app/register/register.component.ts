@@ -37,7 +37,8 @@ export class RegisterComponent implements OnInit {
         username: this.fb.control('', [Validators.required], usernameCheckValidator),
         password: this.fb.control('', [Validators.required]),
         passwordConfirm: this.fb.control('', [Validators.required]),
-        displayName: this.fb.control('', [Validators.required])
+        firstName: this.fb.control('', [Validators.required]),
+        lastName: this.fb.control('', [Validators.required])
       },
       { validator: passwordMatchValidator }
     );
@@ -53,8 +54,8 @@ export class RegisterComponent implements OnInit {
     this.errorMessage = '';
     this.registerForm.disable();
 
-    const { username, password, displayName } = this.registerForm.value;
-    this.registerService.register({ username, password, displayName })
+    const { username, password, firstName, lastName } = this.registerForm.value;
+    this.registerService.register({ username, password, firstName, lastName })
       .subscribe(result => {
         if (result.success) {
           console.log('Success', result.message);

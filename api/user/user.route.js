@@ -11,7 +11,8 @@ router.post('/signup', (req, res) => {
 
   if (!req.body.username || !req.body.password) {
     res.status(400).send({
-      error: 'No username or password defined'
+      success: false,
+      message: 'No username or password defined'
     });
   }
 
@@ -26,7 +27,8 @@ router.post('/signup', (req, res) => {
     newUser.save().then((user) => {
       console.log('Successfully create new user')
       res.status(200).send({
-        message: 'success',
+        success: true,
+        message: 'Successfully register user.',
         username: user.username,
         firstName: user.firstName,
         lastName: user.lastName
@@ -34,11 +36,13 @@ router.post('/signup', (req, res) => {
     }).catch((err) => {
       if (err.code === 11000) {
         res.status(400).send({
-          error: 'This username already exists'
+          success: false,
+          message: 'This username already exists'
         });
       } else {
         res.status(400).send({
-          error: 'Cannot create new user'
+          success: false,
+          message: 'Cannot create new user'
         })
       }
     });
@@ -48,39 +52,44 @@ router.post('/signup', (req, res) => {
 router.post('/login', (req, res) => {
   if (!req.body.username || !req.body.password) {
     res.status(400).send({
-      error: 'No username or password defined'
+      success: false,
+      message: 'No username or password defined'
     });
   };
   User.findOne({
     username: req.body.username
   }).then((user) => {
     bcrypt.compare(req.body.password, user.password).then((result) => {
-      if(result) {
+      if (result) {
+        const { username, firstName, lastName } = user;
         res.status(200).json({
-          message : 'Success',
-          user : user
+          success: true,
+          user: { username, firstName, lastName }
         });
       } else {
         res.status(400).json({
-          error: 'Invalid Password'
-        })
+          success: false,
+          message: 'Invalid Password'
+        });
       }
-    }).catch(err=>{
+    }).catch(err => {
       console.error(err);
       res.status(500).send({
-        error: 'Internal Error'
-      })
+        success: false,
+        message: 'Internal Error'
+      });
     })
   }).catch((err) => {
     console.error(err);
     res.status(400).send({
-      error: 'Could not find user'
-    })
+      success: false,
+      message: 'Could not find user'
+    });
   });
 });
 
-router.get('/validateUsername', (req, res) => {
-  const findingUsername = req.body.username;
+router.get('/validate-username', (req, res) => {
+  const findingUsername = req.query.username;
   User.count({
     username: findingUsername
   }).then((count) => {

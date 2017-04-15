@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit {
       .subscribe(result => {
         this.loginForm.enable();
         if (result.success) {
-          this.router.navigate(['/'], );
+          this.router.navigate(['/']);
         } else {
           this.errorMessage = result.message;
         }

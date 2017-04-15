@@ -34,11 +34,19 @@
       <div *ngIf="registerForm.hasError('mismatch') && passwordConfirm.value !== ''">Mismatch password</div>
 
       <label>
-        Display Name:
+        First Name:
         <input type="text"
-          formControlName="displayName"
+          formControlName="firstName"
           required
-          placeholder="Display Name">
+          placeholder="First Name">
+      </label>
+
+      <label>
+        Last Name:
+        <input type="text"
+          formControlName="lastName"
+          required
+          placeholder="Last Name">
       </label>
 
       <button class="button" [disabled]="registerForm.disabled">Register</button>
