@@ -5,6 +5,7 @@ exports.restrict = (req, res, next) => {
   } else {
     req.session.error = 'Access denied!';
     res.status(403).json({
+      isLogin: false,
       message: req.session.error
     })
   }

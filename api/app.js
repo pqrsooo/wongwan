@@ -28,6 +28,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 app.get('/api/restricted', unauthorizedFunc.restrict, function(req, res){
   res.status(200).json({
+    isLogin: true,
     message: 'Already logged in',
     user: req.session.user
   });
