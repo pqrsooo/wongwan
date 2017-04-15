@@ -37,10 +37,10 @@ export class LoginComponent implements OnInit {
     const { username, password } = this.loginForm.value;
     this.loginService.login(username, password)
       .subscribe(result => {
+        this.loginForm.enable();
         if (result.success) {
-          this.router.navigate(['']);
+          this.router.navigate(['/'], );
         } else {
-          this.loginForm.enable();
           this.errorMessage = result.message;
         }
       });
