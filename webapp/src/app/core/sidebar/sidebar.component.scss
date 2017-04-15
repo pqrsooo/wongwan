@@ -15,7 +15,7 @@
     }
   }
 
-  &:hover:not(.unread) {
+  &:hover:not(.-unread) {
     background-color: $grey-1;
   }
 }
