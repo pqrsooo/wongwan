@@ -23,7 +23,7 @@ router.post('/signup', (req, res) => {
       password: hash,
       firstName: req.body.firstName,
       lastName: req.body.lastName
-    })
+    });
     newUser.save().then((user) => {
       console.log('Successfully create new user')
       req.session.user = {
@@ -96,7 +96,7 @@ router.post('/login', (req, res) => {
         success: false,
         message: 'Internal Error'
       });
-    })
+    });
   }).catch((err) => {
     console.error(err);
     res.status(400).send({
@@ -111,7 +111,7 @@ router.get('/logout', (req, res) => {
   res.status(200).json({
     success: true,
     message: 'Successfully Log Out'
-  })
+  });
 });
 
 router.get('/validate-username', (req, res) => {
