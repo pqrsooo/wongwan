@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="19px" viewBox="0 0 24 19" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 43.1 (39012) - http://www.bohemiancoding.com/sketch -->
+    <title>message-bubble-corner</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <path d="M22.8136245,9.775589 C20.4947491,11.6328118 12.2088524,21.6598289 1.79172745,18.0560586 C8.09036601,12.0924782 9.23653781,5.13964239 9.08492778,0.307072795 C15.7040634,-7.02400418 28.3851392,2.86205879 22.8136245,9.775589 Z" id="message-bubble-corner" fill="#D8D8D8" transform="translate(12.992015, 8.276378) rotate(72.000000) translate(-12.992015, -8.276378) "></path>
+    </g>
+</svg>

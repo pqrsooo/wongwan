@@ -9,6 +9,9 @@
         <div class="message-bubble" [class.-outgoing]="isOutgoing()">
           <ng-content select="[message-body]"></ng-content>
         </div>
+        <div class="message-bubble-corner" [class.-outgoing]="isOutgoing()">
+          <app-message-bubble-corner width="14"></app-message-bubble-corner>
+        </div>
         <div class="timestamp">{{ timestamp }}</div>
       </div>
     </div>
