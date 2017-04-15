@@ -23,7 +23,7 @@ db.setUpDatabase().then(() => {
   process.exit(10);
 });
 
-const io = ioServer(appServer);
+const io = ioServer(appServer, { serveClient:false });
 const chat = io.of('/chat');
 
 let clientListNames = [];
@@ -33,7 +33,7 @@ io.on('connection', (socket) => {
   let addedUser = false;
   // server listen on message 'createGroup'
   socket.on('new group', (groupName) => {
-    
+
   })
 
   // emit 'new message' when user type in

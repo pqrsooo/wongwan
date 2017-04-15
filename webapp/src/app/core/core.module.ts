@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 
 import { SharedModule } from '../shared/shared.module';
+import { AutoHeightDirective } from './chat-area/auto-height.directive';
 import { ChatAreaComponent } from './chat-area/chat-area.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 
@@ -10,7 +11,8 @@ import { SidebarComponent } from './sidebar/sidebar.component';
   ],
   declarations: [
     SidebarComponent,
-    ChatAreaComponent
+    ChatAreaComponent,
+    AutoHeightDirective
   ],
   exports: [
     SidebarComponent,

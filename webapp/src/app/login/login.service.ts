@@ -14,7 +14,7 @@ interface ServerLoginResultSuccess {
     username: string;
     firstName: string;
     lastName: string;
-  }
+  };
 }
 
 interface ServerLoginResultFail {
