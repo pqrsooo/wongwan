@@ -1,4 +1,5 @@
 @import 'helper';
+@import 'color';
 
 .row {
   height: 100%;
@@ -13,24 +14,38 @@
   .send-message-container {}
 
   .conversation-container {
-    flex-grow: 1;
     padding: 15px;
+    padding-top: 0;
+    flex-grow: 1;
     overflow-y: scroll;
-  }
 
-  .conversation {
-    display: flex;
-    flex-direction: column;
+    .header {
+      position: fixed;
+      width: 100%;
+      top: 0;
+      margin-top: 0px;
+      z-index: -1;
+    }
+
+    .conversation {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      z-index: -2;
+    }
   }
 }
 
 .conversation-message {
   margin-bottom: 10px;
-  &.incoming {
+  &.-incoming {
     align-self: flex-start;
   }
-  &.outgoing {
+  &.-outgoing {
     align-self: flex-end;
+  }
+  &.-before-separator {
+    margin-bottom: 30px;
   }
 }
 
@@ -84,6 +99,14 @@
 
     > button {
       cursor: pointer;
+    }
+
+    .send-icon-svg /deep/ .primary-fill {
+      fill: $primary-color !important;
+    }
+
+    .send-icon-svg:hover /deep/ .primary-fill {
+      fill: darken($primary-color, 5%) !important;
     }
   }
 }
