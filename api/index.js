@@ -33,10 +33,23 @@ io.on('connection', (socket) => {
   let addedUser = false;
   // emit 'new message' when user type in
   socket.on('new message', (data) => {
-    socket.broadcast.emit('new message', {
+    const message = {
       username: socket.username,
-      message: data
-    })
+      content: data,
+      id: Date.now().toString() // TODO: Change to Mongo's _id
+    };
+
+    // We use setTimeout to simulate latency and use randomness to simulate out-of-order.
+    setTimeout(() => {
+      socket.broadcast.emit('new message', message)
+    }, Math.round(Math.random() * 3000));
+
+    setTimeout(() => {
+      socket.emit('new message ack', {
+        success: true,
+        message: message
+      });
+    }, Math.round(Math.random() * 500) + 200);
   })
 
   socket.on('add user', (username) => {
