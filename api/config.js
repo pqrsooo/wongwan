@@ -35,11 +35,31 @@ module.exports = {
      */
     port: process.env.MONGODB_PORT || 27017,
     /**
-     * An host address that the MongoDB server is running on.
+     * A host address that the MongoDB server is running on.
      *
      * @type {string}
      */
     host: process.env.MONGODB_HOST || 'mongodb://db_ww',
+    /**
+     * A database name that being used in MongoDB server
+     *
+     * @type {string}
+     */
     dbName: process.env.MONGODB_DBNAME || 'wongwan-dev'
   },
+  redis: {
+    /**
+     * A port number that the Redis server is running on.
+     *
+     * @type {number | string}
+     */
+    port: process.env.REDIS_PORT_6379_TCP_PORT || 6379,
+    /**
+     * A host address that the Redis server is running on.
+     *
+     * @type {string}
+     */
+    host: process.env.REDIS_PORT_6379_TCP_ADDR || '127.0.0.1',
+
+  }
 };
