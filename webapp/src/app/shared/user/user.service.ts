@@ -9,7 +9,7 @@ interface ServerLoginCheckResult {
     username: string;
     firstName: string;
     lastName: string;
-  }
+  };
 }
 
 @Injectable()
