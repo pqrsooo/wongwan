@@ -1,18 +1,23 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
 
-// import { APIService } from '../base/api.service';
+import { APIService } from '../base/api.service';
 
-let isLoggedIn = false;
+interface ServerLoginCheckResult {
+  isLogin: boolean;
+  message: string;
+  user?: {
+    username: string;
+    firstName: string;
+    lastName: string;
+  }
+}
 
 @Injectable()
 export class UserService {
-  // constructor(private api: APIService) { }
+  constructor(private api: APIService) { }
 
   isLoggedIn() {
-    // return this.api.requestGET('/user');
-    const result = Observable.of(isLoggedIn).delay(1000);
-    isLoggedIn = true;
-    return result;
+    return this.api.requestGET<ServerLoginCheckResult>('/api/restricted', undefined, true)
+      .map(result => result.isLogin);
   }
 }
