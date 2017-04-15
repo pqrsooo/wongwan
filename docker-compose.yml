@@ -22,6 +22,6 @@ services:
     ports:
       - '27017:27017' # MongoDB default port
     volumes:
-      - ./dbdata:/data/db_ww
+      - ./dbdata:/data/db
 # volumes:
 # db-data:
