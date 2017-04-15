@@ -51,16 +51,15 @@
 
 .send-message-form {
   position: relative;
-  // display: block;
 
   .message-input {
     width: 100%;
-    height: 50px;
-    line-height: 50px;
+    min-height: 50px;
     color: black;
-    padding: 0 60px 0 15px;
+    padding: 15px 60px 15px 15px;
     margin: 0;
     @extend ._font-body;
+    line-height: 21px;
     background: rgba(250, 250, 250, 1) !important;
     appearance: none !important;
     box-shadow: none !important;
@@ -93,7 +92,7 @@
   .send-icon {
     position: absolute;
     right: 20px;
-    top: (50 - 30) / 2 + px;
+    bottom: 10px;
     width: 30px;
     height: 30px;
 

@@ -17,7 +17,7 @@ import { DaySeparatorStaticComponent } from './day-separator-static/day-separato
     MessageBubbleComponent,
     DaySeparatorStaticComponent,
     DaySeparatorComponent,
-    SendIconComponent,
+    SendIconComponent
   ],
   exports: [
     BaseModule,
