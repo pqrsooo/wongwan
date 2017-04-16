@@ -55,9 +55,9 @@ router.post('/login', (req, res) => {
   if (!req.body.username || !req.body.password) {
     res.status(400).send({
       success: false,
-      message: 'No username or password defined'
+      message: 'No username or password defined',
     });
-  };
+  }
   User.findOne({
     username: req.body.username,
   }).then((user) => {
@@ -72,7 +72,7 @@ router.post('/login', (req, res) => {
           username: user.username,
           firstName: user.firstName,
           lastName: user.lastName,
-        },
+        };
         res.status(200).json({
           success: true,
           user: {
@@ -134,7 +134,5 @@ router.get('/validate-username', (req, res) => {
     });
   });
 });
-
-
 
 module.exports = router;
