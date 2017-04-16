@@ -41,6 +41,10 @@
     &.-inactive .timestamp {
       display: none;
     }
+
+    &.-failed {
+      opacity: 0.55;
+    }
   }
 
   .message-bubble {
