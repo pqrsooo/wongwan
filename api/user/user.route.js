@@ -1,7 +1,6 @@
 const express = require('express');
 const User = require('./user.model');
 const mongoose = require('mongoose');
-const bodyParser = require('body-parser');
 const bcrypt = require('bcrypt');
 const config = require('../config');
 
