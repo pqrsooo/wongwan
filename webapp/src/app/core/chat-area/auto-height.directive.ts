@@ -1,9 +1,9 @@
-import { AfterContentChecked, AfterViewInit, Directive, ElementRef, HostListener } from '@angular/core';
+import { AfterViewInit, Directive, ElementRef, HostListener } from '@angular/core';
 
 @Directive({
   selector: '[auto-height]'
 })
-export class AutoHeightDirective implements AfterViewInit, AfterContentChecked {
+export class AutoHeightDirective implements AfterViewInit {
 
   constructor(public el: ElementRef) {
   }
@@ -12,10 +12,6 @@ export class AutoHeightDirective implements AfterViewInit, AfterContentChecked {
     const thisNativeElement = this.el.nativeElement;
     thisNativeElement.style.overflow = 'hidden';
     thisNativeElement.style.resize = 'none';
-  }
-
-  ngAfterContentChecked() {
-    this.adjustHeight();
   }
 
   @HostListener('blur')
@@ -29,6 +25,7 @@ export class AutoHeightDirective implements AfterViewInit, AfterContentChecked {
   }
 
   adjustHeight() {
+    console.log('Enter adjustHeight()');
     const thisNativeElement = this.el.nativeElement;
     thisNativeElement.style.overflow = 'hidden';
     thisNativeElement.style.height = '1px'; // Set for determining content height from scrollHeight property
