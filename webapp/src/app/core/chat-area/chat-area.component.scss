@@ -6,12 +6,21 @@
 }
 
 .chat-area-container {
+  position: relative;
   display: flex;
   flex-direction: column;
   width: 100%;
   height: 100%;
 
   .send-message-container {}
+
+  >.header {
+    position: absolute;
+    width: 100%;
+    margin-left: 15px;
+    margin-top: 0px;
+    z-index: -1;
+  }
 
   .conversation-container {
     padding: 15px;
