@@ -1,5 +1,20 @@
 @import 'color';
+@import 'helper';
 
-.row {
+$top-navigation-bar-height: 56;
+.top-navigation-bar {
+  height: $top-navigation-bar-height + px;
   background: $primary-color;
+  display: flex;
+  justify-content: space-between;
+}
+
+.action-group {
+  width: 30px;
+  height: $top-navigation-bar-height;
+}
+
+.user {
+  width: 30px;
+  height: $top-navigation-bar-height;
 }

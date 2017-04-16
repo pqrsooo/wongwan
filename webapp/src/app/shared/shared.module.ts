@@ -6,6 +6,7 @@ import { DaySeparatorComponent } from './day-separator/day-separator.component';
 import { SendIconComponent } from './icons/send-icon/send-icon.component';
 import { MessageBubbleCornerComponent } from './message-bubble/message-bubble-corner/message-bubble-corner.component';
 import { MessageBubbleComponent } from './message-bubble/message-bubble.component';
+import { ProfileImgComponent } from './profile-img/profile-img.component';
 import { UserModule } from './user/user.module';
 
 @NgModule({
@@ -18,7 +19,8 @@ import { UserModule } from './user/user.module';
     DaySeparatorStaticComponent,
     DaySeparatorComponent,
     SendIconComponent,
-    MessageBubbleCornerComponent
+    MessageBubbleCornerComponent,
+    ProfileImgComponent
   ],
   exports: [
     BaseModule,
@@ -26,7 +28,8 @@ import { UserModule } from './user/user.module';
     DaySeparatorStaticComponent,
     DaySeparatorComponent,
     SendIconComponent,
-    UserModule
+    ProfileImgComponent,
+    UserModule,
   ]
 })
 export class SharedModule { }

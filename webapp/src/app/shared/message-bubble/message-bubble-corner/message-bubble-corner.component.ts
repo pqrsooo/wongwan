@@ -9,13 +9,13 @@ export class MessageBubbleCornerComponent implements OnInit {
   @Input() width: number;
 
   private height: number;
-  private ratio: number = 19.0 / 24.0;
+  private ratio: number = 19 / 24;
 
   constructor() {
-    this.height = this.width * this.ratio;
   }
 
   ngOnInit() {
+    this.height = this.width * this.ratio;
   }
 
 }
