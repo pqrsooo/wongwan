@@ -4,6 +4,7 @@ import { SharedModule } from '../shared/shared.module';
 import { AutoHeightDirective } from './chat-area/auto-height.directive';
 import { ChatAreaComponent } from './chat-area/chat-area.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
+import { TopNavigationBarComponent } from './top-navigation-bar/top-navigation-bar.component';
 
 @NgModule({
   imports: [
@@ -12,11 +13,13 @@ import { SidebarComponent } from './sidebar/sidebar.component';
   declarations: [
     SidebarComponent,
     ChatAreaComponent,
-    AutoHeightDirective
+    AutoHeightDirective,
+    TopNavigationBarComponent
   ],
   exports: [
     SidebarComponent,
-    ChatAreaComponent
+    ChatAreaComponent,
+    TopNavigationBarComponent
   ]
 })
 export class CoreModule { }
