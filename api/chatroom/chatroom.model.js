@@ -2,8 +2,8 @@ const mongoose = require('mongoose');
 const objID = mongoose.Schema.Types.ObjectId;
 
 const chatRoomSchema = new mongoose.Schema({
-    room: String,
-    token: String,
+    roomName: String,
+    roomID: String,
     users: [{
         username: String,
         lastSeenMessage: objID,
