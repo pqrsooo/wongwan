@@ -9,6 +9,9 @@ const getUser = (username) => {
   return userPromise;
 };
 
+exports.getUserFromUsername = (username) => {
+  return getUser(username);
+};
 
 exports.getAllUserID = (users) => {
   const userIDArr = users.map((user) => {

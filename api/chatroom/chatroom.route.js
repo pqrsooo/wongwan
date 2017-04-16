@@ -5,6 +5,7 @@ const Chatroom = require('./chatroom.model');
 const chatRoomQuery = require('./chatroom.query');
 const userQuery = require('../user/user.query');
 const utils = require('./utilities');
+
 const router = express.Router();
 
 //TODO - Add unauthorized middleware
@@ -13,18 +14,19 @@ const router = express.Router();
 router.post('/create-room', (req, res) => {
   const session = req.session;
   const user = session.user;
+  const joinUsers = req.body.joinUsers;
+  joinUsers.push(user.username);
+  const uniqueJoins = utils.uniqueArray(joinUsers);
   // will seach for objectID from username array
   // join Users should be array of User object
-
-  userQuery.getAllUserID(req.body.joinUsers).then((users) => {
+  userQuery.getAllUserID(uniqueJoins).then((users) => {
     utils.randomToken(48).then((buf) => {
       const chatRoom = new Chatroom({
         roomName: req.body.roomName,
         roomToken: buf.toString('hex'),
       });
       chatRoom.save().then((room) => {
-        userQuery.addChatRoom(users, room.roomToken).then((data) => {
-          console.log(data);
+        userQuery.addChatRoom(users, room).then((data) => {
           res.status(200).json({
             success: true,
             message: 'Successfully create Chatroom',
@@ -63,10 +65,17 @@ router.post('/create-room', (req, res) => {
 // for getting all the room for particular user
 router.get('/get-chatroom', (req, res) => {
   const session = req.session;
-  const user = session.user;
-  res.status(200).json({
-    message: "This will soon return chatroom",
-  })
+  userQuery.getUserFromUsername(session.user.username).then((user) => {
+    res.status(200).json({
+      chatRooms: user.chatRooms,
+    });
+  }).catch((err) => {
+    res.status(400).json({
+      success: false,
+      message: 'Cannot get ChatRooms',
+      err,
+    });
+  });
 });
 
 module.exports = router;
