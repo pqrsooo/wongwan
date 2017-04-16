@@ -22,7 +22,7 @@ export class CreateRoomService {
 
   createRoom(roomName: string, joinUsers: string[]) {
     return this.api.requestPOST<ServerCreateRoomResult>(
-      '/api/create-room',
+      '/api/chatroom/create-room',
       {
         joinUsers,
         roomName
