@@ -2,6 +2,8 @@ import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angula
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
 
+import { User } from '../../shared/user/user.model';
+import { UserService } from '../../shared/user/user.service';
 import { Message, OptimisticOutgoingMessage } from './internal/message.model';
 import { MessagesService } from './internal/messages.service';
 
@@ -16,12 +18,17 @@ export class ChatAreaComponent implements OnInit, AfterViewInit {
   sendMessageForm: FormGroup;
   messagesList: Observable<Message[]>;
   optimisticMessagesList: Observable<OptimisticOutgoingMessage[]>;
+  currentUser: Observable<User>;
   @ViewChild('conversationContainer') conversationContainer: ElementRef;
 
   public currentSeparatorTitle: string | null = null;
   public separators: any[] = [];
 
-  constructor(private fb: FormBuilder, private messagesService: MessagesService) { }
+  constructor(
+    private fb: FormBuilder,
+    private messagesService: MessagesService,
+    private userService: UserService
+  ) { }
 
   ngOnInit() {
     this.roomID = 'hello-world-room';
@@ -40,6 +47,8 @@ export class ChatAreaComponent implements OnInit, AfterViewInit {
 
     this.optimisticMessagesList = this.messagesService
       .getAccumulatedOptimisticMessageStream(this.roomID);
+
+    this.currentUser = this.userService.getCurrentUser$();
   }
 
   private checkScrollToBottom() {
