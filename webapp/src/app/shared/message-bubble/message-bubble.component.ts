@@ -1,22 +1,23 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, HostBinding, Input, OnChanges } from '@angular/core';
 
 @Component({
   selector: 'app-message-bubble',
   templateUrl: './message-bubble.component.html',
   styleUrls: ['./message-bubble.component.scss']
 })
-export class MessageBubbleComponent implements OnInit {
+export class MessageBubbleComponent implements OnChanges {
   @Input() name: string | undefined;
-  @Input() type: string;
+  @Input() isOutgoing?: boolean;
+  @Input() isBeforeSeparator?: boolean;
   @Input() timestamp: string;
   @Input() waitForServerResponse: boolean | undefined;
+  @HostBinding('class.-incoming') incomingClass?: boolean;
+  @HostBinding('class.-outgoing') outgoingClass?: boolean;
+  @HostBinding('class.-before-separator') beforeSeparatorClass?: boolean;
 
-  constructor() { }
-
-  ngOnInit() {
-  }
-
-  isOutgoing(): boolean {
-    return this.type === 'outgoing';
+  ngOnChanges() {
+    this.incomingClass = !this.isOutgoing;
+    this.outgoingClass = this.isOutgoing;
+    this.beforeSeparatorClass = this.isBeforeSeparator;
   }
 }

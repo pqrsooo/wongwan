@@ -12,25 +12,23 @@
           (notifyPosition)="updateSeparatorPosition($event)">
         </app-day-separator>
 
-        <app-message-bubble class="conversation-message -incoming"
+        <app-message-bubble
           name="Thanat"
-          type="iscomming"
           timestamp="12:56">
           <span message-body>ทำไรอยู่?</span>
         </app-message-bubble>
-        <app-message-bubble class="conversation-message -outgoing"
-          type="outgoing"
+        <app-message-bubble
+          [isOutgoing]="true"
           timestamp="12:58">
           <span message-body>แดกบะหมี่</span>
         </app-message-bubble>
-        <app-message-bubble class="conversation-message -outgoing"
-          type="outgoing"
+        <app-message-bubble
+          [isOutgoing]="true"
           timestamp="12:58">
           <span message-body>ฝากสั่งป่าว?</span>
         </app-message-bubble>
-        <app-message-bubble class="conversation-message -incoming -before-separator"
+        <app-message-bubble
           name="Thanat"
-          type="iscomming"
           timestamp="13:04">
           <span message-body>ไม่อะ แดกแล้ววววว</span>
         </app-message-bubble>
@@ -40,20 +38,18 @@
           (notifyPosition)="updateSeparatorPosition($event)">
         </app-day-separator>
 
-        <app-message-bubble class="conversation-message -outgoing"
-          type="outgoing"
+        <app-message-bubble
+          [isOutgoing]="true"
           timestamp="09:12">
           <span message-body>ส่ง Stat ของ Flight Delay มาให้หน่อย<br>จะ export ส่งละ</span>
         </app-message-bubble>
-        <app-message-bubble class="conversation-message -incoming"
+        <app-message-bubble
           name="Thanat"
-          type="iscomming"
           timestamp="09:13">
           <span message-body>แปปป</span>
         </app-message-bubble>
-        <app-message-bubble class="conversation-message -incoming"
+        <app-message-bubble
           name="Thanat"
-          type="iscomming"
           timestamp="09:37">
           <span message-body>
             Accuracy:  0.693291260063<br>
@@ -62,9 +58,8 @@
             F1:  0.222766644075
           </span>
         </app-message-bubble>
-        <app-message-bubble class="conversation-message -incoming"
+        <app-message-bubble
           name="Thanat"
-          type="iscomming"
           timestamp="09:50">
           <span message-body>
             interface g0/0<br>
@@ -84,8 +79,8 @@
             no shutdown
           </span>
         </app-message-bubble>
-        <app-message-bubble class="conversation-message -outgoing -before-separator"
-          type="outgoing"
+        <app-message-bubble
+          [isOutgoing]="true"
           timestamp="18:23"
           [waitForServerResponse]="true">
           <span message-body>ข้อความนี้ยังไม่ถึง Server</span>
@@ -96,9 +91,8 @@
           (notifyPosition)="updateSeparatorPosition($event)">
         </app-day-separator>
 
-        <app-message-bubble class="conversation-message -incoming"
+        <app-message-bubble
           name="Thanat"
-          type="iscomming"
           timestamp="09:37">
           <span message-body>
             Accuracy:  0.693291260063<br>
@@ -107,9 +101,8 @@
             F1:  0.222766644075
           </span>
         </app-message-bubble>
-        <app-message-bubble class="conversation-message -incoming"
+        <app-message-bubble
           name="Thanat"
-          type="iscomming"
           timestamp="09:50">
           <span message-body>
             interface g0/0<br>
@@ -129,9 +122,8 @@
             no shutdown
           </span>
         </app-message-bubble>
-        <app-message-bubble class="conversation-message -incoming"
+        <app-message-bubble
           name="Thanat"
-          type="iscomming"
           timestamp="09:37">
           <span message-body>
             Accuracy:  0.693291260063<br>
@@ -140,9 +132,8 @@
             F1:  0.222766644075
           </span>
         </app-message-bubble>
-        <app-message-bubble class="conversation-message -incoming"
+        <app-message-bubble
           name="Thanat"
-          type="iscomming"
           timestamp="09:50">
           <span message-body>
             interface g0/0<br>
@@ -165,16 +156,14 @@
 
         <app-message-bubble
           *ngFor="let message of (messagesList | async)"
-          class="conversation-message -outgoing"
-          type="outgoing"
+          [isOutgoing]="true"
           timestamp="18:23">
           <span message-body>{{message.content}}</span>
         </app-message-bubble>
 
         <app-message-bubble
           *ngFor="let message of (optimisticMessagesList | async)"
-          class="conversation-message -outgoing"
-          type="outgoing"
+          [isOutgoing]="true"
           waitForServerResponse="true"
           timestamp="18:23">
           <span message-body>{{message.content}}</span>

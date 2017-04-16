@@ -45,19 +45,6 @@
   }
 }
 
-.conversation-message {
-  margin-bottom: 10px;
-  &.-incoming {
-    align-self: flex-start;
-  }
-  &.-outgoing {
-    align-self: flex-end;
-  }
-  &.-before-separator {
-    margin-bottom: 30px;
-  }
-}
-
 .send-message-form {
   position: relative;
 
