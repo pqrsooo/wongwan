@@ -1,0 +1,37 @@
+<div class="row">
+  <div class="columns">
+    <h1>Create New Room</h1>
+    <div *ngIf="errorMessage" class=".create-room-error-msg">{{errorMessage}}</div>
+    <form [formGroup]="createRoomForm" (submit)="createRoom()">
+      <label>
+        Room Name:
+        <input type="text" formControlName="roomName" placeholder="Room Name" required>
+      </label>
+      <label>
+        Usernames:
+      </label>
+      <button class="button" type="button" (click)="addUsername()">Add</button>
+      <div formArrayName="usernames">
+        <div *ngFor="let username of usernames.controls; let i = index">
+          <div class="row">
+            <div class="columns small-1">
+              {{ i + 1 }}
+            </div>
+            <div class="columns small-7">
+              <input type="text" [formControlName]="i" placeholder="Enter username">
+            </div>
+            <div class="columns small-2">
+              <button class="button" type="button" (click)="removeUsername(i)">Remove</button>
+            </div>
+            <div class="columns small-2" *ngIf="username.value !== ''">
+              <span *ngIf="usernames.at(i).pending">Checking...</span>
+              <span *ngIf="usernames.at(i).valid">Valid</span>
+              <span *ngIf="usernames.at(i).invalid">Invalid</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button class="button" [disabled]="createRoomForm.disabled || !createRoomForm.valid">Create New Room</button>
+    </form>
+  </div>
+</div>
