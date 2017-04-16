@@ -19,7 +19,7 @@ router.post('/create-room', (req, res) => {
   const uniqueJoins = utils.uniqueArray(joinUsers);
   // will seach for objectID from username array
   // join Users should be array of User object
-  userQuery.getAllUserID(uniqueJoins).then((users) => {
+  userQuery.getAllUserIDFromUsernames(uniqueJoins).then((users) => {
     utils.randomToken(48).then((buf) => {
       const chatRoom = new Chatroom({
         roomName: req.body.roomName,
@@ -74,6 +74,18 @@ router.get('/get-chatroom', (req, res) => {
       success: false,
       message: 'Cannot get ChatRooms',
       err,
+    });
+  });
+});
+
+router.get('/get-users', (req, res) => {
+  chatRoomQuery.getChatroomID(req.body.roomToken).then((roomID) => {
+    
+  }).catch((err) => {
+    console.error(err);
+    res.status(400).json({
+      success: false,
+      message: 'Cannot get users',
     });
   });
 });
