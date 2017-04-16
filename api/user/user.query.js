@@ -4,15 +4,15 @@ const User = require('../user/user.model');
 
 const getUser = (username) => {
   const userPromise = User.findOne({
-    username: username
-  })
+    username,
+  });
   return userPromise;
 };
 
 
 exports.getAllUserID = (users) => {
   const userIDArr = users.map((user) => {
-    return getUser(username);
+    return getUser(user.username);
   });
   const results = Promise.all(userIDArr);
   return results;
@@ -20,10 +20,16 @@ exports.getAllUserID = (users) => {
 
 // This return Promise
 const updateUserChatRoom = (username, roomID) => {
-  const userPromise = User.findOneAndUpdate(
-    {username: username}, 
-    { $push: { chatRoom: { roomID: roomID, lastSeenMessage: null}}}
-  )
+  const userPromise = User.findOneAndUpdate({
+    username: username
+  }, {
+    $push: {
+      chatRoom: {
+        roomID: roomID,
+        lastSeenMessage: null
+      }
+    }
+  })
   return userPromise;
 }
 

@@ -16,31 +16,33 @@ router.post('/create-room', (req, res) => {
   // will seach for objectID from username array
   // join Users should be array of User object
 
-  const users = query.getAllUserID(req.body.joinUsers);
-  const roomToken = utils.randomToken(48);
-  const chatRoom = new Chatroom({
-    roomName: req.body.roomName,
-    roomToken: roomToken,
-  });
-  chatRoomQuery.saveChatRoom(chatRoom).then(data => {
-    userQuery.addChatRoom(users, chatRoom).then(data => {
-      res.status(200).json({
-        success: true,
-        message: 'Successfully create Chatroom',
-        roomToken: chatRoom.roomToken,
+  userQuery.getAllUserID(req.body.joinUsers).then((users) => {
+    const roomToken = utils.randomToken(48);
+    const chatRoom = new Chatroom({
+      roomName: req.body.roomName,
+      roomToken,
+    });
+    chatRoom.save().then((room) => {
+      userQuery.addChatRoom(users, chatRoom).then((data) => {
+        console.log(data);
+        res.status(200).json({
+          success: true,
+          message: 'Successfully create Chatroom',
+          roomToken: room.roomToken,
+        });
+      }).catch((err) => {
+        console.error('Fail to addChatroom with error', err);
+        res.status(400).json({
+          success: false,
+          message: 'Fail to create Chatroom',
+        });
       });
-    }).catch(err => {
-      console.error('Fail to addChatroom with error', err);
+    }).catch((err) => {
+      console.error('Fail to createChatroom', err);
       res.status(400).json({
         success: false,
         message: 'Fail to create Chatroom',
       });
-    });
-  }).catch(err => {
-    console.error('Fail to createChatroom', err);
-    res.status(400).json({
-      success: false,
-      message: 'Fail to create Chatroom',
     });
   });
 });
@@ -49,7 +51,6 @@ router.post('/create-room', (req, res) => {
 router.get('/get-chatroom', (req, res) => {
   const session = req.session;
   const user = session.user;
-
 
 });
 
