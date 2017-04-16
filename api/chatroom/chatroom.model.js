@@ -1,11 +1,11 @@
 const mongoose = require('mongoose');
-const ObjectID = mongoose.Schema.Types.ObjectId;
+const objectID = mongoose.Schema.Types.ObjectId;
 
 const chatRoomSchema = new mongoose.Schema({
     roomName: String,
-    roomID: String,
+    roomToken: String,
     users: [{
-        userID: ObjectID,
+        userID: objectID,
     }],
 });
 const m = mongoose.model('chatRoom',chatRoomSchema);
