@@ -1,7 +1,7 @@
 import { AfterViewInit, Directive, ElementRef, HostListener } from '@angular/core';
 
 @Directive({
-  selector: '[auto-height]'
+  selector: '[appAutoHeight]'
 })
 export class AutoHeightDirective implements AfterViewInit {
 
