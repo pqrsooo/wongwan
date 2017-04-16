@@ -24,7 +24,7 @@ const updateUserChatRoom = (username, roomID) => {
     username,
   }, {
     $push: {
-      chatRoom: {
+      chatRooms: {
         roomID,
         lastSeenMessage: null,
       },
@@ -33,9 +33,9 @@ const updateUserChatRoom = (username, roomID) => {
   return userPromise;
 };
 
-exports.addChatRoom = (users, roomID) => {
+exports.addChatRoom = (users, room) => {
   const updatedUsers = users.map((user) => {
-    return updateUserChatRoom(user.username, roomID);
+    return updateUserChatRoom(user.username, room._id);
   });
   const results = Promise.all(updatedUsers);
   return results;

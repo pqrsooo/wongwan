@@ -18,13 +18,13 @@ router.post('/create-room', (req, res) => {
 
   userQuery.getAllUserID(req.body.joinUsers).then((users) => {
     utils.randomToken(48).then((buf) => {
-      console.log(buf);
       const chatRoom = new Chatroom({
         roomName: req.body.roomName,
         roomToken: buf.toString('hex'),
       });
       chatRoom.save().then((room) => {
         userQuery.addChatRoom(users, room.roomToken).then((data) => {
+          console.log(data);
           res.status(200).json({
             success: true,
             message: 'Successfully create Chatroom',
