@@ -3,12 +3,11 @@ const app = require('./app');
 const db = require('./db');
 const ioServer = require('socket.io');
 const http = require('http');
+const ChatRoom = require('./chatroom/chatroom.model');
+const User = require('./user/user.model');
+const Message = require('./message/message.model');
 
 const appServer = http.Server(app);
-
-const chatRoomSchema = require('./chatroom/chatroom.model');
-const userSchema = require('./user/user.model');
-const messageSchema = require('./message/message.model');
 
 db.setUpDatabase().then(() => {
   appServer.listen(config.express.port, config.express.ip, (err) => {
