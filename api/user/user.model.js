@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const ObjectId = mongoose.Schema.Types.ObjectId;
+const objectID = mongoose.Schema.Types.ObjectId;
 
 const userSchema = new mongoose.Schema({
     username: { type: String, required: true, index: { unique: true } },
@@ -7,8 +7,8 @@ const userSchema = new mongoose.Schema({
     firstName: {type: String, required: true},
     lastName: {type: String, required: true},
     chatRooms : [{
-        roomID : ObjectId,
-        lastSeenMeesage: ObjectId
+        roomID : objectID,
+        lastSeenMeesage: objectID
     }]
 });
 //Users 
