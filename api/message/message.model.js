@@ -1,10 +1,10 @@
 const mongoose = require('mongoose');
-const objID = mongoose.Types.ObjectId;
+const objectID = mongoose.Schema.Types.ObjectId;
 
 const chatMessageSchema = new mongoose.Schema({
     message: String,
-    username: String,
-    room: String,
+    userID: objectID,
+    roomID: objectID,
 });
 
 module.exports = mongoose.model('chatMessage',chatMessageSchema);

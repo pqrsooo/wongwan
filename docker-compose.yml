@@ -23,5 +23,12 @@ services:
       - '27017:27017' # MongoDB default port
     volumes:
       - ./dbdata:/data/db
+  redis:
+    image: redis:3.0.7
+    container_name: redis_ww
+    ports:
+      - '6379:6379' # Redis default port
+    volumes:
+      - ./redisdata:/data
 # volumes:
 # db-data:

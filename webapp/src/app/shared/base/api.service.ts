@@ -12,9 +12,9 @@ interface HTTPGetParams {
 export class APIService {
   constructor(private http: Http) { }
 
-  requestGET<T>(endpointURL: string, data?: HTTPGetParams, throwError = false) {
+  requestGET<T>(endpointURL: string, data?: HTTPGetParams, notThrowError = false) {
     const path = environment.endpointURLPrefix + endpointURL;
-    return this.mapResponse<T>(this.http.get(path, { params: data }), throwError);
+    return this.mapResponse<T>(this.http.get(path, { params: data }), notThrowError);
 
   }
 
@@ -27,9 +27,9 @@ export class APIService {
     return this.mapResponse<T>(req, throwError);
   }
 
-  private mapResponse<T>(responseObservable: Observable<Response>, throwError: boolean) {
+  private mapResponse<T>(responseObservable: Observable<Response>, notThrowError: boolean) {
     return responseObservable.catch(err => {
-      if (throwError && err instanceof Response) {
+      if (notThrowError && err instanceof Response) {
         return Observable.of(err);
       }
       throw err;
