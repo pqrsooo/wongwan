@@ -1,8 +1,9 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import 'rxjs/add/observable/fromEvent';
-import 'rxjs/add/operator/debounceTime';
 import { Observable } from 'rxjs/Observable';
+
+import { Message, OptimisticOutgoingMessage } from './internal/message.model';
+import { MessagesService } from './internal/messages.service';
 
 @Component({
   selector: 'app-chat-area',
@@ -10,15 +11,20 @@ import { Observable } from 'rxjs/Observable';
   styleUrls: ['./chat-area.component.scss']
 })
 export class ChatAreaComponent implements OnInit, AfterViewInit {
+  roomID: string;
+
   sendMessageForm: FormGroup;
+  messagesList: Observable<Message[]>;
+  optimisticMessagesList: Observable<OptimisticOutgoingMessage[]>;
   @ViewChild('conversationContainer') conversationContainer: ElementRef;
 
   public currentSeparatorTitle: string | null = null;
   public separators: any[] = [];
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, private messagesService: MessagesService) { }
 
   ngOnInit() {
+    this.roomID = 'hello-world-room';
     this.sendMessageForm = this.fb.group({
       message: this.fb.control('', Validators.required)
     });
@@ -27,6 +33,17 @@ export class ChatAreaComponent implements OnInit, AfterViewInit {
       .subscribe(() => {
         this.currentSeparatorTitle = this.getCurrentSeparatorTitle();
       });
+
+    this.messagesList = this.messagesService
+      .getAccumulatedMessageStream(this.roomID)
+      .do(() => this.checkScrollToBottom());
+
+    this.optimisticMessagesList = this.messagesService
+      .getAccumulatedOptimisticMessageStream(this.roomID);
+  }
+
+  private checkScrollToBottom() {
+    // You can check whether to scroll to bottom or not here.
   }
 
   ngAfterViewInit() {
@@ -37,7 +54,25 @@ export class ChatAreaComponent implements OnInit, AfterViewInit {
   }
 
   scrollToBottom() {
-    this.conversationContainer.nativeElement.scrollTop = this.conversationContainer.nativeElement.scrollHeight;
+    // Wait for DOM to update
+    setTimeout(() => {
+      this.conversationContainer.nativeElement.scrollTop = this.conversationContainer.nativeElement.scrollHeight;
+    }, 1);
+  }
+
+  sendMessage(keyEvent: KeyboardEvent) {
+    if (keyEvent.shiftKey) {
+      return;
+    }
+
+    keyEvent.preventDefault();
+    keyEvent.stopPropagation();
+
+    if (this.sendMessageForm.valid) {
+      this.messagesService.sendMessage(this.roomID, this.sendMessageForm.value.message);
+      this.sendMessageForm.setValue({ message: '' });
+      this.scrollToBottom();
+    }
   }
 
   updateSeparatorPosition($event: any) {

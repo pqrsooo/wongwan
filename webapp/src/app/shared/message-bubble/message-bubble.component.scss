@@ -22,6 +22,7 @@
   }
 
   .message-with-timestamp {
+    position: relative;
     display: flex;
     flex-direction: row;
     align-items: flex-end;
@@ -41,6 +42,31 @@
       color: white;
       background: $primary-color;
       order: 10;
+    }
+  }
+
+  .message-bubble-corner {
+    position: absolute;
+    top: -2px;
+
+    &:not(.-outgoing) {
+      left: -5px;
+    }
+
+    &.-outgoing {
+      right: -5px;
+    }
+
+    /deep/ .primary-fill {
+      fill: $grey-1;
+    }
+
+    &.-outgoing /deep/ svg {
+      transform: scaleX(-1);
+    }
+
+    &.-outgoing /deep/ .primary-fill {
+      fill: $primary-color;
     }
   }
 
