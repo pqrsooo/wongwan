@@ -8,3 +8,8 @@ exports.randomToken = (size) => {
     });
   });
 };
+
+exports.uniqueArray = (arr) => {
+  const uset = new Set(arr);
+  return [...uset];
+};
