@@ -21,21 +21,21 @@ exports.getAllUserID = (users) => {
 // This return Promise
 const updateUserChatRoom = (username, roomID) => {
   const userPromise = User.findOneAndUpdate({
-    username: username
+    username,
   }, {
     $push: {
       chatRoom: {
-        roomID: roomID,
-        lastSeenMessage: null
-      }
-    }
-  })
+        roomID,
+        lastSeenMessage: null,
+      },
+    },
+  });
   return userPromise;
-}
+};
 
 exports.addChatRoom = (users, roomID) => {
-  const updatedUsers = users.map(user => {
-    return updateUserChatRoom(user.username, roomID)
+  const updatedUsers = users.map((user) => {
+    return updateUserChatRoom(user.username, roomID);
   });
   const results = Promise.all(updatedUsers);
   return results;

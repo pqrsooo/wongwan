@@ -1,8 +1,13 @@
 const mongoose = require('mongoose');
-const objectID = mongoose.Schema.Types.ObjectId;
 
 const chatRoomSchema = new mongoose.Schema({
   roomName: String,
-  roomToken: String,
+  roomToken: {
+    type: String,
+    required: true,
+    index: {
+      unique: true,
+    },
+  },
 });
 module.exports = mongoose.model('chatRoom', chatRoomSchema);

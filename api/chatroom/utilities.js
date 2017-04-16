@@ -1,7 +1,10 @@
-// User defined function 
+const crypto = require('crypto');
+
 exports.randomToken = (size) => {
-  const crypto = require('crypto');
-  crypto.randomBytes(size, (err, buf) => {
-    return buf.toString('hex');
-  })
+  return new Promise((resolve, reject) => {
+    crypto.randomBytes(size, (err, buf) => {
+      if (err) return reject(err);
+      return resolve(buf);
+    });
+  });
 };

@@ -22,7 +22,7 @@ router.post('/signup', (req, res) => {
       chatRooms: [],
     });
     newUser.save().then((user) => {
-      console.log('Successfully create new user')
+      console.log('Successfully create new user');
       req.session.user = {
         username: user.username,
         firstName: user.firstName,
