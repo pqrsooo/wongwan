@@ -29,6 +29,7 @@
         </app-message-bubble>
         <app-message-bubble
           name="Thanat"
+          [isBeforeSeparator]="true"
           timestamp="13:04">
           <span message-body>ไม่อะ แดกแล้ววววว</span>
         </app-message-bubble>
@@ -82,6 +83,7 @@
         <app-message-bubble
           [isOutgoing]="true"
           timestamp="18:23"
+          [isBeforeSeparator]="true"
           [waitForServerResponse]="true">
           <span message-body>ข้อความนี้ยังไม่ถึง Server</span>
         </app-message-bubble>
