@@ -25,8 +25,6 @@ export class ProfileImgComponent implements OnInit {
   ngOnInit() {
     this.height = this.width * this.heightRatio;
     this.borderRadius = this.width * this.borderRadiusRatio;
-    console.log(this.borderRadiusRatio);
-    console.log(this.borderRadius);
   }
 
   srcImageUrl(): string {

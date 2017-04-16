@@ -7,14 +7,38 @@ $top-navigation-bar-height: 56;
   background: $primary-color;
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  padding-left: 15px;
+  padding-right: 15px;
+  color: white;
 }
 
 .action-group {
-  width: 30px;
   height: $top-navigation-bar-height;
 }
 
+.user-flex-control {
+  padding: 5px 10px;
+  border-radius: 7px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  @extend ._transition-fast;
+
+  &:hover {
+    background: darken($primary-color , 5%);
+  }
+}
+
 .user {
-  width: 30px;
   height: $top-navigation-bar-height;
+}
+
+.name {
+  display: inline-block;
+}
+
+.profile-img-wrapper {
+  margin-left: 10px;
+  display: inline-block;
 }
