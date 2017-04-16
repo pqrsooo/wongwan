@@ -53,5 +53,12 @@ exports.addChatRoom = (users, room) => {
 };
 
 exports.getUserFromChatRoom = (roomID) => {
-  User.find({})
-}
+  const promise = User.find({
+    chatRooms: {
+      $elemMatch: {
+        roomID,
+      },
+    },
+  });
+  return promise;
+};

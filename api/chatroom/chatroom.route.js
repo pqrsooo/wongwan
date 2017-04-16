@@ -79,8 +79,21 @@ router.get('/get-chatroom', (req, res) => {
 });
 
 router.get('/get-users', (req, res) => {
+  if (!req.body.roomToken) {
+    res.send(400).json({
+      success: false,
+      message: 'Fail to get chatroom',
+    });
+  }
   chatRoomQuery.getChatroomID(req.body.roomToken).then((roomID) => {
-    
+    userQuery.getUserFromChatRoom(roomID).then((users) => {
+      const usrs = utils.getUserInterfaceKey(users);
+      res.status(200).json({
+        usrs,
+      });
+    }).catch((err) => {
+
+    })
   }).catch((err) => {
     console.error(err);
     res.status(400).json({
