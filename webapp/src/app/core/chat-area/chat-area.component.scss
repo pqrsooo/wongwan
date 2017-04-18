@@ -6,11 +6,28 @@
 }
 
 .chat-area-container {
+  $chat-title-bar-height: 50;
+  margin-top: $chat-title-bar-height + px;
+  padding-bottom: $chat-title-bar-height + px;
   position: relative;
   display: flex;
   flex-direction: column;
   width: 100%;
   height: 100%;
+
+  .chat-title-bar {
+    @extend ._font-bold;
+    font-size: 16px;
+    position: absolute;
+    width: 100%;
+    height: $chat-title-bar-height + px;
+    top: -$chat-title-bar-height + px;
+    padding: 0 15px;
+    border-bottom: 1px solid $grey-2;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
 
   .send-message-container {}
 
