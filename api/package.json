@@ -19,6 +19,7 @@
     "express-session": "^1.15.2",
     "helmet": "3.5.0",
     "mongoose": "4.9.4",
+    "redis": "^2.7.1",
     "socket.io": "^1.7.3"
   },
   "devDependencies": {
