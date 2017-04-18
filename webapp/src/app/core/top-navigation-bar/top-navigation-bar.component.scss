@@ -21,7 +21,8 @@ $top-navigation-bar-height: 56;
 
 .nav-button {
   display: inline-block;
-  margin-right: 15px;
+  margin-right: 5px;
+
   /deep/ .primary-fill {
     fill: white;
   }
@@ -45,10 +46,17 @@ $top-navigation-bar-height: 56;
 }
 
 .name {
+  margin-right: 10px;
   display: inline-block;
 }
 
 .profile-img-wrapper {
-  margin-left: 10px;
   display: inline-block;
+}
+
+.triangle-down {
+  margin-left: 8px;
+  /deep/ .primary-fill {
+    fill: white;
+  }
 }
