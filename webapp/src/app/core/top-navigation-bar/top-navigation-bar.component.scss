@@ -1,7 +1,7 @@
 @import 'color';
 @import 'helper';
+@import 'variables';
 
-$top-navigation-bar-height: 56;
 .top-navigation-bar {
   @extend ._font-heading;
   font-size: 15px;
@@ -59,4 +59,20 @@ $top-navigation-bar-height: 56;
   /deep/ .primary-fill {
     fill: white;
   }
+}
+
+.logo-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.logo-img {
+  margin-right: 10px;
+  display: inline-block;
+}
+
+.brand-name {
+  @extend ._font-bold;
+  font-size: 22px;
+  display: inline-block;
 }

@@ -1,12 +1,11 @@
 @import 'color';
+@import 'variables';
 
 .app-wrapper {
   position: relative;
   height: 100%;
   overflow: hidden;
 }
-
-$top-navigation-bar-height: 56;
 
 .top-navigation-bar {
   height: $top-navigation-bar-height + px;

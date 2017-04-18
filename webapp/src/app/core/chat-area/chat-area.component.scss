@@ -29,6 +29,20 @@
     align-items: center;
   }
 
+  .chat-title-bar > .chat-title-name {
+    margin-right: 10px;
+  }
+
+  .chat-title-bar > .group-member {
+    // position: relative;
+  }
+
+  .chat-title-bar > .group-member > .member {
+    position: relative;
+    display: inline-block;
+    height: 24px;
+  }
+
   .send-message-container {}
 
   .conversation-container {
