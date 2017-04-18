@@ -15,7 +15,10 @@
             <ng-content select="[message-body]"></ng-content>
           </div>
           <div class="message-bubble-corner" [class.-outgoing]="isOutgoing">
-            <app-message-bubble-corner width="14"></app-message-bubble-corner>
+            <app-svg-icon
+              src="assets/icons/message-bubble-corner.svg"
+              style="width: 14px;">
+            </app-svg-icon>
           </div>
           <div class="timestamp">{{ timestamp }}</div>
         </div>

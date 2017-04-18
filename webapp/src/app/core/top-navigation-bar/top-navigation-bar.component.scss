@@ -3,6 +3,8 @@
 
 $top-navigation-bar-height: 56;
 .top-navigation-bar {
+  @extend ._font-heading;
+  font-size: 15px;
   height: $top-navigation-bar-height + px;
   background: $primary-color;
   display: flex;
@@ -15,6 +17,14 @@ $top-navigation-bar-height: 56;
 
 .action-group {
   height: $top-navigation-bar-height;
+}
+
+.nav-button {
+  display: inline-block;
+  margin-right: 15px;
+  /deep/ .primary-fill {
+    fill: white;
+  }
 }
 
 .user-flex-control {
