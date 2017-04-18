@@ -31,19 +31,12 @@
 
   .send-message-container {}
 
-  >.header {
-    position: absolute;
-    width: 100%;
-    margin-left: 15px;
-    margin-top: 0px;
-    z-index: -1;
-  }
-
   .conversation-container {
     padding: 15px;
     padding-top: 0;
     flex-grow: 1;
     overflow-y: scroll;
+    margin-top: -1px;
 
     .header {
       position: absolute;
@@ -51,6 +44,10 @@
       top: 0;
       margin-top: 0px;
       z-index: -1;
+
+      /deep/ .separator-container {
+        border-top: none !important;
+      }
     }
 
     .conversation {
