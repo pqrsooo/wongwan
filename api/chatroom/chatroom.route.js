@@ -8,8 +8,7 @@ const utils = require('./utilities');
 
 const router = express.Router();
 
-//TODO - Add unauthorized middleware
-
+// TODO - Add unauthorized middleware
 // for creating new room
 router.post('/create-room', (req, res) => {
   const session = req.session;
@@ -77,7 +76,7 @@ router.get('/get-chatroom', (req, res) => {
     });
   });
 });
-
+// for getting all the users in the specify room
 router.get('/get-users', (req, res) => {
   if (!req.body.roomToken) {
     res.send(400).json({
@@ -93,7 +92,7 @@ router.get('/get-users', (req, res) => {
       });
     }).catch((err) => {
 
-    })
+    });
   }).catch((err) => {
     console.error(err);
     res.status(400).json({
