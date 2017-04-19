@@ -27,6 +27,7 @@ router.post('/signup', (req, res) => {
         username: user.username,
         firstName: user.firstName,
         lastName: user.lastName,
+        userID: user._id,
       };
       res.status(200).send({
         success: true,
@@ -72,6 +73,7 @@ router.post('/login', (req, res) => {
           username: user.username,
           firstName: user.firstName,
           lastName: user.lastName,
+          userID: user._id,
         };
         res.status(200).json({
           success: true,

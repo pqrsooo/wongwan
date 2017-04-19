@@ -5,11 +5,13 @@ const Chatroom = require('./chatroom.model');
 const chatRoomQuery = require('./chatroom.query');
 const userQuery = require('../user/user.query');
 const utils = require('./utilities');
+const redisClient = require('../db/redis.cache');
 
 const router = express.Router();
 
 // TODO - Add unauthorized middleware
-// for creating new room
+// for creating new room 
+// parameter roomName , array of username
 router.post('/create-room', (req, res) => {
   const session = req.session;
   const user = session.user;
@@ -26,10 +28,12 @@ router.post('/create-room', (req, res) => {
       });
       chatRoom.save().then((room) => {
         userQuery.addChatRoom(users, room).then((data) => {
-          res.status(200).json({
-            success: true,
-            message: 'Successfully create Chatroom',
-            roomToken: room.roomToken,
+          redisClient.setValue(room.roomToken, room.id, 60 * 60).then(() => {
+            res.status(200).json({
+              success: true,
+              message: 'Successfully create Chatroom',
+              roomToken: room.roomToken,
+            });
           });
         }).catch((err) => {
           console.error('Fail to addChatroom with error', err);
@@ -65,6 +69,7 @@ router.post('/create-room', (req, res) => {
 router.get('/get-chatroom', (req, res) => {
   const session = req.session;
   userQuery.getUserFromUsername(session.user.username).then((user) => {
+
     res.status(200).json({
       chatRooms: user.chatRooms,
     });
