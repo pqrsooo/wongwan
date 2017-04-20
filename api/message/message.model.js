@@ -2,8 +2,13 @@ const mongoose = require('mongoose');
 const objectID = mongoose.Schema.Types.ObjectId;
 
 const chatMessageSchema = new mongoose.Schema({
+  timeStamp: Number, // sent time
   message: String,
-  userID: objectID,
+  sender: {
+    id: objectID,
+    firstName: String,
+    lastName: String,
+  },
   roomID: objectID,
 });
 
