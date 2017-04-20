@@ -86,18 +86,22 @@ router.get('/get-users', (req, res) => {
   }
   chatRoomQuery.getChatroomID(req.body.roomToken).then((roomID) => {
     userQuery.getUserFromChatRoom(roomID).then((users) => {
-      const usrs = utils.getUserInterfaceKey(users);
       res.status(200).json({
-        usrs,
+        success: true,
+        users,
       });
     }).catch((err) => {
-
+      console.error(err);
+      res.status(400).json({
+        success: false,
+        message: 'Coannot get users',
+      });
     });
   }).catch((err) => {
     console.error(err);
     res.status(400).json({
       success: false,
-      message: 'Cannot get users',
+      message: 'Cannot get Chatroom',
     });
   });
 });
