@@ -10,9 +10,13 @@ router.get('/get-messages', (req, res) => {
   const session = req.session;
   const user = session.user;
   const roomToken = req.body.roomToken;
-  chatRoomQuery.getChatroomID(roomToken).then((roomID) => {
-    messageQuery.getMessageFromRoom(roomID).then((messages) => {
-
+  chatRoomQuery.getChatroom(roomToken).then((room) => {
+    messageQuery.getMessageFromRoom(room._id).then((messages) => {
+      res.status(200).json({
+        success: true,
+        messages,
+        lastSeenMessage: room.lastSeenMessage,
+      });
     }).catch((err) => {
       console.error(err);
       res.status(400).json({
@@ -25,9 +29,8 @@ router.get('/get-messages', (req, res) => {
     res.status(400).json({
       success: false,
       message: 'Cannot Get Chatrooms',
-    })
+    });
   });
-
 });
 
 
