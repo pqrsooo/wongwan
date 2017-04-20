@@ -1,19 +1,23 @@
+@import 'color';
+@import 'variables';
+
 .app-wrapper {
   position: relative;
   height: 100%;
-  display: flex;
-  flex-direction: column;
+  overflow: hidden;
 }
 
 .top-navigation-bar {
-  position: relative;
+  height: $top-navigation-bar-height + px;
+  position: absolute;
+  left: 0;
+  right: 0;
 }
 
 .content {
-  // height: 100%;
-  position: relative;
-  // display: block;
-  flex-grow: 1;
-  flex-shrink: 1;
-  flex-basis: auto;
+  position: absolute;
+  top: $top-navigation-bar-height + px;
+  left: 0;
+  right: 0;
+  bottom: 0;
 }

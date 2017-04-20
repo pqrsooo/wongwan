@@ -1,5 +1,33 @@
 <div class="row">
   <div class="chat-area-container">
+    <div class="chat-title-bar">
+      <div class="chat-title-name">
+        Thanat Jatuphattharachat
+      </div>
+      <!-- <div class="group-member">
+        <div class="member">
+          <app-profile-img
+            width="24"
+            userId="1"
+            extension="jpg">
+          </app-profile-img>
+        </div>
+        <div class="member">
+          <app-profile-img
+            width="24"
+            userId="2"
+            extension="jpg">
+          </app-profile-img>
+        </div>
+        <div class="member">
+          <app-profile-img
+            width="24"
+            userId="3"
+            extension="jpg">
+          </app-profile-img>
+        </div>
+      </div> -->
+    </div>
     <div #conversationContainer class="conversation-container">
       <div class="header" *ngIf="currentSeparatorTitle != null">
         <app-day-separator-static
@@ -12,25 +40,26 @@
           (notifyPosition)="updateSeparatorPosition($event)">
         </app-day-separator>
 
-        <app-message-bubble class="conversation-message -incoming"
+        <app-message-bubble
           name="Thanat"
-          type="iscomming"
+          userId="3"
           timestamp="12:56">
           <span message-body>ทำไรอยู่?</span>
         </app-message-bubble>
-        <app-message-bubble class="conversation-message -outgoing"
-          type="outgoing"
+        <app-message-bubble
+          [isOutgoing]="true"
           timestamp="12:58">
           <span message-body>แดกบะหมี่</span>
         </app-message-bubble>
-        <app-message-bubble class="conversation-message -outgoing"
-          type="outgoing"
+        <app-message-bubble
+          [isOutgoing]="true"
           timestamp="12:58">
           <span message-body>ฝากสั่งป่าว?</span>
         </app-message-bubble>
-        <app-message-bubble class="conversation-message -incoming -before-separator"
+        <app-message-bubble
           name="Thanat"
-          type="iscomming"
+          userId="3"
+          [isBeforeSeparator]="true"
           timestamp="13:04">
           <span message-body>ไม่อะ แดกแล้ววววว</span>
         </app-message-bubble>
@@ -40,20 +69,20 @@
           (notifyPosition)="updateSeparatorPosition($event)">
         </app-day-separator>
 
-        <app-message-bubble class="conversation-message -outgoing"
-          type="outgoing"
+        <app-message-bubble
+          [isOutgoing]="true"
           timestamp="09:12">
           <span message-body>ส่ง Stat ของ Flight Delay มาให้หน่อย<br>จะ export ส่งละ</span>
         </app-message-bubble>
-        <app-message-bubble class="conversation-message -incoming"
+        <app-message-bubble
           name="Thanat"
-          type="iscomming"
+          userId="3"
           timestamp="09:13">
           <span message-body>แปปป</span>
         </app-message-bubble>
-        <app-message-bubble class="conversation-message -incoming"
+        <app-message-bubble
           name="Thanat"
-          type="iscomming"
+          userId="3"
           timestamp="09:37">
           <span message-body>
             Accuracy:  0.693291260063<br>
@@ -62,9 +91,9 @@
             F1:  0.222766644075
           </span>
         </app-message-bubble>
-        <app-message-bubble class="conversation-message -incoming"
+        <app-message-bubble
           name="Thanat"
-          type="iscomming"
+          userId="3"
           timestamp="09:50">
           <span message-body>
             interface g0/0<br>
@@ -84,9 +113,10 @@
             no shutdown
           </span>
         </app-message-bubble>
-        <app-message-bubble class="conversation-message -outgoing -before-separator"
-          type="outgoing"
+        <app-message-bubble
+          [isOutgoing]="true"
           timestamp="18:23"
+          [isBeforeSeparator]="true"
           [waitForServerResponse]="true">
           <span message-body>ข้อความนี้ยังไม่ถึง Server</span>
         </app-message-bubble>
@@ -96,9 +126,9 @@
           (notifyPosition)="updateSeparatorPosition($event)">
         </app-day-separator>
 
-        <app-message-bubble class="conversation-message -incoming"
+        <app-message-bubble
           name="Thanat"
-          type="iscomming"
+          userId="3"
           timestamp="09:37">
           <span message-body>
             Accuracy:  0.693291260063<br>
@@ -107,9 +137,9 @@
             F1:  0.222766644075
           </span>
         </app-message-bubble>
-        <app-message-bubble class="conversation-message -incoming"
+        <app-message-bubble
           name="Thanat"
-          type="iscomming"
+          userId="3"
           timestamp="09:50">
           <span message-body>
             interface g0/0<br>
@@ -129,9 +159,9 @@
             no shutdown
           </span>
         </app-message-bubble>
-        <app-message-bubble class="conversation-message -incoming"
+        <app-message-bubble
           name="Thanat"
-          type="iscomming"
+          userId="3"
           timestamp="09:37">
           <span message-body>
             Accuracy:  0.693291260063<br>
@@ -140,9 +170,9 @@
             F1:  0.222766644075
           </span>
         </app-message-bubble>
-        <app-message-bubble class="conversation-message -incoming"
+        <app-message-bubble
           name="Thanat"
-          type="iscomming"
+          userId="3"
           timestamp="09:50">
           <span message-body>
             interface g0/0<br>
@@ -165,16 +195,14 @@
 
         <app-message-bubble
           *ngFor="let message of (messagesList | async)"
-          class="conversation-message -outgoing"
-          type="outgoing"
+          [isOutgoing]="true"
           timestamp="18:23">
           <span message-body>{{message.content}}</span>
         </app-message-bubble>
 
         <app-message-bubble
           *ngFor="let message of (optimisticMessagesList | async)"
-          class="conversation-message -outgoing"
-          type="outgoing"
+          [isOutgoing]="true"
           waitForServerResponse="true"
           timestamp="18:23">
           <span message-body>{{message.content}}</span>
@@ -186,9 +214,11 @@
         <textarea appAutoHeight class="message-input" type="text" formControlName="message" placeholder="พิมพ์ข้อความ..." (keydown.enter)="sendMessage($event)"></textarea>
         <span class="send-icon">
           <button type="submit" class="" tabindex="-1">
-            <app-send-icon class="send-icon-svg"
-              width="30" height="30">
-            </app-send-icon>
+            <app-svg-icon
+              class="send-icon-svg"
+              src="assets/icons/send.svg"
+              style="width: 30px;">
+            </app-svg-icon>
           </button>
         </span>
       </form>

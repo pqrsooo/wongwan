@@ -25,7 +25,6 @@ export class AutoHeightDirective implements AfterViewInit {
   }
 
   adjustHeight() {
-    console.log('Enter adjustHeight()');
     const thisNativeElement = this.el.nativeElement;
     thisNativeElement.style.overflow = 'hidden';
     thisNativeElement.style.height = '1px'; // Set for determining content height from scrollHeight property
