@@ -5,6 +5,16 @@ const ChatRoom = require('./chatroom.model');
 exports.getChatroomID = (roomToken) => {
   const promise = ChatRoom.findOne({
     roomToken,
+  }).select({
+    _id: 1,
   });
   return promise;
 };
+
+exports.getChatroom = (roomToken) => {
+  const promise = ChatRoom.findOne({
+    roomToken,
+  });
+  return promise;
+};
+
