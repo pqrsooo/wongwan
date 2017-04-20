@@ -24,10 +24,15 @@ function saveMsgToDB(userID, roomID, message) {
 function saveMessage(user, roomToken, message) {
   redisClient.getValue(roomToken).then((response) => {
     if (!response) {
-      queryChatroom.getChatroomID(roomToken).then((roomID) => saveMsgToDB(user.userID, roomID, message)).catch((err) => return console.error('Error while get roomID ', err));
+      queryChatroom.getChatroomID(roomToken).then((roomID) => {
+        return saveMsgToDB(user.userID, roomID, message);
+      }).catch((err) => {
+        return console.error('Error while get roomID ', err);
+      });
     } else {
       return saveMsgToDB(user.userID, ObjectId(response), message);
     }
+    
   });
 }
 
