@@ -46,7 +46,17 @@ function getMessageFromRoom(roomID) {
   });
 }
 
+function getLatestMessageInRoom(roomID) {
+  const promise = Message.findOne({
+    roomID,
+  }).sort({
+    createAt: -1,
+  });
+  return promise;
+}
+
 module.exports = {
   saveMessage,
   getMessageFromRoom,
-};
+  getLatestMessageInRoom,
+}

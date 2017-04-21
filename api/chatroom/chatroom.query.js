@@ -50,3 +50,4 @@ exports.getRoomTokenFromID = (roomID) => {
   });
   return chatRoomPromise;
 }
+
