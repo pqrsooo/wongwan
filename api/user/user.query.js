@@ -51,6 +51,10 @@ exports.getUserFromChatRoom = (roomID) => {
         roomID,
       },
     },
+  }).select({
+    username: 1,
+    firstName: 1,
+    lastName: 1,
   });
   return promise;
 };

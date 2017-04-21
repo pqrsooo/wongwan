@@ -4,6 +4,7 @@ const config = require('../config');
 const Chatroom = require('./chatroom.model');
 const chatRoomQuery = require('./chatroom.query');
 const userQuery = require('../user/user.query');
+const messageQuery = require('../message/message.query');
 const utils = require('./utilities');
 
 const router = express.Router();
@@ -65,8 +66,17 @@ router.post('/create-room', (req, res) => {
 router.get('/get-chatroom', (req, res) => {
   const session = req.session;
   userQuery.getUserFromUsername(session.user.username).then((user) => {
-    res.status(200).json({
-      chatRooms: user.chatRooms,
+    messageQuery.getChatroomForSidebar(user.chatRooms).then((chatRoomWithData) => {
+      res.status(200).json({
+        success: true,
+        chatRooms: chatRoomWithData,
+      });
+    }).catch((err) => {
+      console.error(err);
+      res.status(400).json({
+        success: false,
+        message: 'Cannot retrieve Chat messages',
+      });
     });
   }).catch((err) => {
     res.status(400).json({
@@ -86,18 +96,22 @@ router.get('/get-users', (req, res) => {
   }
   chatRoomQuery.getChatroomID(req.body.roomToken).then((roomID) => {
     userQuery.getUserFromChatRoom(roomID).then((users) => {
-      const usrs = utils.getUserInterfaceKey(users);
       res.status(200).json({
-        usrs,
+        success: true,
+        users,
       });
     }).catch((err) => {
-
+      console.error(err);
+      res.status(400).json({
+        success: false,
+        message: 'Coannot get users',
+      });
     });
   }).catch((err) => {
     console.error(err);
     res.status(400).json({
       success: false,
-      message: 'Cannot get users',
+      message: 'Cannot get Chatroom',
     });
   });
 });
