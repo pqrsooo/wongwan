@@ -66,7 +66,7 @@ router.post('/create-room', (req, res) => {
 router.get('/get-chatroom', (req, res) => {
   const session = req.session;
   userQuery.getUserFromUsername(session.user.username).then((user) => {
-    chatRoomQuery.getChatroomForSidebar(user.chatRooms).then((chatRoomWithData) => {
+    chatRoomQuery.getChatroomForSidebar(user).then((chatRoomWithData) => {
       res.status(200).json({
         success: true,
         chatRooms: chatRoomWithData,
