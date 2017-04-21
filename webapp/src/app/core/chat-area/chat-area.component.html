@@ -183,7 +183,7 @@
     </div>
     <div class="send-message-container">
       <form class="send-message-form" [formGroup]="sendMessageForm">
-        <textarea auto-height class="message-input" type="text" formControlName="message" placeholder="พิมพ์ข้อความ..." (keydown.enter)="sendMessage($event)"></textarea>
+        <textarea appAutoHeight class="message-input" type="text" formControlName="message" placeholder="พิมพ์ข้อความ..." (keydown.enter)="sendMessage($event)"></textarea>
         <span class="send-icon">
           <button type="submit" class="" tabindex="-1">
             <app-send-icon class="send-icon-svg"

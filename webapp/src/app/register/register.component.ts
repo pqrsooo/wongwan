@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
+import { UserService } from '../shared/user/user.service';
 import { RegisterService } from './register.service';
 
 @Component({
@@ -11,7 +12,11 @@ export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
   errorMessage = '';
 
-  constructor(private registerService: RegisterService, private fb: FormBuilder) { }
+  constructor(
+    private registerService: RegisterService,
+    private fb: FormBuilder,
+    private userService: UserService
+  ) { }
 
   ngOnInit() {
     const passwordMatchValidator = (g: FormGroup) => {
@@ -22,9 +27,9 @@ export class RegisterComponent implements OnInit {
     };
 
     const usernameCheckValidator = (g: FormControl) => (
-      this.registerService.isUsernameUsable(g.value)
-        .map(isOK => {
-          if (isOK) {
+      this.userService.isUsernameExist(g.value)
+        .map(isExist => {
+          if (!isExist) {
             return null;
           } else {
             return { usernameDuplicate: true };

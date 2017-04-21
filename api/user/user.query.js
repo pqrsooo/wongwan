@@ -9,10 +9,21 @@ const getUser = (username) => {
   return userPromise;
 };
 
-
+exports.getUserFromUsername = (username) => {
+  return getUser(username);
+};
+// users shoud be type array
 exports.getAllUserID = (users) => {
   const userIDArr = users.map((user) => {
     return getUser(user.username);
+  });
+  const results = Promise.all(userIDArr);
+  return results;
+};
+// usernames should be array of usernames
+exports.getAllUserIDFromUsernames = (usernames) => {
+  const userIDArr = usernames.map((username) => {
+    return getUser(username);
   });
   const results = Promise.all(userIDArr);
   return results;
@@ -40,3 +51,7 @@ exports.addChatRoom = (users, room) => {
   const results = Promise.all(updatedUsers);
   return results;
 };
+
+exports.getUserFromChatRoom = (roomID) => {
+  User.find({})
+}
