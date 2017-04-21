@@ -13,11 +13,6 @@ button {
   height: 34px;
   border-radius: 7px;
   cursor: pointer;
-  @extend ._transition-fast;
-
-  &:hover {
-    background: darken($primary-color , 5%);
-  }
 }
 
 .title {
