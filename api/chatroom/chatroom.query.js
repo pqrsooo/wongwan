@@ -26,18 +26,32 @@ exports.getChatroomForSidebar = (userChatrooms) => {
     // We need to find latest message , chatRoom Token and is read
     const chatRoomWithData = {
       roomToken: null,
-      latestMessage: null,
-      isLatestMessageSeen: false,
+      roomName: null,
+      latestMessage: {
+        message: null,
+        sender: {
+          firstName: null,
+          lastName: null,
+          ts: null,
+          seen: false,
+        },
+      },
     };
     let latestMessage = null;
     return messageQuery.getLatestMessageInRoom(chatRoom.roomID).then((latestMsg) => {
-      chatRoomWithData.latestMessage = latestMsg.message;
-      latestMessage = latestMsg;
+      latestMessage = latestMsg;   
       return chatRoomQuery.getRoomTokenFromID(chatRoom.roomID);
     }).then((roomToken) => {
       chatRoomWithData.roomToken = roomToken;
-      const isLatestMessageSeen = latestMessage ? chatRoom.roomID.equals(latestMessage._id) : true;
-      chatRoomWithData.isLatestMessageSeen = isLatestMessageSeen;
+      if (latestMessage) {
+        chatRoomWithData.latestMessage.message = latestMessage.message;
+        chatRoomWithData.latestMessage.sender.firstName = latestMessage.sender.firstName;
+        chatRoomWithData.latestMessage.sender.lastName = latestMessage.sender.lastName;
+        chatRoomWithData.latestMessage.timeStamp = latestMessage.createAt;
+        chatRoomWithData.latestMessage.seen = chatRoom.roomID.equals(latestMessage._id);
+      } else {
+        chatRoomWithData.latestMessage.seen = true;
+      }
       return Promise.resolve(chatRoomWithData);
     });
   });
