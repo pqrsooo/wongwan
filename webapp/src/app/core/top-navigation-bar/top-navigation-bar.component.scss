@@ -8,15 +8,11 @@
   height: $top-navigation-bar-height + px;
   background: $primary-color;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
   padding-left: 15px;
   padding-right: 15px;
   color: white;
-}
-
-.action-group {
-  height: $top-navigation-bar-height;
 }
 
 .nav-button {
@@ -41,6 +37,24 @@
   }
 }
 
+.action-group {
+  height: $top-navigation-bar-height;
+  margin-right: 5px;
+}
+
+.separator {
+  margin-right:10px;
+
+  .oval-separator {
+    opacity: 0.5;
+    display: inline-block;
+
+    /deep/ .primary-fill {
+      fill: #ffffff;
+    }
+  }
+}
+
 .user {
   height: $top-navigation-bar-height;
 }
@@ -56,14 +70,19 @@
 
 .triangle-down {
   margin-left: 8px;
+
   /deep/ .primary-fill {
     fill: white;
   }
 }
 
-.logo-wrapper {
-  display: flex;
-  align-items: center;
+.logo {
+  margin-right: auto;
+
+  .logo-wrapper {
+    display: flex;
+    align-items: center;
+  }
 }
 
 .logo-img {
