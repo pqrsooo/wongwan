@@ -29,12 +29,13 @@ exports.getChatroomForSidebar = (userChatrooms) => {
       latestMessage: null,
       isLatestMessageSeen: false,
     };
+    let latestMessage = null;
     return messageQuery.getLatestMessageInRoom(chatRoom.roomID).then((latestMsg) => {
-      chatRoomWithData.latestMessage = latestMsg;
+      chatRoomWithData.latestMessage = latestMsg.message;
+      latestMessage = latestMsg;
       return chatRoomQuery.getRoomTokenFromID(chatRoom.roomID);
     }).then((roomToken) => {
       chatRoomWithData.roomToken = roomToken;
-      const latestMessage = chatRoomWithData.latestMessage;
       const isLatestMessageSeen = latestMessage ? chatRoom.roomID.equals(latestMessage._id) : true;
       chatRoomWithData.isLatestMessageSeen = isLatestMessageSeen;
       return Promise.resolve(chatRoomWithData);
