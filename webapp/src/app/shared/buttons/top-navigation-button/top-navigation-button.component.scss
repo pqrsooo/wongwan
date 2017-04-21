@@ -1,5 +1,6 @@
 @import 'helper';
 @import 'color';
+@import 'mixin';
 
 button {
   @extend ._font-heading;
@@ -16,7 +17,12 @@ button {
 }
 
 .title {
-  margin-left: 10px;
+  display: none;
+
+  @include breakpoint(medium) {
+    margin-left: 10px;
+    display: initial;
+  }
 }
 
 .icon {
