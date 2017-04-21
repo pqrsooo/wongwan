@@ -36,5 +36,6 @@ app.get('/api/restricted', unauthorizedFunc.restrict, (req, res) => {
 
 app.use('/api/user', require('./user/user.route'));
 app.use('/api/chatroom', require('./chatroom/chatroom.route'));
+app.use('/api/message', require('./message/message.route'));
 
 module.exports = app;
