@@ -9,6 +9,13 @@ html {
   line-height: 21px;
 }
 
-html, body {
+body,
+html {
   height: 100% !important;
+}
+
+button {
+  &:focus {
+    outline: 0;
+  }
 }

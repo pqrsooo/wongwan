@@ -19,8 +19,27 @@
   display: inline-block;
   margin-right: 5px;
 
+  /deep/ .primary-fill,
+  /deep/ button {
+    @extend ._transition-fast;
+  }
+
+  /deep/ button {
+    color: white;
+  }
+
   /deep/ .primary-fill {
     fill: white;
+  }
+
+  &:hover {
+    /deep/ button {
+      color: darken($primary-color , 27%);
+    }
+
+    /deep/ .primary-fill {
+      fill: darken($primary-color , 27%);
+    }
   }
 }
 
@@ -43,14 +62,14 @@
 }
 
 .separator {
-  margin-right:10px;
+  margin-right: 10px;
 
   .oval-separator {
-    opacity: 0.5;
+    opacity: 0.4;
     display: inline-block;
 
     /deep/ .primary-fill {
-      fill: #ffffff;
+      fill: white;
     }
   }
 }
