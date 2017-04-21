@@ -9,22 +9,16 @@ const getUser = (username) => {
   return userPromise;
 };
 
-exports.getUserFromUsername = (username) => {
-  return getUser(username);
-};
+exports.getUserFromUsername = username => getUser(username);
 // users shoud be type array
 exports.getAllUserID = (users) => {
-  const userIDArr = users.map((user) => {
-    return getUser(user.username);
-  });
+  const userIDArr = users.map(user => getUser(user.username));
   const results = Promise.all(userIDArr);
   return results;
 };
 // usernames should be array of usernames
 exports.getAllUserIDFromUsernames = (usernames) => {
-  const userIDArr = usernames.map((username) => {
-    return getUser(username);
-  });
+  const userIDArr = usernames.map(username => getUser(username));
   const results = Promise.all(userIDArr);
   return results;
 };
@@ -45,13 +39,19 @@ const updateUserChatRoom = (username, roomID) => {
 };
 
 exports.addChatRoom = (users, room) => {
-  const updatedUsers = users.map((user) => {
-    return updateUserChatRoom(user.username, room._id);
-  });
+  const updatedUsers = users.map(user => updateUserChatRoom(user.username, room._id));
   const results = Promise.all(updatedUsers);
   return results;
 };
 
 exports.getUserFromChatRoom = (roomID) => {
-  User.find({})
-}
+  const promise = User.find({
+    chatRooms: {
+      $elemMatch: {
+        roomID,
+      },
+    },
+  });
+  return promise;
+};
+

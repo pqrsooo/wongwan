@@ -1,5 +1,78 @@
 @import 'color';
+@import 'helper';
+@import 'variables';
 
-.row {
+.top-navigation-bar {
+  @extend ._font-heading;
+  font-size: 15px;
+  height: $top-navigation-bar-height + px;
   background: $primary-color;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 15px;
+  padding-right: 15px;
+  color: white;
+}
+
+.action-group {
+  height: $top-navigation-bar-height;
+}
+
+.nav-button {
+  display: inline-block;
+  margin-right: 5px;
+
+  /deep/ .primary-fill {
+    fill: white;
+  }
+}
+
+.user-flex-control {
+  padding: 5px 10px;
+  border-radius: 7px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  @extend ._transition-fast;
+
+  &:hover {
+    background: darken($primary-color , 5%);
+  }
+}
+
+.user {
+  height: $top-navigation-bar-height;
+}
+
+.name {
+  margin-right: 10px;
+  display: inline-block;
+}
+
+.profile-img-wrapper {
+  display: inline-block;
+}
+
+.triangle-down {
+  margin-left: 8px;
+  /deep/ .primary-fill {
+    fill: white;
+  }
+}
+
+.logo-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.logo-img {
+  margin-right: 10px;
+  display: inline-block;
+}
+
+.brand-name {
+  @extend ._font-bold;
+  font-size: 22px;
+  display: inline-block;
 }

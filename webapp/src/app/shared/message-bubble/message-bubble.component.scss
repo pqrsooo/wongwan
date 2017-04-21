@@ -1,10 +1,21 @@
 @import 'helper';
 @import 'color';
 
-.profile-img {
-  border-radius: 7px;
-  overflow: hidden;
+.profile-img-wraper {
   display: inline-block;
+}
+
+:host {
+  margin-bottom: 10px;
+  &.-incoming {
+    align-self: flex-start;
+  }
+  &.-outgoing {
+    align-self: flex-end;
+  }
+  &.-before-separator {
+    margin-bottom: 30px;
+  }
 }
 
 .message-wrapper {
@@ -27,7 +38,11 @@
     flex-direction: row;
     align-items: flex-end;
 
-    &.-inactive {
+    &.-inactive .timestamp {
+      display: none;
+    }
+
+    &.-failed {
       opacity: 0.55;
     }
   }

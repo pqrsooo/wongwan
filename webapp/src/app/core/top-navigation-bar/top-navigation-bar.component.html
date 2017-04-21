@@ -1,7 +1,48 @@
-<div class="row">
-  <div class="columns medium-6">
+<div class="top-navigation-bar">
+  <div class="action-group hide-for-small-only">
+    <app-top-navigation-button
+      class="nav-button"
+      title="สร้างแชทใหม่">
+      <app-svg-icon
+        src="assets/icons/new-chat.svg"
+        style="width: 20px;"
+        icon>
+      </app-svg-icon>
+    </app-top-navigation-button>
+    <app-top-navigation-button
+      class="nav-button"
+      title="เข้าร่วมกลุ่ม">
+      <app-svg-icon
+        src="assets/icons/join-group.svg"
+        style="width: 23px;"
+        icon>
+      </app-svg-icon>
+    </app-top-navigation-button>
   </div>
-  <div class="columns medium-6">
-    top-navigation-bar works!
+  <div class="logo">
+    <div class="logo-wrapper">
+      <div class="logo-img"><img src="assets/images/wongwan-logo.png" width="36" height="36"></div>
+      <div class="brand-name">Wongwan</div>
+    </div>
+  </div>
+  <div class="user">
+    <div class="user-flex-control">
+      <div class="name hide-for-small-only">
+        Parinthorn
+      </div>
+      <div class="profile-img-wrapper">
+        <app-profile-img
+          width="30"
+          userId="1"
+          extension="jpg">
+        </app-profile-img>
+      </div>
+      <div class="triangle-down">
+        <app-svg-icon
+          src="assets/icons/triangle-down.svg"
+          style="width: 11px;">
+        </app-svg-icon>
+      </div>
+    </div>
   </div>
 </div>
