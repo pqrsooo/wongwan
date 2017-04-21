@@ -8,3 +8,17 @@ exports.randomToken = (size) => {
     });
   });
 };
+
+exports.uniqueArray = (arr) => {
+  const uset = new Set(arr);
+  return [...uset];
+};
+
+exports.getUserInterfaceKey = (arr) => {
+  const users = [];
+  for (let i = 0; i < arr.length; i++) {
+    const {username, firstName, lastName} = arr[i];
+    users.push({username, firstName, lastName});
+  }
+  return users;
+};
