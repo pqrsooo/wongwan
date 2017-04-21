@@ -5,8 +5,7 @@
 FROM node:7.9.0
 
 # Create a new user "app" to run a node server in
-RUN useradd --user-group --create-home --shell /bin/false app && \
-curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 0.22.0
+RUN useradd --user-group --create-home --shell /bin/false app
 
 ENV HOME=/home/app
 
