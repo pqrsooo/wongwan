@@ -29,13 +29,15 @@ exports.getChatroomForSidebar = (userChatrooms) => {
       latestMessage: null,
       isLatestMessageSeen: false,
     };
-    messageQuery.getLatestMessageInRoom(chatRoom.roomID).then((latestMsg) => {
+    return messageQuery.getLatestMessageInRoom(chatRoom.roomID).then((latestMsg) => {
       chatRoomWithData.latestMessage = latestMsg;
       return chatRoomQuery.getRoomTokenFromID(chatRoom.roomID);
     }).then((roomToken) => {
       chatRoomWithData.roomToken = roomToken;
-      chatRoomWithData.isLatestMessageSeen = userChatrooms.roomID.equals(lateostMsg._id);
-      return chatRoomWithData;
+      const latestMessage = chatRoomWithData.latestMessage;
+      const isLatestMessageSeen = latestMessage ? chatRoom.roomID.equals(latestMessage._id) : true;
+      chatRoomWithData.isLatestMessageSeen = isLatestMessageSeen;
+      return Promise.resolve(chatRoomWithData);
     });
   });
   const results = Promise.all(chatRoomPromise);
@@ -46,8 +48,9 @@ exports.getRoomTokenFromID = (roomID) => {
   const chatRoomPromise = ChatRoom.findOne({
     _id: roomID,
   }).select({
+    _id: 0,
     roomToken: 1,
   });
-  return chatRoomPromise;
+  return chatRoomPromise.then(chatRoom => chatRoom.roomToken);
 }
 
