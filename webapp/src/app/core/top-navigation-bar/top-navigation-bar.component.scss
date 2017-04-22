@@ -20,6 +20,12 @@
   display: inline-block;
   margin-right: 5px;
 
+  @include breakpoint(small down) {
+    /deep/ .button-wrapper {
+      padding: 0 5px;
+    }
+  }
+
   /deep/ .primary-fill,
   /deep/ button {
     @extend ._transition-fast;
