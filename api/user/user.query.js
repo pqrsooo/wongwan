@@ -59,3 +59,15 @@ exports.getUserFromChatRoom = (roomID) => {
   return promise;
 };
 
+exports.updateLastSeenMessageInRoom = (username, roomID, lastSeenMsg) => {
+  const promise = User.update({
+    username,
+    'chatRooms.roomID': roomID,
+  }, {
+    $set: {
+      'chatRooms.lastSeenMessage': lastSeenMsg,
+    },
+  });
+  return promise;
+};
+
