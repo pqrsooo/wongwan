@@ -15,6 +15,8 @@
   width: 100%;
   height: $sidebar-container-height-small + px;
   border-bottom: 1px solid $grey-2;
+  overflow: hidden;
+  @include breakpoint(small down) {}
   @include breakpoint(medium) {
     position: relative;
     height: 100%;

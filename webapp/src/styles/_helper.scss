@@ -1,7 +1,7 @@
+@import 'variables';
 /* ==========================================================================
     Typography
    ========================================================================== */
-
 ._font-heading {
   font-family: 'Lato', 'Mitr', sans-serif;
 }
@@ -22,14 +22,13 @@
   font-weight: bold !important;
 }
 
-strong, b {
+b,
+strong {
   @extend ._font-bold;
 }
-
 /* ==========================================================================
     Element
    ========================================================================== */
-
 ._invisible {
   position: absolute;
   width: 1px;
@@ -40,10 +39,21 @@ strong, b {
   clip: rect(0 0 0 0);
   overflow: hidden;
 }
-
 /* ==========================================================================
     Transition
    ========================================================================== */
 ._transition-fast {
   transition: all 0.07s ease-out !important;
+}
+/* ==========================================================================
+    Scrollbar
+   ========================================================================== */
+._hide-vertical-scrollbar {
+  margin-right: -$scrollbar-size + px !important;
+  padding-right: $scrollbar-size + px !important;
+}
+
+._hide-horizontal-scrollbar {
+  margin-bottom: -$scrollbar-size + px !important;
+  padding-bottom: $scrollbar-size + px !important;
 }
