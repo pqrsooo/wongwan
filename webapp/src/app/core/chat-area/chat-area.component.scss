@@ -7,6 +7,15 @@
   height: 100%;
 }
 
+.scrollbar{
+  position: absolute;
+  width: 10px;
+  height: 100%;
+  right: 2px;
+  top: 0px;
+  background: rgba(1,1,1,0.4);
+}
+
 .chat-area-container {
   margin-top: $chat-title-bar-height-small + px;
   padding-bottom: $chat-title-bar-height-small + px;
@@ -62,6 +71,8 @@
     flex-grow: 1;
     overflow-y: scroll;
     margin-top: -1px;
+
+    @extend ._hide-vertical-scrollbar;
 
     .header {
       position: absolute;
