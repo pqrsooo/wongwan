@@ -59,4 +59,6 @@ module.exports = {
   saveMessage,
   getMessageFromRoom,
   getLatestMessageInRoom,
-}
+};
+
+
