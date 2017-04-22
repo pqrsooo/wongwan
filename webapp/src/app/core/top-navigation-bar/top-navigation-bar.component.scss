@@ -1,5 +1,6 @@
 @import 'color';
 @import 'helper';
+@import 'mixin';
 @import 'variables';
 
 .top-navigation-bar {
@@ -105,8 +106,11 @@
 }
 
 .logo-img {
+  display: none;
   margin-right: 10px;
-  display: inline-block;
+  @include breakpoint(medium) {
+    display: inline-block;
+  }
 }
 
 .brand-name {
