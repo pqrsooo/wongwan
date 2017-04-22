@@ -1,14 +1,36 @@
+@import 'mixin';
 @import 'color';
+@import 'variables';
 
 .row {
   max-width: 100%;
   height: 100%;
   top: 0;
   bottom: 0;
+  position: relative;
 }
 
 .sidebar-container {
-  top: 0;
-  bottom: 0;
-  border-right: 1px solid $grey-2;
+  position: absolute;
+  width: 100%;
+  height: $sidebar-container-height-small + px;
+  border-bottom: 1px solid $grey-2;
+  @include breakpoint(medium) {
+    position: relative;
+    height: 100%;
+    top: 0;
+    bottom: 0;
+    border-bottom: none;
+    border-right: 1px solid $grey-2;
+  }
+}
+
+.chat-area-container {
+  margin-top: $sidebar-container-height-small + px;
+  padding-bottom: $sidebar-container-height-small + px;
+  height: 100%;
+  @include breakpoint(medium) {
+    margin-top: 0;
+    padding-bottom: 0;
+  }
 }
