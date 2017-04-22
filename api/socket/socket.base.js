@@ -1,30 +1,25 @@
 const ioServer = require('socket.io');
+const Message = require('../message/message.model');
+const userQuery = require('../user/user.query');
+const chatRoomQuery = require('../chatroom/chatroom.query');
+const messageQuery = require('../message/message.query');
+const ObjectId = require('mongoose').Schema.Types.ObjectId;
 
-io.on('connection', (socket) => {
-  let addedUser = false;
-  // emit 'new message' when user type in
-  socket.on('new message', (data) => {
-    const message = {
-      username: socket.username,
-      content: data,
-      id: Date.now().toString(), // TODO: Change to Mongo's _id
-    };
-
-    // We use setTimeout to simulate latency and use randomness to simulate out-of-order.
-    setTimeout(() => {
-      socket.broadcast.emit('new message', message);
-    }, Math.round(Math.random() * 3000));
-
-    setTimeout(() => {
-      socket.emit('new message ack', {
-        success: true,
-        message,
-      });
-    }, Math.round(Math.random() * 500) + 200);
+function createSocketServer(appServer) {
+  const io = ioServer(appServer, {
+    serveClient: false,
   });
+  // force socket to only user 'websocket'
+  io.set('transports', ['websocket']);
 
-  socket.on('add user', (username) => {
-    if (addedUser) return;
+  // TODO: Uncomment this and  Use Redis as an Adapter for Clustering reason
+  // Using Redis
+  // const port = `${config.redis.port}`;
+  // const host = `${config.redis.host}`;
+  // const password = config.redis.password;
+  // const pubClient = redis(port, host, { auth_pass: password });
+  // const subClient = redis(port, host, { auth_pass: password, return_buffers: true, });
+  // io.adapter(adapter({ pubClient, subClient }));
 
     socket.username = username;
     ++numUsers;
