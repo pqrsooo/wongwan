@@ -5,11 +5,11 @@ import { AfterViewInit, Directive, ElementRef, HostListener } from '@angular/cor
 })
 export class AutoHeightDirective implements AfterViewInit {
 
-  constructor(public el: ElementRef) {
+  constructor(public element: ElementRef) {
   }
 
   ngAfterViewInit() {
-    const thisNativeElement = this.el.nativeElement;
+    const thisNativeElement = this.element.nativeElement;
     thisNativeElement.style.overflow = 'hidden';
     thisNativeElement.style.resize = 'none';
   }
@@ -25,7 +25,7 @@ export class AutoHeightDirective implements AfterViewInit {
   }
 
   adjustHeight() {
-    const thisNativeElement = this.el.nativeElement;
+    const thisNativeElement = this.element.nativeElement;
     thisNativeElement.style.overflow = 'hidden';
     thisNativeElement.style.height = '1px'; // Set for determining content height from scrollHeight property
     thisNativeElement.style.height = thisNativeElement.scrollHeight + 'px';
