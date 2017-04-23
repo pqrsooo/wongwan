@@ -4,7 +4,7 @@ const session = require('express-session');
 const redis = require('redis');
 const RedisStore = require('connect-redis')(session);
 const config = require('./config');
-const unauthorizedFunc = require('./middleware/unauthorized')
+const unauthorizedFunc = require('./middleware/unauthorized');
 const http = require('http');
 
 const app = express();
@@ -21,7 +21,7 @@ app.use(session({
     ttl: 60 * 60 * 24,
   }),
   secret: 'wongwanSecret',
-  cookie: { path: '/', httpOnly: true, secure: false, maxAge: null }
+  cookie: { path: '/', httpOnly: true, secure: false, maxAge: null },
 }));
 
 // Add bodyParser
