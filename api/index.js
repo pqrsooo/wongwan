@@ -2,6 +2,7 @@ const config = require('./config');
 const appServer = require('./app').appServer;
 const db = require('./db');
 const createSocketServer = require('./socket/socket.base');
+const onConnect = require('./socket/socket.connect');
 
 db.setUpDatabase().then(() => {
   appServer.listen(config.express.port, config.express.ip, (err) => {
@@ -17,7 +18,5 @@ db.setUpDatabase().then(() => {
 });
 
 const io = createSocketServer(appServer);
+io.on('connection', onConnect);
 
-io.on('connection', (socket) => {
-  //just call to make io connect
-});
