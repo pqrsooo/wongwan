@@ -1,5 +1,3 @@
-const mongoose = require('mongoose');
-const ChatRoom = require('../chatroom/chatroom.model');
 const User = require('../user/user.model');
 
 const getUser = (username) => {
@@ -55,6 +53,18 @@ exports.getUserFromChatRoom = (roomID) => {
     username: 1,
     firstName: 1,
     lastName: 1,
+  });
+  return promise;
+};
+
+exports.updateLastSeenMessageInRoom = (username, roomID, lastSeenMsg) => {
+  const promise = User.update({
+    username,
+    'chatRooms.roomID': roomID,
+  }, {
+    $set: {
+      'chatRooms.lastSeenMessage': lastSeenMsg,
+    },
   });
   return promise;
 };

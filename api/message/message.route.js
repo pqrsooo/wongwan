@@ -1,7 +1,5 @@
 const express = require('express');
-const Chatroom = require('../chatroom/chatroom.model');
 const chatRoomQuery = require('../chatroom/chatroom.query');
-const userQuery = require('../user/user.query');
 const messageQuery = require('./message.query');
 
 const router = express.Router();

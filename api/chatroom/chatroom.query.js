@@ -7,7 +7,7 @@ const chatRoomQuery = require('../chatroom/chatroom.query');
 exports.getChatroomID = (roomToken) => {
   const promise = ChatRoom.findOne({
     roomToken,
-  }).select({
+    }).select({
     _id: 1,
   });
   return promise;
@@ -65,5 +65,6 @@ exports.getRoomTokenFromID = (roomID) => {
     roomToken: 1,
   });
   return chatRoomPromise.then(chatRoom => chatRoom.roomToken);
-}
+};
+
 
