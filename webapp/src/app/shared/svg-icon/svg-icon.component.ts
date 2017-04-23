@@ -11,7 +11,7 @@ export class SvgIconComponent implements OnInit {
 
   @Input() src: string;
 
-  constructor(private el: ElementRef, private renderer: Renderer,
+  constructor(private _element: ElementRef, private _renderer: Renderer,
     private iconReg: SvgIconManagerService) {
   }
 
@@ -27,9 +27,9 @@ export class SvgIconComponent implements OnInit {
 
   private setSvg(svg: SVGElement) {
     const icon = <SVGElement>svg.cloneNode(true);
-    const elem = this.el.nativeElement;
+    const elem = this._element.nativeElement;
     elem.innerHTML = '';
-    this.renderer.projectNodes(elem, [icon]);
+    this._renderer.projectNodes(elem, [icon]);
   }
 
 }

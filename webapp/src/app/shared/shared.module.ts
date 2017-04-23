@@ -6,6 +6,7 @@ import { DaySeparatorStaticComponent } from './day-separator-static/day-separato
 import { DaySeparatorComponent } from './day-separator/day-separator.component';
 import { MessageBubbleComponent } from './message-bubble/message-bubble.component';
 import { ProfileImgComponent } from './profile-img/profile-img.component';
+import { ShowScrollbarDirective } from './show-scrollbar/show-scrollbar.directive';
 import { SvgIconModule } from './svg-icon/svg-icon.module';
 import { UserModule } from './user/user.module';
 
@@ -21,6 +22,7 @@ import { UserModule } from './user/user.module';
     DaySeparatorComponent,
     ProfileImgComponent,
     TopNavigationButtonComponent,
+    ShowScrollbarDirective
   ],
   exports: [
     BaseModule,
@@ -31,6 +33,7 @@ import { UserModule } from './user/user.module';
     TopNavigationButtonComponent,
     UserModule,
     SvgIconModule,
+    ShowScrollbarDirective
   ]
 })
 export class SharedModule { }

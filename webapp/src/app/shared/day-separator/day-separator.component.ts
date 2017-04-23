@@ -1,7 +1,6 @@
 import { AfterViewInit, Component, ElementRef, EventEmitter, OnInit, Output } from '@angular/core';
-import 'rxjs/add/observable/fromEvent';
-import 'rxjs/add/operator/throttleTime';
 import { Observable } from 'rxjs/Observable';
+
 import { DaySeparatorStaticComponent } from '../day-separator-static/day-separator-static.component';
 
 @Component({

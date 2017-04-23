@@ -3,6 +3,8 @@
 @import 'variables';
 @import 'helper';
 
+@import 'scrollbar';
+
 html {
   @extend ._font-heading;
   font-size: 14px;
