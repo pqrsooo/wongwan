@@ -45,7 +45,7 @@ module.exports = {
      *
      * @type {string}
      */
-    dbName: process.env.MONGODB_DBNAME || 'wongwan-dev'
+    dbName: process.env.MONGODB_DBNAME || 'wongwan-dev',
   },
   redis: {
     /**
@@ -61,5 +61,5 @@ module.exports = {
      */
     host: process.env.REDIS_PORT_6379_TCP_ADDR || '127.0.0.1',
 
-  }
+  },
 };

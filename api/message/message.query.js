@@ -1,4 +1,3 @@
-const mongoose = require('mongoose');
 const Message = require('./message.model');
 const userQuery = require('../user/user.query');
 const chatRoomQuery = require('../chatroom/chatroom.query');

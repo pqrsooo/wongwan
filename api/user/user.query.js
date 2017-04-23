@@ -1,5 +1,3 @@
-const mongoose = require('mongoose');
-const ChatRoom = require('../chatroom/chatroom.model');
 const User = require('../user/user.model');
 
 const getUser = (username) => {

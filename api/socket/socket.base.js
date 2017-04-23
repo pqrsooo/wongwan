@@ -2,7 +2,6 @@ const ioServer = require('socket.io');
 const Message = require('../message/message.model');
 const userQuery = require('../user/user.query');
 const chatRoomQuery = require('../chatroom/chatroom.query');
-const messageQuery = require('../message/message.query');
 const ObjectId = require('mongoose').Schema.Types.ObjectId;
 
 function createSocketServer(appServer) {
