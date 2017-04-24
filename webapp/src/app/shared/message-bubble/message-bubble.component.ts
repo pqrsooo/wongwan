@@ -14,11 +14,11 @@ export class MessageBubbleComponent implements OnChanges {
   @Input() waitForServerResponse: boolean | undefined;
   @HostBinding('class.-incoming') incomingClass?: boolean;
   @HostBinding('class.-outgoing') outgoingClass?: boolean;
-  @HostBinding('class.-before-separator') beforeSeparatorClass?: boolean;
+  // @HostBinding('class.-before-separator') beforeSeparatorClass?: boolean;
 
   ngOnChanges() {
     this.incomingClass = !this.isOutgoing;
     this.outgoingClass = this.isOutgoing;
-    this.beforeSeparatorClass = this.isBeforeSeparator;
+    // this.beforeSeparatorClass = this.isBeforeSeparator;
   }
 }

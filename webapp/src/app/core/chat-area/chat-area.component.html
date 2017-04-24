@@ -194,7 +194,16 @@
           </span>
         </app-message-bubble>-->
 
+
+        <!-- MARK: USE THIS VERSION -->
+        <!-- <app-day-separator
+          class="day-separator"
+          title="Wednesday, 12 April"
+          (notifyPosition)="updateSeparatorPosition($event)">
+        </app-day-separator> -->
+
         <app-message-bubble
+          class="message-bubble"
           *ngFor="let message of (messagesList | async)"
           [isOutgoing]="message.username === (currentUser$ | async).username"
           [name]="message.senderName"
@@ -204,6 +213,7 @@
         </app-message-bubble>
 
         <app-message-bubble
+          class="message-bubble"
           *ngFor="let message of (optimisticMessagesList | async)"
           [isOutgoing]="true"
           waitForServerResponse="true"
