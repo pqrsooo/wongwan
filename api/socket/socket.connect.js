@@ -34,7 +34,7 @@ function onConnect(socket) {
    */
   socket.on('send', (data) => {
     const messagePrefab = {
-      sender: {}
+      sender: {},
     }; // message object must follow the Message Schema
     messagePrefab.content = data.content;
     userQuery.getUserFromUsername(data.username).then((user) => {
@@ -111,23 +111,25 @@ function onConnect(socket) {
    */
   socket.on('read', (data) => {
     let roomID = null;
-    const seenMsgID = ObjectId(data.messageID);
-    chatRoomQuery.getChatroomID(data.roomToken).then((room) => {
+    const roomToken = data.roomToken;
+    const seenMsg = ObjectId(data.messageID);
+    chatRoomQuery.getChatroomID(roomToken).then((room) => {
       roomID = room._id;
-      return userQuery.updateLastSeenMessageInRoom(data.user, roomID, seenMsgID);
-    }).then((result) => {
-      const updatedResult = result.nMatched === 1;
-      const currentTime = Date.now();
-      console.log('Write Result is ', updatedResult ? 'Success' : 'Fail');
+      return userQuery.updateLastSeenMessageInRoom(data.user, roomID, seenMsg);
+    }).then((updatedUser) => {
       socket.emit('read ack', {
-        success: updatedResult,
-        seenTimestamp: currentTime,
+        success: true,
+        seenTimestamp: updatedUser.updatedAt,
         seenMessageID: data.messageID,
+        room: data.room,
       });
       socket.to(data.roomToken).emit('seen', {
-        success: updatedResult,
-        seenTimestamp: currentTime,
-        seenMessageID: data.messageID,
+        success: true,
+        seenTimestamp: updatedUser.updatedAt,
+        seenMessageID: seenMsg.id,
+        seenUsername: updatedUser.username,
+        seenUser: updatedUser.firstName,
+        room: data.room,
       });
     }).catch((err) => {
       console.error('Cannot Set Read status ', err);
