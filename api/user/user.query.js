@@ -39,7 +39,7 @@ const joinChatRoom = (username, roomID) => {
   }, { new: true });
   return userPromise;
 };
-
+// TODO: Make leave room just toggle isJoin field and then add leave Date
 const leaveChatRoom = (username, roomID) => {
   const userPromise = User.findOneAndUpdate({
     username,
