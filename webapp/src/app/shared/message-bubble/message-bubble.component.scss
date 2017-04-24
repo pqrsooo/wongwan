@@ -6,6 +6,7 @@
 }
 
 :host {
+  max-width: 75%;
   margin-bottom: 10px;
   &.-incoming {
     align-self: flex-start;
@@ -52,6 +53,7 @@
     background: $grey-1;
     border-radius: 15px;
     color: black;
+    word-break: break-all;
 
     &.-outgoing {
       color: white;
