@@ -7,7 +7,7 @@ const chatRoomQuery = require('../chatroom/chatroom.query');
 exports.getChatroomID = (roomToken) => {
   const promise = ChatRoom.findOne({
     roomToken,
-    }).select({
+  }).select({
     _id: 1,
   });
   return promise;
@@ -26,21 +26,24 @@ exports.getChatroomForSidebar = (user) => {
     // We need to find latest message , chatRoom Token and is read
     const currentUserID = user._id;
     const chatRoomWithData = {
-      sender: {},
-      latestMessage: {}
+      roomName: null,
+      latestMessage: null,
+      roomToken: null,
     };
     let latestMessage = null;
     return messageQuery.getLatestMessageInRoom(chatRoom.roomID).then((latestMsg) => {
       latestMessage = latestMsg;
-      return chatRoomQuery.getRoomTokenFromID(chatRoom.roomID);
-    }).then((roomToken) => {
-      chatRoomWithData.roomToken = roomToken;
+      return chatRoomQuery.getRoomTokenAndNameFromID(chatRoom.roomID);
+    }).then((room) => {
+      chatRoomWithData.roomToken = room.roomToken;
+      chatRoomWithData.roomName = room.roomName;
       if (latestMessage) {
-        const sentFirstName = currentUserID.equals(latestMessage.sender.id) ? 'You' : latestMessage.sender.firstName;
-        chatRoomWithData.latestMessage.message = latestMessage.message;
-        chatRoomWithData.latestMessage.sender.firstName = sentFirstName;
-        chatRoomWithData.latestMessage.ts = latestMessage.createAt;
-        chatRoomWithData.latestMessage.seen = chatRoom.lastSeenMessage.equals(latestMessage._id);
+        chatRoomWithData.latestMessage = {
+          sender: currentUserID.equals(latestMessage.sender.id) ? 'You' : latestMessage.sender.firstName,
+          content: latestMessage.content,
+          ts: latestMessage.createdAt,
+          seen: chatRoom.lastSeenMessage ? chatRoom.lastSeenMessage.equals(latestMessage._id) : false,
+        }
       }
       return Promise.resolve(chatRoomWithData);
     });
@@ -49,14 +52,18 @@ exports.getChatroomForSidebar = (user) => {
   return results;
 };
 
-exports.getRoomTokenFromID = (roomID) => {
+exports.getRoomTokenAndNameFromID = (roomID) => {
   const chatRoomPromise = ChatRoom.findOne({
     _id: roomID,
   }).select({
     _id: 0,
     roomToken: 1,
+    roomName: 1,
   });
-  return chatRoomPromise.then(chatRoom => chatRoom.roomToken);
+  return chatRoomPromise.then(chatRoom => chatRoom);
 };
 
+exports.getRoom = (roomID) => {
+
+}
 

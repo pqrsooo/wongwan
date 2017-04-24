@@ -52,6 +52,12 @@ function getLatestMessageInRoom(roomID) {
     roomID,
   }).sort({
     createdAt: -1,
+  }).select({
+    content: 1,
+    sender: 1,
+    createdAt: 1,
+    _id: 1,
+    username: 1,
   });
   return promise;
 }
