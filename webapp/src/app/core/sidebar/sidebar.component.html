@@ -14,15 +14,15 @@
                   <div class="--text-crop">
                     <strong>{{room.roomName}}</strong>
                   </div>
-                  <div class="timestamp">
-                    {{room.latestMessage.time | moment: 'time'}}
+                  <div class="timestamp" *ngIf="room.latestMessage as msg">
+                    {{msg.time | moment: 'time'}}
                   </div>
                 </div>
               </div>
               <div class="message">
                 <div class="row-flex">
                   <div class="--text-crop">
-                    <span *ngIf="room.latestMessage">You: {{room.latestMessage.content}}</span>
+                    <span *ngIf="room.latestMessage">{{room.latestMessage.senderFirstName}}: {{room.latestMessage.content}}</span>
                   </div>
                 </div>
               </div>
@@ -31,7 +31,7 @@
         </div>
       </div>
 
-      <div class="chat-room-entry -unread">
+      <!--<div class="chat-room-entry -unread">
         <div class="chat-room-entry-flex">
           <div class="profile-img-wrapper">
             <app-profile-img width="45" userId="2" extension="jpg">
@@ -230,7 +230,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </div>-->
     </div>
   </div>
 </div>
