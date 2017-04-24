@@ -64,7 +64,7 @@
   .send-message-container {}
 
   .conversation-container {
-    padding: 0 15px 15px;
+    padding: 0 15px;
     flex-grow: 1;
     overflow-x: hidden;
     overflow-y: scroll;
@@ -91,7 +91,7 @@
     }
 
     .message-bubble:first-child {
-      margin-top: 15px;
+      margin-top: 10px;
     }
 
     .day-separator ~ .message-bubble {
