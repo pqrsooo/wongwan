@@ -25,6 +25,9 @@ const userSchema = new mongoose.Schema({
   chatRooms: [{
     roomID: objectID,
     lastSeenMessage: objectID,
+    isJoin: Boolean,
+    join: [Date],
+    leave: [Date],
   }],
 });
 // Users
