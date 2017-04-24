@@ -172,6 +172,35 @@ function onConnect(socket) {
       sender: data.sender,
     });
   });
+  /**
+   *  The 'leave room' event tell the server to
+   *  broadcast to other clients that the user has permanently
+   *  leaved the group. Also, the server will remove the client
+   *  from the chatroom
+   *
+   *  @param {Object} data {roomToken, sender}
+   */
+  socket.on('leave room', (data) => {
+    const username = data.sender;
+    const roomToken = data.roomToken;
+    chatRoomQuery.getChatroom(roomToken).then((room) => {
+      return userQuery.leaveChatRoom(username, room._id);
+    }).then((updatedUser) => {
+      socket.to(roomToken).emit('user left', {
+        success: true,
+        username: updatedUser.username,
+        firstName: updatedUser.firstName,
+        ts: updatedUser.updatedAt,
+      });
+      socket.emit('leave room ack', {
+        success: true,
+        ts: updatedUser.updatedAt,
+      });
+      socket.leave(roomToken);
+    }).catch((err) => {
+      console.error('Error while leaving room', err);
+    });
+  });
 }
 
 module.exports = {
