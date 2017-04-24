@@ -26,16 +26,8 @@ exports.getChatroomForSidebar = (user) => {
     // We need to find latest message , chatRoom Token and is read
     const currentUserID = user._id;
     const chatRoomWithData = {
-      roomToken: null,
-      roomName: null,
-      latestMessage: {
-        message: null,
-        sender: {
-          firstName: null,
-          lastName: null,
-          ts: null,
-        },
-      },
+      sender: {},
+      latestMessage: {}
     };
     let latestMessage = null;
     return messageQuery.getLatestMessageInRoom(chatRoom.roomID).then((latestMsg) => {
@@ -47,8 +39,8 @@ exports.getChatroomForSidebar = (user) => {
         const sentFirstName = currentUserID.equals(latestMessage.sender.id) ? 'You' : latestMessage.sender.firstName;
         chatRoomWithData.latestMessage.message = latestMessage.message;
         chatRoomWithData.latestMessage.sender.firstName = sentFirstName;
-        chatRoomWithData.latestMessage.timeStamp = latestMessage.createAt;
-        chatRoomWithData.latestMessage.seen = chatRoom.roomID.equals(latestMessage._id);
+        chatRoomWithData.latestMessage.ts = latestMessage.createAt;
+        chatRoomWithData.latestMessage.seen = chatRoom.lastSeenMessage.equals(latestMessage._id);
       }
       return Promise.resolve(chatRoomWithData);
     });
