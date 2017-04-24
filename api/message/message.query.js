@@ -8,10 +8,10 @@ function saveMessage(sender, message, roomToken) {
   userQuery.getUserFromUsername(username).then((user) => {
     chatRoomQuery.getChatroomID(roomToken).then((roomID) => {
       const msg = new Message({
-        timeStamp: Date.now(), // sent time
-        message,
+        content: message,
         sender: {
           id: user._id,
+          userName: user.userName,
           firstName: user.firstName,
           lastName: user.lastName,
         },
@@ -37,11 +37,13 @@ function getMessageFromRoom(roomID) {
   return Message.find({
     roomID,
   }).sort({
-    createAt: 'ascending',
+    createdAt: 'ascending',
   }).select({
-    message: 1,
+    content: 1,
     sender: 1,
-    createAt: 1,
+    createdAt: 1,
+    _id: 1,
+    username: 1,
   });
 }
 
@@ -49,7 +51,7 @@ function getLatestMessageInRoom(roomID) {
   const promise = Message.findOne({
     roomID,
   }).sort({
-    createAt: -1,
+    createdAt: -1,
   });
   return promise;
 }

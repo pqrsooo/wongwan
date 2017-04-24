@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
 
@@ -13,12 +13,11 @@ import { MessagesService } from './internal/messages.service';
   styleUrls: ['./chat-area.component.scss']
 })
 export class ChatAreaComponent implements OnInit, AfterViewInit {
-  roomID: string;
-
+  @Input() roomID: string;
   sendMessageForm: FormGroup;
   messagesList: Observable<Message[]>;
   optimisticMessagesList: Observable<OptimisticOutgoingMessage[]>;
-  currentUser: Observable<User>;
+  currentUser$: Observable<User>;
   @ViewChild('conversationContainer') conversationContainer: ElementRef;
 
   public currentSeparatorTitle: string | null = null;
@@ -31,7 +30,6 @@ export class ChatAreaComponent implements OnInit, AfterViewInit {
   ) { }
 
   ngOnInit() {
-    this.roomID = 'hello-world-room';
     this.sendMessageForm = this.fb.group({
       message: this.fb.control('', Validators.required)
     });
@@ -48,11 +46,13 @@ export class ChatAreaComponent implements OnInit, AfterViewInit {
     this.optimisticMessagesList = this.messagesService
       .getAccumulatedOptimisticMessageStream(this.roomID);
 
-    this.currentUser = this.userService.getCurrentUser$();
+    this.currentUser$ = this.userService.getCurrentUser$();
   }
 
   private checkScrollToBottom() {
     // You can check whether to scroll to bottom or not here.
+    // THIS IS FOR DEMO!!!
+    this.scrollToBottom();
   }
 
   ngAfterViewInit() {

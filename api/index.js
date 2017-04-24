@@ -15,7 +15,10 @@ db.setUpDatabase().then(() => {
 }).catch((err) => {
   console.error('Unable to connect to database', err);
   process.exit(10);
-});
+  });
+
 
 const io = createSocketServer(appServer);
-io.on('connection', onConnect);
+io.on('connection', (socket) => {
+  onConnect(socket);
+});

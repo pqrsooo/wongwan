@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
+
+import { ChatRoomInfo } from '../internal/chat-room-info.model';
+import { SidebarService } from '../internal/sidebar.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -6,10 +10,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./sidebar.component.scss']
 })
 export class SidebarComponent implements OnInit {
+  roomInfos: Observable<ChatRoomInfo[]>;
 
-  constructor() { }
+  constructor(private sidebar: SidebarService) { }
 
   ngOnInit() {
+    this.roomInfos = this.sidebar.getServerRoomList();
   }
-
 }

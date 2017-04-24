@@ -196,8 +196,10 @@
 
         <app-message-bubble
           *ngFor="let message of (messagesList | async)"
-          [isOutgoing]="true"
-          timestamp="18:23">
+          [isOutgoing]="message.username === (currentUser$ | async).username"
+          [name]="message.senderName"
+          userId="3"
+          [timestamp]="message.sentTime | moment: 'time'">
           <span message-body>{{message.content}}</span>
         </app-message-bubble>
 

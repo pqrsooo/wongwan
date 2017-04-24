@@ -124,7 +124,9 @@ export class CreateRoomComponent implements OnInit, OnDestroy {
       this.updateFormDisability();
 
       if (result.success) {
-        this.router.navigate(['room', result.roomToken]);
+        this.router.navigate(['/'], {
+          queryParams: { room: result.roomToken }
+        });
       } else {
         this.errorMessage = result.message;
       }

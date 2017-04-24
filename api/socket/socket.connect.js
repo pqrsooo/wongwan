@@ -33,30 +33,39 @@ function onConnect(socket) {
    *  back to the client(sender) as well
    */
   socket.on('send', (data) => {
-    const messagePrefab = {}; // message object must follow the Message Schema
+    const messagePrefab = {
+      sender: {}
+    }; // message object must follow the Message Schema
     messagePrefab.content = data.content;
     userQuery.getUserFromUsername(data.username).then((user) => {
       messagePrefab.sender.id = user.id;
       messagePrefab.sender.firstName = user.firstName;
       messagePrefab.sender.lastName = user.lastName;
+      messagePrefab.sender.username = user.username;
       return chatRoomQuery.getChatroomID(data.room);
     }).then((roomID) => {
       messagePrefab.roomID = roomID;
       const message = new Message(messagePrefab);
       return message.save();
     }).then((msg) => {
-      socket.to(data.room).emit('new message', {
+      socket.in(data.room).emit('new message', {
         content: msg.content,
-        sender: msg.firstName,
         createdTime: msg.createdAt,
-        room: data.room,
         messageID: msg.id,
+        room: data.room,
+        sender: msg.sender.firstName,
+        username: msg.sender.username,
       });
       socket.emit('new message ack', {
         success: true,
-        message: msg.content,
-        room: data.room,
-        messageID: msg.id,
+        message: {
+          content: msg.content,
+          createdTime: msg.createdAt,
+          messageID: msg.id,
+          room: data.room,
+          sender: msg.sender.firstName,
+          username: msg.sender.username,
+        }
       });
     })
       .catch((err) => {
