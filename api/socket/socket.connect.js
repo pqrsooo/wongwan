@@ -138,6 +138,40 @@ function onConnect(socket) {
       });
     });
   });
+  /**
+   *  The 'join room' event tell the server to
+   *  broadcast to other clients that the user has already
+   *  joined the group
+   *
+   *  @param {Object} data {roomToken, sender}
+   */
+  socket.on('join room', (data) => {
+    const username = data.sender;
+    const roomToken = data.roomToken;
+    chatRoomQuery.getChatroom(roomToken).then((room) => {
+      return userQuery.joinChatRoom(username, room._id);
+    }).then((updatedUser) => {
+      socket.to(roomToken).emit('new user join', {
+        success: true,
+        username: updatedUser.username,
+        firstName: updatedUser.firstName,
+        ts: updatedUser.updatedAt,
+      });
+      socket.emit('join room ack', {
+        success: true,
+        ts: updatedUser.updatedAt,
+      });
+      socket.join(roomToken);
+    }).catch((err) => {
+      console.error('Cannot join room', err);
+      socket.emit('join room ack', {
+        success: false,
+      });
+    });
+    socket.to(data.roomToken).emit('typing', {
+      sender: data.sender,
+    });
+  });
 }
 
 module.exports = {
