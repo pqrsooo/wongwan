@@ -5,7 +5,7 @@ function createSocketServer(appServer) {
     serveClient: false,
   });
   // force socket to only user 'websocket'
-  io.set('transports', ['websocket']);
+  // io.set('transports', ['websocket']);
 
   // TODO: Uncomment this and  Use Redis as an Adapter for Clustering reason
   // Using Redis

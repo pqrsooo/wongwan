@@ -9,6 +9,7 @@ import { ProfileImgComponent } from './profile-img/profile-img.component';
 import { ShowScrollbarDirective } from './show-scrollbar/show-scrollbar.directive';
 import { SvgIconModule } from './svg-icon/svg-icon.module';
 import { UserModule } from './user/user.module';
+import { MomentFormatPipe } from './utils/moment.pipe'
 
 @NgModule({
   imports: [
@@ -22,7 +23,8 @@ import { UserModule } from './user/user.module';
     DaySeparatorComponent,
     ProfileImgComponent,
     TopNavigationButtonComponent,
-    ShowScrollbarDirective
+    ShowScrollbarDirective,
+    MomentFormatPipe
   ],
   exports: [
     BaseModule,
@@ -33,7 +35,8 @@ import { UserModule } from './user/user.module';
     TopNavigationButtonComponent,
     UserModule,
     SvgIconModule,
-    ShowScrollbarDirective
+    ShowScrollbarDirective,
+    MomentFormatPipe
   ]
 })
 export class SharedModule { }

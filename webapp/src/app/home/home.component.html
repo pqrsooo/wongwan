@@ -3,6 +3,11 @@
     <app-sidebar></app-sidebar>
   </div>
   <div class="chat-area-container medium-9 small-12 columns">
-    <app-chat-area></app-chat-area>
+    <div *ngIf="(chatRoomID$ | async) as chatRoomID; else noSelectedChatRoom" style="height:100%;">
+      <app-chat-area [roomID]="chatRoomID"></app-chat-area>
+    </div>
+    <ng-template #noSelectedChatRoom>
+      <h3 class="text-center">Let's chat on Wongwan!</h3>
+    </ng-template>
   </div>
 </div>

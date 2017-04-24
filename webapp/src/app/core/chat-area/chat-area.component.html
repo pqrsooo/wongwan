@@ -2,7 +2,7 @@
   <div class="chat-area-container">
     <div class="chat-title-bar">
       <div class="chat-title-name">
-        Thanat Jatuphattharachat
+        {{roomName$ | async}}
       </div>
       <!-- <div class="group-member">
         <div class="member">
@@ -36,7 +36,7 @@
         </app-day-separator-static>
       </div>
       <div class="conversation">
-        <app-day-separator
+        <!--<app-day-separator
           title="Wednesday, 12 April"
           (notifyPosition)="updateSeparatorPosition($event)">
         </app-day-separator>
@@ -192,12 +192,14 @@
             clock rate 128000<br>
             no shutdown
           </span>
-        </app-message-bubble>
+        </app-message-bubble>-->
 
         <app-message-bubble
           *ngFor="let message of (messagesList | async)"
-          [isOutgoing]="true"
-          timestamp="18:23">
+          [isOutgoing]="message.username === (currentUser$ | async).username"
+          [name]="message.senderName"
+          userId="3"
+          [timestamp]="message.sentTime | moment: 'time'">
           <span message-body>{{message.content}}</span>
         </app-message-bubble>
 
@@ -211,7 +213,7 @@
       </div>
     </div>
     <div class="send-message-container">
-      <form class="send-message-form" [formGroup]="sendMessageForm">
+      <form class="send-message-form" [formGroup]="sendMessageForm" (submit)="sendMessage($event)">
         <textarea appAutoHeight class="message-input" type="text" formControlName="message" placeholder="พิมพ์ข้อความ..." (keydown.enter)="sendMessage($event)"></textarea>
         <span class="send-icon">
           <button type="submit" class="" tabindex="-1">

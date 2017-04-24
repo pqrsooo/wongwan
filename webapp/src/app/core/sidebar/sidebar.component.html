@@ -1,11 +1,44 @@
 <div class="row">
   <div class="sidebar-scroll-container">
     <div appShowScrollbar class="sidebar-scroll-area">
-      <div class="chat-room-entry">
+      <div class="chat-room-entry" *ngFor="let room of (roomInfos | async)" [class.-unread]="!(room.latestMessage?.seen)" routerLink="/" [queryParams]="{room: room.roomToken}">
         <div class="chat-room-entry-flex">
           <div class="profile-img-wrapper">
             <app-profile-img width="45" userId="1" extension="jpg">
             </app-profile-img>
+          </div>
+          <div class="latest-message hide-for-small-only --ignore-content-width">
+            <div class="latest-message-flex">
+              <div class="">
+                <div class="row-flex">
+                  <div class="--text-crop">
+                    <strong>{{room.roomName}}</strong>
+                  </div>
+                  <div class="timestamp" *ngIf="room.latestMessage as msg">
+                    {{msg.time | moment: 'time'}}
+                  </div>
+                </div>
+              </div>
+              <div class="message">
+                <div class="row-flex">
+                  <div class="--text-crop">
+                    <span *ngIf="room.latestMessage">{{room.latestMessage.senderFirstName}}: {{room.latestMessage.content}}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!--<div class="chat-room-entry -unread">
+        <div class="chat-room-entry-flex">
+          <div class="profile-img-wrapper">
+            <app-profile-img width="45" userId="2" extension="jpg">
+            </app-profile-img>
+            <div class="unread-number">
+              17
+            </div>
           </div>
           <div class="latest-message hide-for-small-only --ignore-content-width">
             <div class="latest-message-flex">
@@ -95,36 +128,6 @@
                   </div>
                   <div class="unread-number">
                     1
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="chat-room-entry">
-        <div class="chat-room-entry-flex">
-          <div class="profile-img-wrapper">
-            <app-profile-img width="45" userId="4" extension="jpg">
-            </app-profile-img>
-          </div>
-          <div class="latest-message hide-for-small-only --ignore-content-width">
-            <div class="latest-message-flex">
-              <div class="">
-                <div class="row-flex">
-                  <div class="--text-crop">
-                    <strong>Sirinthra Chantharaj</strong>
-                  </div>
-                  <div class="timestamp">
-                    14:12
-                  </div>
-                </div>
-              </div>
-              <div class="message">
-                <div class="row-flex">
-                  <div class="--text-crop">
-                    Sirinthra: จะมา enginx กี่โมงอ่าา?
                   </div>
                 </div>
               </div>
@@ -227,7 +230,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </div>-->
     </div>
   </div>
 </div>

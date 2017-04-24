@@ -1,9 +1,11 @@
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Input, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs/Observable';
 
 import { User } from '../../shared/user/user.model';
 import { UserService } from '../../shared/user/user.service';
+import { SidebarService } from '../internal/sidebar.service';
 import { Message, OptimisticOutgoingMessage } from './internal/message.model';
 import { MessagesService } from './internal/messages.service';
 
@@ -12,13 +14,14 @@ import { MessagesService } from './internal/messages.service';
   templateUrl: './chat-area.component.html',
   styleUrls: ['./chat-area.component.scss']
 })
-export class ChatAreaComponent implements OnInit, AfterViewInit {
-  roomID: string;
-
+export class ChatAreaComponent implements OnInit, AfterViewInit, OnChanges {
+  @Input() roomID: string;
+  roomID$ = new BehaviorSubject<string | undefined>(undefined);
+  roomName$: Observable<string | undefined>;
   sendMessageForm: FormGroup;
   messagesList: Observable<Message[]>;
   optimisticMessagesList: Observable<OptimisticOutgoingMessage[]>;
-  currentUser: Observable<User>;
+  currentUser$: Observable<User>;
   @ViewChild('conversationContainer') conversationContainer: ElementRef;
 
   public currentSeparatorTitle: string | null = null;
@@ -27,11 +30,11 @@ export class ChatAreaComponent implements OnInit, AfterViewInit {
   constructor(
     private fb: FormBuilder,
     private messagesService: MessagesService,
+    private sidebarService: SidebarService,
     private userService: UserService
   ) { }
 
   ngOnInit() {
-    this.roomID = 'hello-world-room';
     this.sendMessageForm = this.fb.group({
       message: this.fb.control('', Validators.required)
     });
@@ -41,18 +44,40 @@ export class ChatAreaComponent implements OnInit, AfterViewInit {
         this.currentSeparatorTitle = this.getCurrentSeparatorTitle();
       });
 
+    this.currentUser$ = this.userService.getCurrentUser$();
+
+    this.roomName$ = Observable.combineLatest(
+      this.sidebarService.getServerRoomList(),
+      this.roomID$,
+      (roomList, roomID) => {
+        const room = roomList.find(r => r.roomToken === roomID);
+        if (room) {
+          return room.roomName;
+        } else {
+          return undefined;
+        }
+      }
+    );
+    this.roomID$.next(this.roomID);
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if ('roomID' in changes) {
+      this.roomID$.next(changes.roomID.currentValue);
+    }
+
     this.messagesList = this.messagesService
       .getAccumulatedMessageStream(this.roomID)
       .do(() => this.checkScrollToBottom());
 
     this.optimisticMessagesList = this.messagesService
       .getAccumulatedOptimisticMessageStream(this.roomID);
-
-    this.currentUser = this.userService.getCurrentUser$();
   }
 
   private checkScrollToBottom() {
     // You can check whether to scroll to bottom or not here.
+    // THIS IS FOR DEMO!!!
+    this.scrollToBottom();
   }
 
   ngAfterViewInit() {

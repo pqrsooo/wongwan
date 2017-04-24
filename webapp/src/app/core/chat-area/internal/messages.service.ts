@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 
 import { APISocketService } from '../../../shared/base/api-socket.service';
+import { APIService } from '../../../shared/base/api.service';
+import { UserService } from '../../../shared/user/user.service';
 import { Message, OptimisticOutgoingMessage, ServerIncomingMessage } from './message.model';
-// import { APIService } from '../../../shared/base/api.service';
 
 interface AccumulatedMessageOptions {
   maxMessagesNumber: number;
@@ -18,7 +20,7 @@ interface OutgoingMessageInfo {
   content: string;
 }
 
-interface ServerMessageAcknowledgement {
+export interface ServerMessageAcknowledgement {
   success: boolean;
   message?: ServerIncomingMessage;
 }
@@ -30,7 +32,7 @@ export class MessagesService {
   private outgoingMessagesQueueChangeEvent = new Subject();
   private outgoingMessageAcknowledgeEvent = new Subject<Message>();
 
-  constructor(private socket: APISocketService) {
+  constructor(private api: APIService, private socket: APISocketService, private userService: UserService) {
     this.setUpAcknowledgementHandler();
   }
 
@@ -64,12 +66,29 @@ export class MessagesService {
     this.isWaitingForAcknowledgement = true;
     const message = this.outgoingMessagesQueue[0];
     console.log(`Sending message "${message.content}" to room "${message.roomID}"`);
-    this.socket.sendMessage('new message', message.content);
+
+    let username: string | undefined;
+    this.userService.getCurrentUsername$().subscribe(u => username = u).unsubscribe();
+
+    this.socket.sendMessage('send', {
+      room: message.roomID,
+      username: username!,
+      content: message.content
+    });
   }
 
   getMessageStream(roomID: string) {
     console.log('getMessageStream', roomID);
-    return this.socket.getEvent<ServerIncomingMessage>('new message')
+
+    const fromSocket = this.socket.getEvent<ServerIncomingMessage>('new message');
+    const fromAPI = this.api.requestGET<{
+      success: true;
+      messagesArr: ServerIncomingMessage[];
+    }>('/api/message/get-messages', {
+      roomToken: roomID
+    }).mergeMap(messages => Observable.from(messages.messagesArr));
+
+    return fromSocket.merge(fromAPI)
       .map((serverMsg) => new Message(serverMsg))
       .merge(this.outgoingMessageAcknowledgeEvent);
   }

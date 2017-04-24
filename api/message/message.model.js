@@ -6,6 +6,7 @@ const chatMessageSchema = new mongoose.Schema({
   content: String,
   sender: {
     id: objectID,
+    username: String,
     firstName: String,
     lastName: String,
   },

@@ -7,22 +7,23 @@ const getUser = (username) => {
   return userPromise;
 };
 
-exports.getUserFromUsername = username => getUser(username);
+const getUserFromUsername = username => getUser(username);
 // users shoud be type array
-exports.getAllUserID = (users) => {
+const getAllUserID = (users) => {
   const userIDArr = users.map(user => getUser(user.username));
   const results = Promise.all(userIDArr);
   return results;
 };
 // usernames should be array of usernames
-exports.getAllUserIDFromUsernames = (usernames) => {
+const getAllUserIDFromUsernames = (usernames) => {
   const userIDArr = usernames.map(username => getUser(username));
   const results = Promise.all(userIDArr);
   return results;
 };
 
 // This return Promise
-const updateUserChatRoom = (username, roomID) => {
+// Let user join the room
+const joinChatRoom = (username, roomID) => {
   const userPromise = User.findOneAndUpdate({
     username,
   }, {
@@ -30,19 +31,35 @@ const updateUserChatRoom = (username, roomID) => {
       chatRooms: {
         roomID,
         lastSeenMessage: null,
+        isJoin: true,
+        join: [].push(Date.now()),
+        leave: [],
       },
     },
-  });
+  }, { new: true });
+  return userPromise;
+};
+// TODO: Make leave room just toggle isJoin field and then add leave Date
+const leaveChatRoom = (username, roomID) => {
+  const userPromise = User.findOneAndUpdate({
+    username,
+  }, {
+    $pull: {
+      chatRooms: {
+        roomID,
+      },
+    },
+  }, { new: true });
   return userPromise;
 };
 
-exports.addChatRoom = (users, room) => {
-  const updatedUsers = users.map(user => updateUserChatRoom(user.username, room._id));
+const addChatRoom = (users, room) => {
+  const updatedUsers = users.map(user => joinChatRoom(user.username, room._id));
   const results = Promise.all(updatedUsers);
   return results;
 };
 
-exports.getUserFromChatRoom = (roomID) => {
+const getUserFromChatRoom = (roomID) => {
   const promise = User.find({
     chatRooms: {
       $elemMatch: {
@@ -57,15 +74,27 @@ exports.getUserFromChatRoom = (roomID) => {
   return promise;
 };
 
-exports.updateLastSeenMessageInRoom = (username, roomID, lastSeenMsg) => {
-  const promise = User.update({
+const updateLastSeenMessageInRoom = (username, roomID, lastSeenMsgId) => {
+  const promise = User.findOneAndUpdate({
     username,
     'chatRooms.roomID': roomID,
   }, {
     $set: {
-      'chatRooms.lastSeenMessage': lastSeenMsg,
+      'chatRooms.lastSeenMessage': lastSeenMsgId,
     },
-  });
+  }, { new: true });
   return promise;
 };
+
+module.exports = {
+  getUserFromUsername,
+  getAllUserID,
+  getAllUserIDFromUsernames,
+  joinChatRoom,
+  leaveChatRoom,
+  addChatRoom,
+  getUserFromChatRoom,
+  updateLastSeenMessageInRoom,
+};
+
 

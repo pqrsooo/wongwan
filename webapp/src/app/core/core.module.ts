@@ -4,6 +4,7 @@ import { SharedModule } from '../shared/shared.module';
 import { AutoHeightDirective } from './chat-area/auto-height.directive';
 import { ChatAreaComponent } from './chat-area/chat-area.component';
 import { MessagesService } from './chat-area/internal/messages.service';
+import { SidebarService } from './internal/sidebar.service';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { TopNavigationBarComponent } from './top-navigation-bar/top-navigation-bar.component';
 
@@ -23,7 +24,8 @@ import { TopNavigationBarComponent } from './top-navigation-bar/top-navigation-b
     TopNavigationBarComponent
   ],
   providers: [
-    MessagesService
+    MessagesService,
+    SidebarService
   ]
 })
 export class CoreModule { }

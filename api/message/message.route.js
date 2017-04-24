@@ -7,12 +7,22 @@ const router = express.Router();
 router.get('/get-messages', (req, res) => {
   const session = req.session;
   const user = session.user;
-  const roomToken = req.body.roomToken;
+  const roomToken = req.query.roomToken;
   chatRoomQuery.getChatroom(roomToken).then((room) => {
     messageQuery.getMessageFromRoom(room._id).then((messages) => {
+      const messagesArr = messages.map((msg) => {
+        return {
+          content: msg.content,
+          createdTime: msg.createdAt,
+          messageID: msg.id,
+          sender: msg.sender.firstName,
+          room: roomToken,
+          username: msg.sender.username,
+        }
+      });
       res.status(200).json({
         success: true,
-        messages,
+        messagesArr,
         lastSeenMessage: room.lastSeenMessage,
       });
     }).catch((err) => {

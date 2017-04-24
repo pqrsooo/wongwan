@@ -33,30 +33,39 @@ function onConnect(socket) {
    *  back to the client(sender) as well
    */
   socket.on('send', (data) => {
-    const messagePrefab = {}; // message object must follow the Message Schema
+    const messagePrefab = {
+      sender: {},
+    }; // message object must follow the Message Schema
     messagePrefab.content = data.content;
     userQuery.getUserFromUsername(data.username).then((user) => {
       messagePrefab.sender.id = user.id;
       messagePrefab.sender.firstName = user.firstName;
       messagePrefab.sender.lastName = user.lastName;
+      messagePrefab.sender.username = user.username;
       return chatRoomQuery.getChatroomID(data.room);
     }).then((roomID) => {
       messagePrefab.roomID = roomID;
       const message = new Message(messagePrefab);
       return message.save();
     }).then((msg) => {
-      socket.to(data.room).emit('new message', {
+      socket.in(data.room).emit('new message', {
         content: msg.content,
-        sender: msg.firstName,
         createdTime: msg.createdAt,
-        room: data.room,
         messageID: msg.id,
+        room: data.room,
+        sender: msg.sender.firstName,
+        username: msg.sender.username,
       });
       socket.emit('new message ack', {
         success: true,
-        message: msg.content,
-        room: data.room,
-        messageID: msg.id,
+        message: {
+          content: msg.content,
+          createdTime: msg.createdAt,
+          messageID: msg.id,
+          room: data.room,
+          sender: msg.sender.firstName,
+          username: msg.sender.username,
+        }
       });
     })
       .catch((err) => {
@@ -102,29 +111,94 @@ function onConnect(socket) {
    */
   socket.on('read', (data) => {
     let roomID = null;
-    const seenMsgID = ObjectId(data.messageID);
-    chatRoomQuery.getChatroomID(data.roomToken).then((room) => {
+    const roomToken = data.roomToken;
+    const seenMsg = ObjectId(data.messageID);
+    chatRoomQuery.getChatroomID(roomToken).then((room) => {
       roomID = room._id;
-      return userQuery.updateLastSeenMessageInRoom(data.user, roomID, seenMsgID);
-    }).then((result) => {
-      const updatedResult = result.nMatched === 1;
-      const currentTime = Date.now();
-      console.log('Write Result is ', updatedResult ? 'Success' : 'Fail');
+      return userQuery.updateLastSeenMessageInRoom(data.user, roomID, seenMsg);
+    }).then((updatedUser) => {
       socket.emit('read ack', {
-        success: updatedResult,
-        seenTimestamp: currentTime,
+        success: true,
+        seenTimestamp: updatedUser.updatedAt,
         seenMessageID: data.messageID,
+        room: data.room,
       });
       socket.to(data.roomToken).emit('seen', {
-        success: updatedResult,
-        seenTimestamp: currentTime,
-        seenMessageID: data.messageID,
+        success: true,
+        seenTimestamp: updatedUser.updatedAt,
+        seenMessageID: seenMsg.id,
+        seenUsername: updatedUser.username,
+        seenUser: updatedUser.firstName,
+        room: data.room,
       });
     }).catch((err) => {
       console.error('Cannot Set Read status ', err);
       socket.emit('read ack', {
         success: false,
       });
+    });
+  });
+  /**
+   *  The 'join room' event tell the server to
+   *  broadcast to other clients that the user has already
+   *  joined the group
+   *
+   *  @param {Object} data {roomToken, sender}
+   */
+  socket.on('join room', (data) => {
+    const username = data.sender;
+    const roomToken = data.roomToken;
+    chatRoomQuery.getChatroom(roomToken).then((room) => {
+      return userQuery.joinChatRoom(username, room._id);
+    }).then((updatedUser) => {
+      socket.to(roomToken).emit('new user join', {
+        success: true,
+        username: updatedUser.username,
+        firstName: updatedUser.firstName,
+        ts: updatedUser.updatedAt,
+      });
+      socket.emit('join room ack', {
+        success: true,
+        ts: updatedUser.updatedAt,
+      });
+      socket.join(roomToken);
+    }).catch((err) => {
+      console.error('Cannot join room', err);
+      socket.emit('join room ack', {
+        success: false,
+      });
+    });
+    socket.to(data.roomToken).emit('typing', {
+      sender: data.sender,
+    });
+  });
+  /**
+   *  The 'leave room' event tell the server to
+   *  broadcast to other clients that the user has permanently
+   *  leaved the group. Also, the server will remove the client
+   *  from the chatroom
+   *
+   *  @param {Object} data {roomToken, sender}
+   */
+  socket.on('leave room', (data) => {
+    const username = data.sender;
+    const roomToken = data.roomToken;
+    chatRoomQuery.getChatroom(roomToken).then((room) => {
+      return userQuery.leaveChatRoom(username, room._id);
+    }).then((updatedUser) => {
+      socket.to(roomToken).emit('user left', {
+        success: true,
+        username: updatedUser.username,
+        firstName: updatedUser.firstName,
+        ts: updatedUser.updatedAt,
+      });
+      socket.emit('leave room ack', {
+        success: true,
+        ts: updatedUser.updatedAt,
+      });
+      socket.leave(roomToken);
+    }).catch((err) => {
+      console.error('Error while leaving room', err);
     });
   });
 }
