@@ -11,7 +11,6 @@ router.post('/signup', (req, res) => {
       message: 'No username or password defined',
     });
   }
-
   const saltRounds = 10;
   bcrypt.hash(req.body.password, saltRounds).then((hash) => {
     const newUser = new User({
@@ -21,33 +20,34 @@ router.post('/signup', (req, res) => {
       lastName: req.body.lastName,
       chatRooms: [],
     });
-    newUser.save().then((user) => {
-      console.log('Successfully create new user');
-      req.session.user = {
-        username: user.username,
-        firstName: user.firstName,
-        lastName: user.lastName,
-      };
-      res.status(200).send({
-        success: true,
-        message: 'Successfully register user.',
-        username: user.username,
-        firstName: user.firstName,
-        lastName: user.lastName,
-      });
-    }).catch((err) => {
-      if (err.code === 11000) {
-        res.status(400).send({
-          success: false,
-          message: 'This username already exists',
-        });
-      } else {
-        res.status(400).send({
-          success: false,
-          message: 'Cannot create new user',
-        });
-      }
+    return newUser.save();
+  }).then((user) => {
+    console.log('Successfully create new user');
+    req.session.user = {
+      username: user.username,
+      firstName: user.firstName,
+      lastName: user.lastName,
+    };
+    res.status(200).send({
+      success: true,
+      message: 'Successfully register user.',
+      username: user.username,
+      firstName: user.firstName,
+      lastName: user.lastName,
     });
+  }).catch((err) => {
+    if (err.code === 11000) {
+      res.status(400).send({
+        success: false,
+        message: 'This username already exists',
+      });
+    } else {
+      console.error(err);
+      res.status(400).send({
+        success: false,
+        message: 'Cannot create new user',
+      });
+    }
   });
 });
 
@@ -58,47 +58,43 @@ router.post('/login', (req, res) => {
       message: 'No username or password defined',
     });
   }
+  let user = null;
   User.findOne({
     username: req.body.username,
-  }).then((user) => {
-    bcrypt.compare(req.body.password, user.password).then((result) => {
-      if (result) {
-        const {
+  }).then((usr) => {
+    user = usr;
+    return bcrypt.compare(req.body.password, user.password);
+  }).then((result) => {
+    if (result) {
+      const {
+        username,
+        firstName,
+        lastName,
+      } = user;
+      req.session.user = {
+        username: user.username,
+        firstName: user.firstName,
+        lastName: user.lastName,
+      };
+      res.status(200).json({
+        success: true,
+        user: {
           username,
           firstName,
           lastName,
-        } = user;
-        req.session.user = {
-          username: user.username,
-          firstName: user.firstName,
-          lastName: user.lastName,
-        };
-        res.status(200).json({
-          success: true,
-          user: {
-            username,
-            firstName,
-            lastName,
-          },
-        });
-      } else {
-        res.status(400).json({
-          success: false,
-          message: 'Invalid Password',
-        });
-      }
-    }).catch((err) => {
-      console.error(err);
-      res.status(500).send({
-        success: false,
-        message: 'Internal Error',
+        },
       });
-    });
+    } else {
+      res.status(400).json({
+        success: false,
+        message: 'Invalid Password',
+      });
+    }
   }).catch((err) => {
     console.error(err);
     res.status(400).send({
       success: false,
-      message: 'Could not find user',
+      message: 'Cannot Create new user',
     });
   });
 });
