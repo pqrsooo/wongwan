@@ -19,7 +19,7 @@ exports.getChatroom = (roomToken) => {
   });
   return promise;
 };
-
+// user is user object -- exactly user object
 exports.getChatroomForSidebar = (user) => {
   const chatRoomPromise = user.chatRooms.map((chatRoom) => {
     // This will be chatRoom field from UserModel -- {roomID, lastSeenMessage}
@@ -63,7 +63,4 @@ exports.getRoomTokenAndNameFromID = (roomID) => {
   return chatRoomPromise.then(chatRoom => chatRoom);
 };
 
-exports.getRoom = (roomID) => {
-
-}
 
