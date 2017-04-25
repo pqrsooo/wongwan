@@ -13,7 +13,7 @@ function createSocketServer(appServer) {
   // Using Redis
   const port = `${config.redis.port}`;
   const host = `${config.redis.host}`;
-  io.adapter(redis({ host, port }));
+  io.adapter(redis({ host: 'redis', port: '6379' }));
   // const pubClient = redis(port, host);
   // const subClient = redis(port, host);
   // io.adapter(redis({ pubClient, subClient }));
