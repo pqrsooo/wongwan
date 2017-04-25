@@ -1,6 +1,10 @@
 $scrollbar-thick: 9;
 $scrollbar-thumb-thick: 7;
 
+::-webkit-scrollbar {
+  display: none;
+}
+
 .scrollbar {
   z-index: 1000;
   position: absolute;

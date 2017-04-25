@@ -33,7 +33,7 @@
       overflow-x: hidden;
       overflow-y: scroll;
       margin-right: -$scrollbar-size + px !important;
-      padding-right: ($scrollbar-size - 15) + px !important;
+      padding-right: $scrollbar-size + px !important;
     }
   }
 }
