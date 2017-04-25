@@ -15,9 +15,6 @@ export class SidebarService {
       .map((serverResponse) => {
         return serverResponse.chatRooms.map(chatroom => new ChatRoomInfo(chatroom));
       })
-      .do(chatRooms => {
-        this.socket.sendMessage('subscribe', chatRooms.map(chatRoom => chatRoom.roomToken));
-      })
       .share();
 
     // const initialStream = this.api.requestGET<ServerChatRooms>('/api/chatroom/get-chatroom')
