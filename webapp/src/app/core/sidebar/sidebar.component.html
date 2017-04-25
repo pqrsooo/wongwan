@@ -31,6 +31,32 @@
         </div>
       </div>
 
+      <div *ngIf="'true'" class="chat-room-entry">
+        <div class="chat-room-entry-flex">
+          <div class="profile-img-wrapper">
+            <app-profile-img width="45" userId="0" extension="jpg">
+            </app-profile-img>
+          </div>
+          <div class="latest-message hide-for-small-only --ignore-content-width">
+            <div class="latest-message-flex">
+              <div class="">
+                <div class="row-flex">
+                  <div class="--text-crop">
+                    <strong>สร้างแชทใหม่</strong>
+                  </div>
+                </div>
+              </div>
+              <div class="message">
+                <div class="row-flex">
+                  <div class="--text-crop">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <!--<div class="chat-room-entry -unread">
         <div class="chat-room-entry-flex">
           <div class="profile-img-wrapper">
