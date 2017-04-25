@@ -17,7 +17,8 @@ services:
     command: npm run dev
     container_name: api_primary
     environment:
-      NODE_ENV: development
+      NODE_ENV: development 
+      MONGODB_HOST: mongodb://mongo1
       EXPRESS_IP: '0.0.0.0'
     links:
       - 'redis'
@@ -36,7 +37,8 @@ services:
     command: npm run dev
     container_name: api_secondary
     environment:
-      NODE_ENV: development
+      NODE_ENV: development 
+      MONGODB_HOST: mongodb://mongo1
       EXPRESS_IP: '0.0.0.0'
     links:
       - 'redis'
