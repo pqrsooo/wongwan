@@ -9,11 +9,13 @@
       <div *ngIf="errorMessage" class="login-error-msg"><i class="fa fa-exclamation-triangle fa-lg" aria-hidden="true"></i>&nbsp;&nbsp;{{errorMessage}}</div>
 
       <form [formGroup]="loginForm" (submit)="login()">
-        <label class="-warn">
+        <!-- ADD '-warn' class for warning style -->
+        <!-- <label class="-warn"> -->
+        <label class="">
         Username
         <input type="text" formControlName="username" placeholder="Username" required>
       </label>
-        <label>
+      <label class="">
         Password
         <input type="password" formControlName="password" placeholder="Password" required>
       </label>
