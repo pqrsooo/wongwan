@@ -4,22 +4,22 @@
       <div class="columns">
         <div class="title-group">
           <div class="logo-img"><img src="assets/images/wongwan-logo.png" width="56" height="56"></div>
-          <div>
-            <h2 class="title">เข้าสู่ระบบ</h2></div>
+          <div><h2 class="title">เข้าสู่ระบบ</h2></div>
         </div>
-        <div *ngIf="errorMessage" class="login-error-msg"><i class="fa fa-exclamation-triangle fa-lg" aria-hidden="true"></i>&nbsp;&nbsp;{{errorMessage}}</div>
 
         <form [formGroup]="loginForm" (submit)="login()">
           <!-- ADD '-warn' class for warning style -->
           <!-- <label class="-warn"> -->
           <label class="">
-        Username
-        <input type="text" formControlName="username" placeholder="Username" required>
-      </label>
+            Username
+            <input type="text" formControlName="username" placeholder="Username" required>
+          </label>
           <label class="">
-        Password
-        <input type="password" formControlName="password" placeholder="Password" required>
-      </label>
+            Password
+            <input type="password" formControlName="password" placeholder="Password" required>
+          </label>
+
+          <div *ngIf="errorMessage" [@fadeInOut] class="login-error-msg"><i class="fa fa-exclamation-triangle fa-lg" aria-hidden="true"></i>&nbsp;&nbsp;{{errorMessage}}</div>
 
           <button class="button -login" [disabled]="loginForm.disabled">เข้าสู่ระบบ</button>
           <button class="button -login-fb"><i class="fa fa-facebook-square fa-lg" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;เข้าสู่ระบบด้วย Facebook</button>

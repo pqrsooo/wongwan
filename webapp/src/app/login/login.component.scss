@@ -21,6 +21,7 @@
     margin-top: 10px;
     max-width: 460px;
     padding: 25px 15px;
+    overflow: hidden;
     @include breakpoint(468px) {
       margin-top: 60px;
       background: white;
