@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { NavigationCancel, NavigationEnd, NavigationStart, Router } from '@angular/router/';
+import { ActivatedRoute, NavigationCancel, NavigationEnd, NavigationStart, Router } from '@angular/router/';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'app-root',
@@ -8,8 +9,9 @@ import { NavigationCancel, NavigationEnd, NavigationStart, Router } from '@angul
 })
 export class AppComponent implements OnInit {
   routerLoading = true;
+  isOverflowHidden$: Observable<boolean>;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.router.events.subscribe(event => {
@@ -18,6 +20,11 @@ export class AppComponent implements OnInit {
       } else if (event instanceof NavigationEnd || event instanceof NavigationCancel) {
         this.routerLoading = false;
       }
+    });
+
+    this.isOverflowHidden$ = this.route.url.map(urls => {
+      console.log(urls);
+      return false;
     });
   }
 }

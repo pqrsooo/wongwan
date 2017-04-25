@@ -1,4 +1,4 @@
-<div class="app-wrapper">
+<div class="app-wrapper" [class.-overflow]="isOverflowHidden | async">
   <div class="top-navigation-bar">
     <app-top-navigation-bar></app-top-navigation-bar>
   </div>

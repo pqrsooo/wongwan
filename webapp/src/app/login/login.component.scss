@@ -2,6 +2,13 @@
 @import 'helper';
 @import 'mixin';
 
+.content-wrapper {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: rgba(252, 252, 252, 1);
+}
+
 .row.main {
   margin-top: 30px;
   max-width: 420px;
@@ -18,6 +25,13 @@ h2 {
   font-size: 26px !important;
 }
 
+label.-warn {
+  color: $warning-color;
+  input {
+    border: 1px solid $warning-color;
+  }
+}
+
 .title-group {
   // display: flex;
   // align-items: center;
@@ -26,6 +40,7 @@ h2 {
   .logo-img {
     display: inline-block;
     margin-right: 10px;
+    margin-bottom: 3px;
   }
 
   .title {
@@ -38,23 +53,17 @@ h2 {
   display: inline-block;
   margin-top: 7px;
   @extend ._font-heading;
+  font-size: 15px;
 }
 
 .login-error-msg {
-  background: red;
   color: white;
-}
-
-.row {
-  // box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.05);
-}
-
-.or-separator {
-  @extend ._font-heading;
-  font-size: 16px;
-  width: 100%;
-  text-align: center;
-  margin-bottom: 8px;
+  padding: 12px 15px;
+  color: darken($warning-color, 10%);
+  // border: 1px solid $warning-color;
+  background: rgba($warning-color, 0.15);
+  border-radius: 4px;
+  margin-bottom: 10px;
 }
 
 input {
@@ -64,6 +73,12 @@ input {
   box-shadow: none;
   border: 1px solid rgb(223, 223, 223);
   border-radius: 4px;
+
+  &:focus {
+    border: 1px solid $primary-color;
+    // box-shadow: 0 0 5px rgba($primary-color, 0.4);
+    box-shadow: none;
+  }
 }
 
 button {
@@ -72,16 +87,34 @@ button {
   @extend ._font-heading;
   font-size: 16px;
   border-radius: 4px;
+  transition: box-shadow 0.15s ease-out;
 
   &:focus {
     outline: 0;
   }
 
   &.-login {
+    margin-top: 15px;
     background: $primary-color;
   }
+  &.-login:hover, &.-login:focus {
+    background: darken($primary-color, 2%);
+    box-shadow: 0 5px 11px 0 rgba(0,0,0,0.14), 0 4px 15px 0 rgba(0,0,0,0.11);
+  }
 
-  &._login-fb {
+  &.-login-fb {
     background: #3b5998;
+  }
+
+  &.-login-fb:hover, &.-login-fb:focus {
+    background: darken(#3b5998, 2%);
+    box-shadow: 0 5px 11px 0 rgba(0,0,0,0.14), 0 4px 15px 0 rgba(0,0,0,0.11);
+  }
+}
+
+a {
+  color: $secondary-color;
+  &:hover {
+    color: darken($secondary-color, 20%);
   }
 }
