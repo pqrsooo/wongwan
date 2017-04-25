@@ -1,13 +1,19 @@
 import { AfterViewInit, Component, ElementRef, Input, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs/Observable';
 
+import { APISocketService } from '../../shared/base/api-socket.service';
 import { User } from '../../shared/user/user.model';
 import { UserService } from '../../shared/user/user.service';
 import { SidebarService } from '../internal/sidebar.service';
 import { Message, OptimisticOutgoingMessage } from './internal/message.model';
 import { MessagesService } from './internal/messages.service';
+
+interface ServerLeaveRoomAcknowledgement {
+  success: boolean;
+}
 
 @Component({
   selector: 'app-chat-area',
@@ -22,6 +28,7 @@ export class ChatAreaComponent implements OnInit, AfterViewInit, OnChanges {
   messagesList: Observable<Message[]>;
   optimisticMessagesList: Observable<OptimisticOutgoingMessage[]>;
   currentUser$: Observable<User>;
+  isLeavingRoom = false;
   @ViewChild('conversationContainer') conversationContainer: ElementRef;
 
   public currentSeparatorTitle: string | null = null;
@@ -31,7 +38,9 @@ export class ChatAreaComponent implements OnInit, AfterViewInit, OnChanges {
     private fb: FormBuilder,
     private messagesService: MessagesService,
     private sidebarService: SidebarService,
-    private userService: UserService
+    private userService: UserService,
+    private socket: APISocketService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -47,7 +56,7 @@ export class ChatAreaComponent implements OnInit, AfterViewInit, OnChanges {
     this.currentUser$ = this.userService.getCurrentUser$();
 
     this.roomName$ = Observable.combineLatest(
-      this.sidebarService.getServerRoomList(),
+      this.sidebarService.serverRoomList$,
       this.roomID$,
       (roomList, roomID) => {
         const room = roomList.find(r => r.roomToken === roomID);
@@ -128,5 +137,25 @@ export class ChatAreaComponent implements OnInit, AfterViewInit, OnChanges {
       }
     }
     return null;
+  }
+
+  leaveRoom() {
+    this.isLeavingRoom = true;
+
+    const leavingRoomID = this.roomID;
+
+    this.socket.getEvent<ServerLeaveRoomAcknowledgement>('leave room ack')
+      .first()
+      .subscribe(ack => {
+        this.isLeavingRoom = false;
+        if (ack.success) {
+          this.sidebarService.leaveRoom(leavingRoomID);
+          this.router.navigate(['']);
+        } else {
+          alert('Cannot leave room. You must stay here.');
+        }
+      });
+
+    this.socket.sendMessage('leave room', { roomToken: leavingRoomID });
   }
 }

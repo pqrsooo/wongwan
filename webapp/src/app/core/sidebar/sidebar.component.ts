@@ -15,6 +15,6 @@ export class SidebarComponent implements OnInit {
   constructor(private sidebar: SidebarService) { }
 
   ngOnInit() {
-    this.roomInfos$ = this.sidebar.getServerRoomList().share();
+    this.roomInfos$ = this.sidebar.serverRoomList$;
   }
 }

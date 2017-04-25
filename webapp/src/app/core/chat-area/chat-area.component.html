@@ -4,6 +4,9 @@
       <div class="chat-title-name">
         {{roomName$ | async}}
       </div>
+      <span class="float-right">
+        <button type="button" class="small alert button" [disabled]="isLeavingRoom" (click)="leaveRoom()">Leave Room</button>
+      </span>
       <!-- <div class="group-member">
         <div class="member">
           <app-profile-img

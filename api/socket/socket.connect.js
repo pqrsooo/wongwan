@@ -202,7 +202,7 @@ function onConnect(socket) {
      *  @param {Object} data {roomToken, sender}
      */
     socket.on('leave room', (data) => {
-      const username = data.sender;
+      const username = session.user.username;
       const roomToken = data.roomToken;
       chatRoomQuery.getChatroom(roomToken).then((room) => {
         return userQuery.leaveChatRoom(username, room._id);
@@ -219,6 +219,9 @@ function onConnect(socket) {
         });
         socket.leave(roomToken);
       }).catch((err) => {
+        socket.emit('leave room ack', {
+          success: false,
+        });
         console.error('Error while leaving room', err);
       });
     });

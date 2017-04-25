@@ -1,35 +1,38 @@
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
+import { Subject } from 'rxjs/Subject';
 
 import { APISocketService } from '../../shared/base/api-socket.service';
 import { APIService } from '../../shared/base/api.service';
 import { ChatRoomInfo, ServerChatRooms } from './chat-room-info.model';
-import { ServerIncomingMessage } from '../chat-area/internal/message.model';
-import { ServerMessageAcknowledgement } from '../chat-area/internal/messages.service';
 
 @Injectable()
 export class SidebarService {
-  constructor(private api: APIService, private socket: APISocketService) { }
+  private leaveRoomSubject = new Subject<string>();
+  readonly serverRoomList$: Observable<ChatRoomInfo[]>;
 
-  getServerRoomList() {
-    return this.api.requestGET<ServerChatRooms>('/api/chatroom/get-chatroom')
-      .map((serverResponse) => {
-        return serverResponse.chatRooms.map(chatroom => new ChatRoomInfo(chatroom));
-      })
-      .share();
+  constructor(private api: APIService, private socket: APISocketService) {
+    this.serverRoomList$ = this.api.requestGET<ServerChatRooms>('/api/chatroom/get-chatroom')
+      .map((serverResponse) => serverResponse.chatRooms.map(chatroom => new ChatRoomInfo(chatroom)))
+      .mergeMap((rooms) => (
+        this.leaveRoomSubject
+          .startWith(undefined)
+          .scan((currentRooms: ChatRoomInfo[], deleteRoomToken) => {
+            if (deleteRoomToken !== undefined) {
+              const roomIndex = currentRooms.findIndex(r => r.roomToken === deleteRoomToken);
+              if (roomIndex !== -1) {
+                currentRooms.splice(roomIndex, 1);
+              }
+            }
+            return currentRooms;
+          }, rooms)
+      ))
+      .do(a => console.log(a))
+      .publishReplay(1)
+      .refCount();
+  }
 
-    // const initialStream = this.api.requestGET<ServerChatRooms>('/api/chatroom/get-chatroom')
-    //   .map((serverResponse) => {
-    //     return serverResponse.chatRooms.map(chatroom => new ChatRoomInfo(chatroom));
-    //   });
-
-    // const roomStream = initialStream;
-
-    // const ackMessagesSocketStream = this.socket.getEvent<ServerMessageAcknowledgement>('new message ack')
-    //   .filter(ack => ack.success).map(ack => ack.message!);
-    // const newMessageSocketStream = this.socket.getEvent<ServerIncomingMessage>('new message');
-    // const messageStream = ackMessagesSocketStream.merge(newMessageSocketStream)
-    //   .map((msg) => {
-    //   msg.
-    // })
+  leaveRoom(roomToken: string) {
+    this.leaveRoomSubject.next(roomToken);
   }
 }
