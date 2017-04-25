@@ -20,7 +20,7 @@ router.post('/create-room', (req, res) => {
   // will seach for objectID from username array
   // join Users should be array of User object
   userQuery.getAllUserIDFromUsernames(uniqueJoins).then((users) => {
-    utils.randomToken(48).then((buf) => {
+    utils.randomToken(12).then((buf) => {
       const chatRoom = new Chatroom({
         roomName: req.body.roomName,
         roomToken: buf.toString('hex'),

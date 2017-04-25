@@ -39,7 +39,7 @@ module.exports = {
      *
      * @type {string}
      */
-    host: process.env.MONGODB_HOST || 'mongodb://db_ww',
+    host: process.env.MONGODB_HOST || 'mongodb://mongo1',
     /**
      * A database name that being used in MongoDB server
      *

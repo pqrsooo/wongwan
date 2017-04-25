@@ -1,0 +1,106 @@
+# modify from
+# mongo-cluster: https://github.com/yeasy/docker-compose-files/blob/master/mongo_cluster/docker-compose.yml
+# ngix : https://github.com/socketio/socket.io/blob/master/examples/cluster-nginx/docker-compose.yml
+
+version: '3'
+
+services:
+  nginx:
+    build: ./nginx
+    links:
+      - api-primary
+      - api-secondary
+    ports:
+    - '3000:80'
+  api-primary:
+    build: ./api
+    command: npm run dev
+    container_name: api_primary
+    environment:
+      NODE_ENV: development
+      EXPRESS_IP: '0.0.0.0'
+    links:
+      - 'redis'
+      - 'mongo1'
+    expose:
+      - '3000' 
+    volumes:
+      - ./api:/home/app/wongwan/api
+      - /home/app/wongwan/api/node_modules
+    depends_on:
+      - mongosetup
+      - mongo1
+      - redis
+  api-secondary:
+    build: ./api
+    command: npm run dev
+    container_name: api_secondary
+    environment:
+      NODE_ENV: development
+      EXPRESS_IP: '0.0.0.0'
+    links:
+      - 'redis'
+      - 'mongo1'
+    expose:
+      - '3000' 
+    volumes:
+      - ./api:/home/app/wongwan/api
+      - /home/app/wongwan/api/node_modules
+    depends_on:
+      - mongosetup
+      - mongo1
+      - redis
+      
+  redis:
+    image: redis:3.0.7
+    container_name: redis-ww
+    expose:
+      - '6379' # Redis default port
+    volumes:
+      - ./redisdata:/data
+
+  mongo3:
+    image: mongo:3.4.3
+    hostname: mongo3
+    expose:
+      - "27017"
+      - "28017"
+    restart: always
+    entrypoint: [ "/usr/bin/mongod", "--replSet", "rs", "--rest", "--httpinterface" ]
+
+  mongo2:
+    image: mongo:3.4.3
+    hostname: mongo2
+    expose:
+      - "27017"
+      - "28017"
+    restart: always
+    entrypoint: [ "/usr/bin/mongod", "--replSet", "rs", "--rest", "--httpinterface" ]
+
+  mongo1:
+    image: mongo:3.4.3
+    hostname: mongo1
+    expose:
+      - "27017"
+      - "28017"
+    links:
+      - mongo2:mongo2
+      - mongo3:mongo3
+    restart: always
+    entrypoint: [ "/usr/bin/mongod", "--replSet", "rs", "--rest", "--httpinterface" ]
+
+  mongosetup:
+    image: mongo:3.4.3
+    container_name: db_ww_prod
+    links:
+      - mongo1:mongo1
+      - mongo2:mongo2
+      - mongo3:mongo3
+    volumes:
+      - ./scripts:/scripts
+    ports:
+      - '27017:27017'
+    restart: always
+    entrypoint: [ "bash", "/scripts/mongosetup.sh" ]
+# volumes:
+# db-data:
