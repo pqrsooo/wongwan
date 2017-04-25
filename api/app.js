@@ -13,7 +13,7 @@ const client = redis.createClient('6379', 'redis');
 
 // Use redis store as the store of express-session
 // TODO - move secret to config
-app.use(session({
+const appSession = session({
   store: new RedisStore({
     host: `${config.redis.host}`,
     port: `${config.redis.port}`,
@@ -22,7 +22,8 @@ app.use(session({
   }),
   secret: 'wongwanSecret',
   cookie: { path: '/', httpOnly: true, secure: false, maxAge: null },
-}));
+});
+app.use(appSession);
 
 // Add bodyParser
 app.use(bodyParser.json());
@@ -44,5 +45,6 @@ app.use('/api/message', require('./message/message.route'));
 module.exports = {
   app,
   appServer,
+  appSession,
 };
 
