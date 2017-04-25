@@ -10,11 +10,11 @@ import { SidebarService } from '../internal/sidebar.service';
   styleUrls: ['./sidebar.component.scss']
 })
 export class SidebarComponent implements OnInit {
-  roomInfos: Observable<ChatRoomInfo[]>;
+  roomInfos$: Observable<ChatRoomInfo[]>;
 
   constructor(private sidebar: SidebarService) { }
 
   ngOnInit() {
-    this.roomInfos = this.sidebar.getServerRoomList();
+    this.roomInfos$ = this.sidebar.getServerRoomList().share();
   }
 }

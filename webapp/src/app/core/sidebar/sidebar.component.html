@@ -1,7 +1,7 @@
 <div class="row">
   <div class="sidebar-scroll-container">
     <div appShowScrollbar class="sidebar-scroll-area">
-      <div class="chat-room-entry" *ngFor="let room of (roomInfos | async)" [class.-unread]="!(room.latestMessage?.seen)" routerLink="/" [queryParams]="{room: room.roomToken}">
+      <div *ngFor="let room of (roomInfos$ | async)" class="chat-room-entry" [class.-unread]="!(room.latestMessage?.seen)" routerLink="/" [queryParams]="{room: room.roomToken}">
         <div class="chat-room-entry-flex">
           <div class="profile-img-wrapper">
             <app-profile-img width="45" userId="1" extension="jpg">
@@ -31,7 +31,7 @@
         </div>
       </div>
 
-      <div *ngIf="'true'" class="chat-room-entry">
+      <div class="chat-room-entry" *ngIf="(roomInfos$ | async)?.length === 0" routerLink="/create-room">
         <div class="chat-room-entry-flex">
           <div class="profile-img-wrapper">
             <app-profile-img width="45" userId="0" extension="jpg">
