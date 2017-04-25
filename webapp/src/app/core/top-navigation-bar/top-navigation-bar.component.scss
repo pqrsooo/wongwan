@@ -4,7 +4,9 @@
 @import 'variables';
 
 .top-navigation-bar {
-  position: relative;
+  // position: relative;
+  position: fixed;
+  width: 100%;
   @extend ._font-heading;
   font-size: 15px;
   height: $top-navigation-bar-height + px;

@@ -7,7 +7,17 @@
       <app-chat-area [roomID]="chatRoomID"></app-chat-area>
     </div>
     <ng-template #noSelectedChatRoom>
-      <h3 class="text-center">Let's chat on Wongwan!</h3>
+      <div class="no-selected-chat-room-container">
+        <div>
+          <img class="img-responsive" src="assets/images/wongwan-bw.png" width="160" height="160">
+        </div>
+        <div>
+          <span class="title">Let's chat on Wongwan!</span>
+        </div>
+        <div>
+          <span class="desc">Make new friends and talk to them :D</span>
+        </div>
+      </div>
     </ng-template>
   </div>
 </div>

@@ -1,7 +1,7 @@
 $scrollbar-thick: 9;
 $scrollbar-thumb-thick: 7;
 
-::-webkit-scrollbar {
+.hide-native-scrollbar::-webkit-scrollbar {
   display: none;
 }
 

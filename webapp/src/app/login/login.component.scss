@@ -4,7 +4,6 @@
 
 .content-wrapper {
   display: flex;
-  // min-height: 100vh;
   flex-direction: column;
   align-items: center;
   position: absolute;
@@ -23,7 +22,7 @@
     padding: 25px 15px;
     overflow: hidden;
     @include breakpoint(468px) {
-      margin-top: 60px;
+      margin-top: 50px;
       background: white;
       border: 1px solid $grey-2;
       border-radius: 7px;

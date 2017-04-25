@@ -54,12 +54,15 @@ export class ShowScrollbarDirective implements AfterViewInit, OnInit {
         this.updateScrollbar();
         this.showScrollbar();
       });
+    const thisNativeElement = this._element.nativeElement;
+    thisNativeElement.classList.add('hide-native-scrollbar');
   }
 
   ngAfterViewInit() {
     this.measure();
     const thisNativeElement = this._element.nativeElement;
     thisNativeElement.insertAdjacentHTML('afterBegin', scrollbarElementString);
+    // thisNativeElement.classList.add('hide-native-scrollbar');
     this.hookElement();
     this.updateScrollbar();
   }
