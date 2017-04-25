@@ -21,7 +21,8 @@
     "helmet": "3.5.0",
     "mongoose": "^4.9.5",
     "redis": "^2.7.1",
-    "socket.io": "^1.7.3"
+    "socket.io": "^1.7.3",
+    "socket.io-redis": "^4.0.0"
   },
   "devDependencies": {
     "eslint": "3.19.0",

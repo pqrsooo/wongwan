@@ -1,21 +1,43 @@
 const Message = require('../message/message.model');
 const userQuery = require('../user/user.query');
 const chatRoomQuery = require('../chatroom/chatroom.query');
+const appSession = require('../app').appSession;
 const ObjectId = require('mongoose').Schema.Types.ObjectId;
 
 function onConnect(socket) {
+  /**
+   *  when socket on the connection - join the room for the user
+   */
+  appSession(socket.handshake, {}, (err) => {
+    if (err) {
+      console.error(err);
+      return;
+    }
+    const session = socket.handshake.session;
+    // do stuff
+    userQuery.getUserFromUsername(session.user.username).then(usr => (
+      chatRoomQuery.getChatroomForSidebar(usr)
+    )).then((chatRoomWithData) => {
+      chatRoomWithData.forEach((room) => {
+        const roomToken = room.roomToken;
+        console.log(`subscribe client ${socket.id} to ${roomToken}`);
+        socket.join(roomToken);
+      });
+    });
+  });
+
   /**
    * 'subscribe event' let the server join the client
    *  to the rooms(Tokens) sent from the client
    *
    *  @param {Array} rooms
    */
-  socket.on('subscribe', (rooms) => {
-    rooms.forEach((room) => {
-      console.log(`subscribe client ${socket.id} to ${room}`);
-      socket.join(room);
-    });
-  });
+  // socket.on('subscribe', (rooms) => {
+  //   rooms.forEach((room) => {
+  //     console.log(`subscribe client ${socket.id} to ${room}`);
+  //     socket.join(room);
+  //   });
+  // });
   /**
    * 'unsubscribe event' let the server disconnect the client from
    *  specific rooms when user leave the room
