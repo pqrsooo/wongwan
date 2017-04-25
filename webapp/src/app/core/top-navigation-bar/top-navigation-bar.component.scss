@@ -4,6 +4,7 @@
 @import 'variables';
 
 .top-navigation-bar {
+  position: relative;
   @extend ._font-heading;
   font-size: 15px;
   height: $top-navigation-bar-height + px;
@@ -14,6 +15,8 @@
   padding-left: 15px;
   padding-right: 15px;
   color: white;
+  z-index: 1000;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
 }
 
 .nav-button {
