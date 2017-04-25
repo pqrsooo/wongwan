@@ -1,4 +1,87 @@
+@import 'color';
+@import 'helper';
+@import 'mixin';
+
+.row.main {
+  margin-top: 30px;
+  max-width: 420px;
+  padding: 20px 15px;
+  @include breakpoint(468px) {
+    margin-top: 60px;
+    background: white;
+    border: 1px solid $grey-2;
+    border-radius: 7px;
+  }
+}
+
+h2 {
+  font-size: 26px !important;
+}
+
+.title-group {
+  // display: flex;
+  // align-items: center;
+  margin-bottom: 10px;
+
+  .logo-img {
+    display: inline-block;
+    margin-right: 10px;
+  }
+
+  .title {
+    display: inline-block;
+    color: $primary-color-darker;
+  }
+}
+
+.to-register {
+  display: inline-block;
+  margin-top: 7px;
+  @extend ._font-heading;
+}
+
 .login-error-msg {
   background: red;
   color: white;
+}
+
+.row {
+  // box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.or-separator {
+  @extend ._font-heading;
+  font-size: 16px;
+  width: 100%;
+  text-align: center;
+  margin-bottom: 8px;
+}
+
+input {
+  height: 40px;
+  background: rgba(255, 255, 255, 1);
+  appearance: none !important;
+  box-shadow: none;
+  border: 1px solid rgb(223, 223, 223);
+  border-radius: 4px;
+}
+
+button {
+  width: 100%;
+  // margin-bottom: 8px;
+  @extend ._font-heading;
+  font-size: 16px;
+  border-radius: 4px;
+
+  &:focus {
+    outline: 0;
+  }
+
+  &.-login {
+    background: $primary-color;
+  }
+
+  &._login-fb {
+    background: #3b5998;
+  }
 }

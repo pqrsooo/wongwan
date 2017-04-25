@@ -1,18 +1,26 @@
-<div class="row">
+<div class="row main">
   <div class="columns">
-    <h1>Login</h1>
+    <!-- <h1>Login</h1> -->
+    <div class="title-group">
+      <div class="logo-img"><img src="assets/images/wongwan-logo.png" width="56" height="56"></div>
+      <div><h2 class="title">เข้าสู่ระบบ</h2></div>
+    </div>
     <div *ngIf="errorMessage" class="login-error-msg">{{errorMessage}}</div>
+
     <form [formGroup]="loginForm" (submit)="login()">
       <label>
-        Username:
+        Username
         <input type="text" formControlName="username" placeholder="Username" required>
       </label>
       <label>
-        Password:
+        Password
         <input type="password" formControlName="password" placeholder="Password" required>
       </label>
-      <button class="button" [disabled]="loginForm.disabled">Login</button>
+      <br>
+      <button class="button -login" [disabled]="loginForm.disabled">เข้าสู่ระบบ</button>
+      <!-- <div class="or-separator">หรือ</div> -->
+      <button class="button -login-fb" [disabled]="loginForm.disabled"><i class="fa fa-facebook-square fa-lg"></i>&nbsp;&nbsp;&nbsp;เข้าสู่ระบบด้วย Facebook</button>
     </form>
-    <a routerLink="/register">Register</a>
+    <span class="to-register">ยังไม่มีบัญชี? <a routerLink="/register">ลงทะเบียน</a></span>
   </div>
 </div>

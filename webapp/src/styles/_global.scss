@@ -16,8 +16,18 @@ html {
   height: 100% !important;
 }
 
+h1, h2, h3, h4, h5, h6 {
+  @extend ._font-heading;
+  @extend ._font-bold;
+}
+
 button {
   &:focus {
     outline: 0;
   }
+}
+
+label {
+  @extend ._font-bold;
+  font-size: 16px;
 }
