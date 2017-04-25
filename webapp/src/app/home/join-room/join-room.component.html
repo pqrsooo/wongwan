@@ -1,3 +1,13 @@
-<p>
-  join-room works!
-</p>
+<div class="row">
+  <div class="columns">
+    <h1>Join Room</h1>
+    <div *ngIf="errorMessage" class=".create-room-error-msg">{{errorMessage}}</div>
+    <form [formGroup]="joinRoomForm" (submit)="onJoinRoom()">
+      <label>
+        Room Token:
+        <input type="text" formControlName="roomToken" placeholder="Room Name" required>
+      </label>
+      <button class="button" [disabled]="joinRoomForm.disabled || !joinRoomForm.valid">Join Room</button>
+    </form>
+  </div>
+</div>
