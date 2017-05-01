@@ -103,6 +103,24 @@
       display: none;
     }
   }
+
+  &.-character {
+    width: 45px;
+    height: 45px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: $primary-color;
+    border-radius: 7px;
+
+    .character {
+      @extend ._font-heading;
+      @extend ._font-bold;
+      font-size: 15px;
+      color: white;
+    }
+  }
 }
 
 .latest-message {

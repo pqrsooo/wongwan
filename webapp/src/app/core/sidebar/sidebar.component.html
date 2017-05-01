@@ -3,9 +3,10 @@
     <div appShowScrollbar class="sidebar-scroll-area">
       <div *ngFor="let room of (roomInfos$ | async)" class="chat-room-entry" [class.-unread]="!(room.latestMessage?.seen)" routerLink="/" [queryParams]="{room: room.roomToken}">
         <div class="chat-room-entry-flex">
-          <div class="profile-img-wrapper">
-            <app-profile-img width="45" userId="1" extension="jpg">
-            </app-profile-img>
+          <div class="profile-img-wrapper -character">
+            <div class="character">{{room.roomName.substring(0, 2)}}</div>
+            <!-- <app-profile-img width="45" userId="1" extension="jpg">
+            </app-profile-img> -->
           </div>
           <div class="latest-message hide-for-small-only --ignore-content-width">
             <div class="latest-message-flex">
