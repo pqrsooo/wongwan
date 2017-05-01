@@ -40,12 +40,12 @@
   <div class="user" *ngIf="(isLoggedIn$ | async)" (click)="toggleDropdown()">
     <div class="user-flex-control">
       <div class="name hide-for-small-only">
-        {{username$ | async}}
+        {{firstName$ | async}}
       </div>
       <div class="profile-img-wrapper">
         <app-profile-img
           width="30"
-          userId="1"
+          [userId]="(username$ | async)"
           extension="jpg">
         </app-profile-img>
       </div>

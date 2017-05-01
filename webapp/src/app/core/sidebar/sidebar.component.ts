@@ -1,3 +1,4 @@
+/* tslint:disable */
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 
@@ -17,4 +18,8 @@ export class SidebarComponent implements OnInit {
   ngOnInit() {
     this.roomInfos$ = this.sidebar.serverRoomList$;
   }
+
+  // stringHexNumber(str: string) {
+  //   return parseInt(parseInt(str, 36).toExponential().slice(2,-5), 10) & 0xFFFFFF).toString(16).toUpperCase();
+  // }
 }

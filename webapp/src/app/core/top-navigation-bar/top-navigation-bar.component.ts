@@ -14,17 +14,19 @@ import { UserService } from '../../shared/user/user.service';
 })
 export class TopNavigationBarComponent implements OnInit {
   username$: Observable<string>;
+  firstName$: Observable<string>;
   isLoggedIn$: Observable<boolean>;
   isDropdownVisible = false;
 
   constructor(private userService: UserService, private _el: ElementRef, private router: Router) { }
 
   ngOnInit() {
-    this.username$ = this.userService.getCurrentUser$().map(user => {
+    this.username$ = this.userService.getCurrentUsername$();
+    this.firstName$ = this.userService.getCurrentUser$().map(user => {
       if (user) {
         return user.firstName;
       }
-      return 'Not Logged In T_T';
+      return 'Not Logged In';
     });
 
     this.isLoggedIn$ = this.userService.getCurrentUser$().map(user => user !== undefined);
