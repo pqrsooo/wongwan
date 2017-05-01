@@ -1,37 +1,49 @@
-<div class="row">
+<div class="row container">
   <div class="columns">
-    <h1>Create New Room</h1>
+    <h2>Create New Room</h2>
     <div *ngIf="errorMessage" class=".create-room-error-msg">{{errorMessage}}</div>
     <form [formGroup]="createRoomForm" (submit)="createRoom()">
-      <label>
+      <label style="margin-bottom: 7px;">
         Room Name:
-        <input type="text" formControlName="roomName" placeholder="Room Name" required>
       </label>
-      <label>
+      <!-- <br> -->
+      <input type="text" formControlName="roomName" placeholder="Room Name" required>
+
+      <br>
+
+      <label style="margin-bottom: 7px;">
         Usernames:
       </label>
-      <button class="button" type="button" (click)="addUsername()">Add</button>
+      <!-- <br> -->
+      <button class="button" type="button" (click)="addUsername()"><i class="fa fa-plus" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Add</button>
       <div formArrayName="usernames">
         <div *ngFor="let username of usernames.controls; let i = index">
-          <div class="row">
-            <div class="columns small-1">
-              {{ i + 1 }}
+          <div class="row add-row">
+            <div class="columns small-12 medium-8 add-input">
+              <div class="add-number">&nbsp;&nbsp;&nbsp;{{ i + 1 }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+              <div style="flex-grow: 1;"><input class="margin-bottom-zero" type="text" [formControlName]="i" placeholder="Enter username"></div>
             </div>
-            <div class="columns small-7">
-              <input type="text" [formControlName]="i" placeholder="Enter username">
+            <!-- <div class="columns small-7">
+              <input class="margin-bottom-zero" type="text" [formControlName]="i" placeholder="Enter username">
+            </div> -->
+            <div class="columns button-row small-12 medium-4">
+              <div><button class="button alert delete margin-bottom-zero" type="button" (click)="removeUsername(i)"><i class="fa fa-trash" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Remove</button>&nbsp;&nbsp;&nbsp;&nbsp;</div>
+              <div class="text-left" *ngIf="username.value !== ''">
+                <span class="checking" *ngIf="usernames.at(i).pending"><i class="fa fa-circle-o-notch fa-spin"></i>&nbsp;&nbsp;Checking...</span>
+                <span class="valid" *ngIf="usernames.at(i).valid"><i class="fa fa-check" aria-hidden="true"></i>&nbsp;&nbsp;Valid</span>
+                <span class="invalid" *ngIf="usernames.at(i).invalid"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>&nbsp;&nbsp;Invalid</span>
+              </div>
             </div>
-            <div class="columns small-2">
-              <button class="button" type="button" (click)="removeUsername(i)">Remove</button>
-            </div>
-            <div class="columns small-2" *ngIf="username.value !== ''">
+            <!-- <div class="columns small-2 text-left" *ngIf="username.value !== ''">
               <span *ngIf="usernames.at(i).pending">Checking...</span>
               <span *ngIf="usernames.at(i).valid">Valid</span>
               <span *ngIf="usernames.at(i).invalid">Invalid</span>
-            </div>
+            </div> -->
           </div>
         </div>
       </div>
-      <button class="button" [disabled]="createRoomForm.disabled || !createRoomForm.valid">Create New Room</button>
+      <div class="line"></div>
+      <button class="button create-room-button" [disabled]="createRoomForm.disabled || !createRoomForm.valid">Create room</button>
     </form>
   </div>
 </div>

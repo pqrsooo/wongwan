@@ -1,3 +1,111 @@
+@import 'color';
+@import 'helper';
+@import 'mixin';
+
+.container {
+  padding: 40px 0;
+  max-width: 600px;
+}
+
+h2 {
+  color: $primary-color;
+}
+
+// .add-row-wrapper {
+//   padding-top: 0;
+//   padding-bottom: 0;
+// }
+
+.add-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.button-row {
+  display: flex;
+  align-items: center;
+  @include breakpoint(small down) {
+    margin-top: 10px;
+    padding-left: 44px;
+  }
+}
+
+.add-input {
+  display: flex;
+  align-items: center;
+}
+
+input.add {
+  display: inline-block;
+  margin-bottom: 0;
+}
+
+.add-number {
+  @extend ._font-heading;
+  font-size: 14px;
+}
+
 .create-room-error-msg {
   background: red;
+}
+
+.delete {
+  height: 34px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+
+.margin-bottom-zero {
+  margin-bottom: 0 !important;
+}
+
+button {
+  @extend ._font-heading;
+  font-size: 14px;
+  border-radius: 4px !important;
+  transition: box-shadow 0.15s ease-out;
+  background: $primary-color;
+
+  height: 34px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+
+  &:focus {
+    outline: 0;
+  }
+
+  &:focus,
+  &:hover {
+    background: darken($primary-color, 2%);
+    // box-shadow: 0 5px 11px 0 rgba(0,0,0,0.14), 0 4px 15px 0 rgba(0,0,0,0.11);
+  }
+}
+
+.create-room-button {
+  margin-top: 10px;
+}
+
+input {
+  border-radius: 4px;
+}
+
+.line {
+  margin: 5px 0;
+  margin-top: 28px;
+  width: 100%;
+  height: 1px;
+  background: #cccccc;
+}
+
+.valid {
+  color: #3adb76;
+}
+
+.checking {
+  color: $grey-3;
+}
+
+.invalid {
+  color: #cc4b37;
 }
