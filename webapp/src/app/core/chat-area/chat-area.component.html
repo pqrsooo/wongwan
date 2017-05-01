@@ -211,6 +211,7 @@
           *ngFor="let message of (messagesList | async)"
           [isOutgoing]="message.username === (currentUser$ | async).username"
           [name]="message.senderName"
+          [username]="message.username"
           userId="3"
           [timestamp]="message.sentTime | moment: 'time'">
           <span message-body>{{message.content}}</span>

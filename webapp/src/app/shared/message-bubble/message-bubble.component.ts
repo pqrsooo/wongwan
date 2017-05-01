@@ -7,6 +7,7 @@ import { Component, HostBinding, Input, OnChanges } from '@angular/core';
 })
 export class MessageBubbleComponent implements OnChanges {
   @Input() name: string | undefined;
+  @Input() username: string | undefined;
   @Input() userId: number | undefined;
   @Input() isOutgoing?: boolean;
   @Input() isBeforeSeparator?: boolean;
