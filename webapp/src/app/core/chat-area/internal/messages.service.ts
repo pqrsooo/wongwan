@@ -88,7 +88,8 @@ export class MessagesService {
       roomToken: roomID
     }).mergeMap(messages => Observable.from(messages.messagesArr));
 
-    return fromSocket.merge(fromAPI)
+    return fromSocket.filter(msg => msg.room === roomID)
+      .merge(fromAPI)
       .map((serverMsg) => new Message(serverMsg))
       .merge(this.outgoingMessageAcknowledgeEvent);
   }
