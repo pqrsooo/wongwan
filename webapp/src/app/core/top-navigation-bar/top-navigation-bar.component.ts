@@ -1,4 +1,5 @@
 import { Component, ElementRef, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 
 import { UserService } from '../../shared/user/user.service';
@@ -16,7 +17,7 @@ export class TopNavigationBarComponent implements OnInit {
   isLoggedIn$: Observable<boolean>;
   isDropdownVisible = false;
 
-  constructor(private userService: UserService, private _el: ElementRef) { }
+  constructor(private userService: UserService, private _el: ElementRef, private router: Router) { }
 
   ngOnInit() {
     this.username$ = this.userService.getCurrentUser$().map(user => {
@@ -37,5 +38,14 @@ export class TopNavigationBarComponent implements OnInit {
     if (!this._el.nativeElement.contains(event.target)) {
       this.isDropdownVisible = false;
     }
+  }
+
+  logOut() {
+    this.userService.logOut().subscribe(res => {
+      console.log(res);
+      if (res.success) {
+        this.router.navigate(['/login']);
+      }
+    });
   }
 }

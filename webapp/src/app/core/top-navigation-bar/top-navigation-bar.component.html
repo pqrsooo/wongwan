@@ -1,5 +1,5 @@
 <div class="top-navigation-bar">
-  <div routerLink="/" class="dropdown" [class.-show]="isDropdownVisible">
+  <div routerLink="/" class="dropdown" [class.-show]="isDropdownVisible" (click)="logOut()">
     ออกจากระบบ
   </div>
   <div class="logo">

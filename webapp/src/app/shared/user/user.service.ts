@@ -67,4 +67,13 @@ export class UserService {
       return isExist$;
     }
   }
+
+  logOut() {
+    return this.api.requestGET<{
+      success: boolean;
+      message: string;
+    }>(
+      '/api/user/logout', undefined, true
+    );
+  }
 }
