@@ -1,4 +1,7 @@
 <div class="top-navigation-bar">
+  <div routerLink="/" class="dropdown" [class.-show]="isDropdownVisible" (click)="logOut()">
+    ออกจากระบบ
+  </div>
   <div class="logo">
     <div routerLink="/" class="logo-wrapper">
       <div class="logo-img"><img src="assets/images/wongwan-logo.png" width="36" height="36"></div>
@@ -34,7 +37,7 @@
       style="width: 8px;">
     </app-svg-icon>
   </div>
-  <div class="user" *ngIf="(isLoggedIn$ | async)">
+  <div class="user" *ngIf="(isLoggedIn$ | async)" (click)="toggleDropdown()">
     <div class="user-flex-control">
       <div class="name hide-for-small-only">
         {{username$ | async}}
@@ -59,21 +62,11 @@
       routerLink="/register"
       class="nav-button"
       title="ลงทะเบียน">
-      <!-- <app-svg-icon
-        src="assets/icons/new-chat.svg"
-        style="width: 20px;"
-        icon>
-      </app-svg-icon> -->
     </app-top-navigation-button>
     <app-top-navigation-button
       routerLink="/"
       class="nav-button"
       title="เข้าสู่ระบบ">
-      <!-- <app-svg-icon
-        src="assets/icons/join-group.svg"
-        style="width: 25px;"
-        icon>
-      </app-svg-icon> -->
     </app-top-navigation-button>
   </div>
 </div>

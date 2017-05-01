@@ -233,7 +233,8 @@
         <span class="send-icon">
           <button type="submit" class="" tabindex="-1">
             <app-svg-icon
-              class="send-icon-svg"
+              class="send-icon-svg -disabled"
+              [class.-disabled]="!this.sendMessageForm.valid"
               src="assets/icons/send.svg"
               style="width: 30px;">
             </app-svg-icon>
