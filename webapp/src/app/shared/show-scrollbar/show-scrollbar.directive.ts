@@ -44,6 +44,8 @@ export class ShowScrollbarDirective implements AfterViewInit, OnInit {
   private visibleTimeout: any;
 
   constructor(private _element: ElementRef, private _renderer: Renderer) {
+    const thisNativeElement = this._element.nativeElement;
+    thisNativeElement.classList.add('hide-native-scrollbar');
   }
 
   ngOnInit() {
@@ -54,8 +56,8 @@ export class ShowScrollbarDirective implements AfterViewInit, OnInit {
         this.updateScrollbar();
         this.showScrollbar();
       });
-    const thisNativeElement = this._element.nativeElement;
-    thisNativeElement.classList.add('hide-native-scrollbar');
+    // const thisNativeElement = this._element.nativeElement;
+    // thisNativeElement.classList.add('hide-native-scrollbar');
   }
 
   ngAfterViewInit() {
