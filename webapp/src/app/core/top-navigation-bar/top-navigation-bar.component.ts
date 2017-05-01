@@ -22,6 +22,6 @@ export class TopNavigationBarComponent implements OnInit {
       return 'Not Logged In T_T';
     });
 
-    this.isLoggedIn$ = this.userService.isLoggedIn();
+    this.isLoggedIn$ = this.userService.getCurrentUser$().map(user => user !== undefined);
   }
 }

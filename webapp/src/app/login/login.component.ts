@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
-import { LoginService } from './login.service';
+import { UserService } from '../shared/user/user.service';
 
 @Component({
   templateUrl: './login.component.html',
@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
   errorMessage = '';
 
   constructor(
-    private loginService: LoginService,
+    private userService: UserService,
     private fb: FormBuilder,
     private router: Router
   ) { }
@@ -53,7 +53,7 @@ export class LoginComponent implements OnInit {
     this.loginForm.disable();
 
     const { username, password } = this.loginForm.value;
-    this.loginService.login(username, password)
+    this.userService.login(username, password)
       .subscribe(result => {
         this.loginForm.enable();
         if (result.success) {

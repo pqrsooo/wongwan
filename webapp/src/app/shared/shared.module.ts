@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { ModuleWithProviders, NgModule } from '@angular/core';
 
 import { BaseModule } from './base/base.module';
 import { TopNavigationButtonComponent } from './buttons/top-navigation-button/top-navigation-button.component';
@@ -8,13 +8,13 @@ import { MessageBubbleComponent } from './message-bubble/message-bubble.componen
 import { ProfileImgComponent } from './profile-img/profile-img.component';
 import { ShowScrollbarDirective } from './show-scrollbar/show-scrollbar.directive';
 import { SvgIconModule } from './svg-icon/svg-icon.module';
-import { UserModule } from './user/user.module';
-import { MomentFormatPipe } from './utils/moment.pipe'
+import { UserLoginGuard } from './user/user-login-guard.service';
+import { UserService } from './user/user.service';
+import { MomentFormatPipe } from './utils/moment.pipe';
 
 @NgModule({
   imports: [
     BaseModule,
-    UserModule,
     SvgIconModule,
   ],
   declarations: [
@@ -33,10 +33,19 @@ import { MomentFormatPipe } from './utils/moment.pipe'
     DaySeparatorComponent,
     ProfileImgComponent,
     TopNavigationButtonComponent,
-    UserModule,
     SvgIconModule,
     ShowScrollbarDirective,
     MomentFormatPipe
   ]
 })
-export class SharedModule { }
+export class SharedModule {
+  static forRoot(): ModuleWithProviders {
+    return {
+      ngModule: SharedModule,
+      providers: [
+        UserService,
+        UserLoginGuard
+      ]
+    };
+  }
+}

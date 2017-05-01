@@ -5,6 +5,27 @@ import { Observable } from 'rxjs/Observable';
 import { APIService } from '../base/api.service';
 import { ServerUser, User } from './user.model';
 
+interface LoginResult {
+  success: boolean;
+  message: string;
+}
+
+interface ServerLoginResultSuccess {
+  success: true;
+  user: {
+    username: string;
+    firstName: string;
+    lastName: string;
+  };
+}
+
+interface ServerLoginResultFail {
+  success: false;
+  message: string;
+}
+
+type ServerLoginResult = ServerLoginResultSuccess | ServerLoginResultFail;
+
 interface ServerLoginCheckResult {
   isLogin: boolean;
   message: string;
@@ -26,7 +47,7 @@ export class UserService {
       .subscribe(result => this.setCurrentUser(result.user));
   }
 
-  isLoggedIn() {
+  isLoggedIn$() {
     return this.api.requestGET<ServerLoginCheckResult>('/api/restricted', undefined, true)
       .do(result => this.setCurrentUser(result.user))
       .map(result => result.isLogin);
@@ -38,6 +59,27 @@ export class UserService {
     } else {
       this.currentUser$.next(undefined);
     }
+  }
+
+  login(username: string, password: string): Observable<LoginResult> {
+    return this.api.requestPOST<ServerLoginResult>(
+      '/api/user/login',
+      { username, password },
+      true
+    ).map(result => {
+      if (result.success) {
+        this.setCurrentUser(result.user);
+        return {
+          success: true,
+          message: 'success'
+        };
+      } else {
+        return {
+          success: false,
+          message: result.message
+        };
+      }
+    });
   }
 
   getCurrentUser$() {
