@@ -42,6 +42,7 @@ exports.getChatroomForSidebar = (user) => {
           sender: currentUserID.equals(latestMessage.sender.id) ? 'You' : latestMessage.sender.firstName,
           content: latestMessage.content,
           ts: latestMessage.createdAt,
+          id: latestMessage._id,
           seen: chatRoom.lastSeenMessage ? chatRoom.lastSeenMessage.equals(latestMessage._id) : false,
         }
       }

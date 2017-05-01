@@ -1,7 +1,8 @@
 <div class="row">
   <div class="sidebar-scroll-container">
     <div appShowScrollbar class="sidebar-scroll-area">
-      <div *ngFor="let room of (roomInfos$ | async)" class="chat-room-entry" [class.-unread]="!(room.latestMessage?.seen)" routerLink="/" [queryParams]="{room: room.roomToken}">
+      <!-- [class.-unread]="!(room.latestMessage?.seen)" -->
+      <div *ngFor="let room of (roomInfos$ | async)" class="chat-room-entry" routerLink="/" [queryParams]="{room: room.roomToken}">
         <div class="chat-room-entry-flex">
           <div class="profile-img-wrapper">
             <app-profile-img width="45" userId="1" extension="jpg">

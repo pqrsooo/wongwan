@@ -8,6 +8,7 @@ interface ServerChatRoom {
     content: string;
     ts: string;
     seen: boolean;
+    id: string;
   } | null;
 }
 
@@ -16,15 +17,18 @@ export interface ServerChatRooms {
   chatRooms: ServerChatRoom[];
 }
 
+export interface LatestMessage {
+  readonly content: string;
+  readonly seen: boolean;
+  readonly senderFirstName: string;
+  readonly time: moment.Moment;
+  readonly id: string;
+}
+
 export class ChatRoomInfo {
   readonly roomToken: string;
   readonly roomName: string;
-  readonly latestMessage?: {
-    readonly content: string;
-    readonly seen: boolean;
-    readonly senderFirstName: string;
-    readonly time: moment.Moment;
-  };
+  readonly latestMessage?: LatestMessage;
 
   constructor(serverResponse: ServerChatRoom) {
     this.roomToken = serverResponse.roomToken;
@@ -34,7 +38,8 @@ export class ChatRoomInfo {
         content: serverResponse.latestMessage.content,
         seen: serverResponse.latestMessage.seen,
         senderFirstName: serverResponse.latestMessage.sender,
-        time: moment(serverResponse.latestMessage.ts)
+        time: moment(serverResponse.latestMessage.ts),
+        id: serverResponse.latestMessage.id
       };
     }
 
