@@ -1,3 +1,4 @@
+import { animate, style, transition, trigger} from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -7,7 +8,24 @@ import { RegisterService } from './register.service';
 
 @Component({
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.scss']
+  styleUrls: ['./register.component.scss'],
+  animations: [
+    trigger('fadeInOut', [
+      transition(':enter', [
+        style({
+          opacity: 0
+        }),
+        animate('350ms ease-in', style({
+          opacity: 1
+        }))
+      ]),
+      transition(':leave', [
+        animate('350 ease-out', style({
+          opacity: 0
+        }))
+      ])
+    ])
+  ]
 })
 export class RegisterComponent implements OnInit {
   registerForm: FormGroup;

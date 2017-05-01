@@ -166,3 +166,15 @@
     }
   }
 }
+
+.leave-room {
+  @extend ._font-heading;
+  @extend ._font-regular;
+  font-size: 15px;
+  a {
+    color: $warning-color !important;
+    &:hover {
+      color: darken($warning-color, 20%) !important;
+    }
+  }
+}

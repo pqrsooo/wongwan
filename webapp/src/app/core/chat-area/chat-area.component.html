@@ -4,8 +4,9 @@
       <div class="chat-title-name">
         {{roomName$ | async}}
       </div>
-      <span class="float-right">
-        <button type="button" class="small alert button" [disabled]="isLeavingRoom" (click)="leaveRoom()">Leave Room</button>
+      <span class="float-right leave-room">
+        <a (click)="leaveRoom()"><i class="fa fa-sign-out" aria-hidden="true"></i> ออกจากห้อง</a>
+        <!-- <button type="button" class="small alert button" [disabled]="isLeavingRoom" (click)="leaveRoom()"><i class="fa fa-sign-out" aria-hidden="true"></i> Leave Room</button> -->
       </span>
       <!-- <div class="group-member">
         <div class="member">

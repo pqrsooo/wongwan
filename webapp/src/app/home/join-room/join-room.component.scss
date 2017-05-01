@@ -1,0 +1,67 @@
+@import 'color';
+@import 'helper';
+
+.container {
+  padding: 40px 0;
+  max-width: 600px;
+}
+
+h2 {
+  color: $primary-color;
+}
+
+button {
+  @extend ._font-heading;
+  font-size: 14px;
+  border-radius: 4px !important;
+  transition: box-shadow 0.15s ease-out;
+  background: $primary-color;
+  height: 36px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+
+  &:focus {
+    outline: 0;
+  }
+
+  &:focus,
+  &:hover {
+    background: darken($primary-color, 2%);
+    // box-shadow: 0 5px 11px 0 rgba(0,0,0,0.14), 0 4px 15px 0 rgba(0,0,0,0.11);
+  }
+}
+
+input {
+  border-radius: 4px;
+  height: 36px;
+}
+
+.line {
+  margin: 5px 0;
+  margin-top: 28px;
+  width: 100%;
+  height: 1px;
+  background: #cccccc;
+}
+
+.valid {
+  color: #3adb76;
+}
+
+.checking {
+  color: $grey-3;
+}
+
+.invalid {
+  color: $warning-color;
+}
+
+.create-room-error-msg {
+  color: white;
+  padding: 12px 15px;
+  color: darken($warning-color, 10%);
+  // border: 1px solid $warning-color;
+  background: rgba($warning-color, 0.15);
+  border-radius: 4px;
+  margin-bottom: 10px;
+}

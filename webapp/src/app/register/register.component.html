@@ -1,4 +1,4 @@
-<div class="row">
+<!-- <div class="row">
   <div class="columns">
     <h1>Register</h1>
     <div *ngIf="errorMessage" class="register-error-msg">{{errorMessage}}</div>
@@ -53,5 +53,103 @@
     </form>
 
     {{registerForm.valid ? 'Valid' : 'Invalid'}}
+  </div>
+</div> -->
+
+
+<div class="content-wrapper">
+  <div class="main">
+    <div class="row box">
+      <div class="columns">
+
+        <div class="title-group">
+          <div class="logo-img"><img src="assets/images/wongwan-logo.png" width="56" height="56"></div>
+          <div><h2 class="title">ลงทะเบียน</h2></div>
+        </div>
+
+        <!-- <h1>Register</h1> -->
+        <div *ngIf="errorMessage" [@fadeInOut] class="register-error-msg"><i class="fa fa-exclamation-triangle fa-lg" aria-hidden="true"></i>&nbsp;&nbsp;{{errorMessage}}</div>
+        <form [formGroup]="registerForm" (submit)="register()">
+          <label>
+            Username:
+            <input type="text"
+              formControlName="username"
+              required
+              #username
+              placeholder="Username">
+          </label>
+          <div class="warning checking" *ngIf="registerForm.get('username').pending"><i class="fa fa-circle-o-notch fa-spin"></i>&nbsp;&nbsp;Checking username...</div>
+          <div class="warning valid" *ngIf="registerForm.get('username').valid"><i class="fa fa-check" aria-hidden="true"></i>&nbsp;&nbsp;Valid username :)</div>
+          <div class="warning invalid" *ngIf="registerForm.get('username').invalid && username.value !== ''"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>&nbsp;&nbsp;Invalid username :(</div>
+
+          <label>
+            Password:
+            <input type="password"
+              formControlName="password"
+              required
+              placeholder="Password">
+          </label>
+
+          <label>
+            Confirm Password:
+            <input type="password"
+              formControlName="passwordConfirm"
+              required
+              #passwordConfirm
+              placeholder="Confirm Password">
+          </label>
+          <div class="warning invalid" *ngIf="registerForm.hasError('mismatch') && passwordConfirm.value !== ''"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>&nbsp;&nbsp;Mismatch password</div>
+
+          <label>
+            First Name:
+            <input type="text"
+              formControlName="firstName"
+              required
+              placeholder="First Name">
+          </label>
+
+          <label>
+            Last Name:
+            <input type="text"
+              formControlName="lastName"
+              required
+              placeholder="Last Name">
+          </label>
+
+          <button class="button" [disabled]="registerForm.disabled">Register</button>
+        </form>
+
+        <!-- {{registerForm.valid ? 'Valid' : 'Invalid'}} -->
+
+
+
+        <!-- <div class="title-group">
+          <div class="logo-img"><img src="assets/images/wongwan-logo.png" width="56" height="56"></div>
+          <div><h2 class="title">เข้าสู่ระบบ</h2></div>
+        </div>
+
+        <form>
+          <label class="">
+            Username
+            <input type="text" formControlName="username" placeholder="Username" required>
+          </label>
+          <label class="">
+            Password
+            <input type="password" formControlName="password" placeholder="Password" required>
+          </label>
+
+          <div *ngIf="errorMessage" [@fadeInOut] class="login-error-msg"><i class="fa fa-exclamation-triangle fa-lg" aria-hidden="true"></i>&nbsp;&nbsp;{{errorMessage}}</div>
+
+          <button class="button -login">เข้าสู่ระบบ</button>
+          <button class="button -login-fb"><i class="fa fa-facebook-square fa-lg" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;เข้าสู่ระบบด้วย Facebook</button>
+        </form>
+        <span class="to-register">ยังไม่มีบัญชี? <a routerLink="/register">ลงทะเบียน</a></span> -->
+
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    © Wongwan under Mongbon Group Ltd. 2017.
   </div>
 </div>

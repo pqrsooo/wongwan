@@ -1,12 +1,13 @@
-<div class="row">
+<div class="row container">
   <div class="columns">
-    <h1>Join Room</h1>
-    <div *ngIf="errorMessage" class=".create-room-error-msg">{{errorMessage}}</div>
+    <h2>Join Room</h2>
+    <!-- <div *ngIf="errorMessage" class=".create-room-error-msg">{{errorMessage}}</div> -->
     <form [formGroup]="joinRoomForm" (submit)="onJoinRoom()">
-      <label>
+      <label style="margin-bottom: 7px;">
         Room Token:
-        <input type="text" formControlName="roomToken" placeholder="Room Name" required>
       </label>
+      <input type="text" formControlName="roomToken" placeholder="Room Name" required>
+      <div *ngIf="errorMessage" [@fadeInOut] class="create-room-error-msg"><i class="fa fa-exclamation-triangle fa-lg" aria-hidden="true"></i>&nbsp;&nbsp;{{errorMessage}}</div>
       <button class="button" [disabled]="joinRoomForm.disabled || !joinRoomForm.valid">Join Room</button>
     </form>
   </div>

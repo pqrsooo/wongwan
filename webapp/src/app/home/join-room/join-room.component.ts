@@ -1,3 +1,4 @@
+import { animate, style, transition, trigger} from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -11,7 +12,24 @@ interface ServerJoinRoomAcknowledgement {
 @Component({
   selector: 'app-join-room',
   templateUrl: './join-room.component.html',
-  styleUrls: ['./join-room.component.scss']
+  styleUrls: ['./join-room.component.scss'],
+  animations: [
+    trigger('fadeInOut', [
+      transition(':enter', [
+        style({
+          opacity: 0
+        }),
+        animate('350ms ease-in', style({
+          opacity: 1
+        }))
+      ]),
+      transition(':leave', [
+        animate('350 ease-out', style({
+          opacity: 0
+        }))
+      ])
+    ])
+  ]
 })
 export class JoinRoomComponent implements OnInit {
   joinRoomForm: FormGroup;

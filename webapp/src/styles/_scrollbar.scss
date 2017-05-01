@@ -3,6 +3,8 @@ $scrollbar-thumb-thick: 7;
 
 .hide-native-scrollbar::-webkit-scrollbar {
   display: none;
+  visibility: hidden;
+  width: 0 !important;
 }
 
 .scrollbar {
