@@ -94,7 +94,7 @@ input {
 }
 
 .valid {
-  color: #3adb76;
+  color: $primary-color;
 }
 
 .checking {
@@ -102,5 +102,5 @@ input {
 }
 
 .invalid {
-  color: #cc4b37;
+  color: $warning-color;
 }

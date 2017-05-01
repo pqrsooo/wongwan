@@ -19,14 +19,14 @@
       <div formArrayName="usernames">
         <div *ngFor="let username of usernames.controls; let i = index">
           <div class="row add-row">
-            <div class="columns small-12 medium-8 add-input">
+            <div class="columns small-12 medium-6 add-input">
               <div class="add-number">&nbsp;&nbsp;&nbsp;{{ i + 1 }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
               <div style="flex-grow: 1;"><input class="margin-bottom-zero" type="text" [formControlName]="i" placeholder="Enter username"></div>
             </div>
             <!-- <div class="columns small-7">
               <input class="margin-bottom-zero" type="text" [formControlName]="i" placeholder="Enter username">
             </div> -->
-            <div class="columns button-row small-12 medium-4">
+            <div class="columns button-row small-12 medium-6">
               <div><button class="button alert delete margin-bottom-zero" type="button" (click)="removeUsername(i)"><i class="fa fa-trash" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Remove</button>&nbsp;&nbsp;&nbsp;&nbsp;</div>
               <div class="text-left" *ngIf="username.value !== ''">
                 <span class="checking" *ngIf="usernames.at(i).pending"><i class="fa fa-circle-o-notch fa-spin"></i>&nbsp;&nbsp;Checking...</span>
