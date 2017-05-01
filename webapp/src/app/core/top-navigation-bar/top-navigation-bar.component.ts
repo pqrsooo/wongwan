@@ -10,6 +10,7 @@ import { UserService } from '../../shared/user/user.service';
 })
 export class TopNavigationBarComponent implements OnInit {
   username$: Observable<string>;
+  isLoggedIn$: Observable<boolean>;
 
   constructor(private userService: UserService) { }
 
@@ -20,5 +21,7 @@ export class TopNavigationBarComponent implements OnInit {
       }
       return 'Not Logged In T_T';
     });
+
+    this.isLoggedIn$ = this.userService.isLoggedIn();
   }
 }

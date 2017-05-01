@@ -1,11 +1,11 @@
 <div class="top-navigation-bar">
   <div class="logo">
-    <div class="logo-wrapper">
+    <div routerLink="/" class="logo-wrapper">
       <div class="logo-img"><img src="assets/images/wongwan-logo.png" width="36" height="36"></div>
       <div class="brand-name">Wongwan</div>
     </div>
   </div>
-  <div class="action-group">
+  <div class="action-group" *ngIf="(isLoggedIn$ | async)">
     <app-top-navigation-button
       routerLink="/create-room"
       class="nav-button"
@@ -27,14 +27,14 @@
       </app-svg-icon>
     </app-top-navigation-button>
   </div>
-  <div class="separator hide-for-small-only">
+  <div class="separator hide-for-small-only" *ngIf="(isLoggedIn$ | async)">
     <app-svg-icon
       class="oval-separator"
       src="assets/icons/oval-separator.svg"
       style="width: 8px;">
     </app-svg-icon>
   </div>
-  <div class="user">
+  <div class="user" *ngIf="(isLoggedIn$ | async)">
     <div class="user-flex-control">
       <div class="name hide-for-small-only">
         {{username$ | async}}
@@ -53,5 +53,27 @@
         </app-svg-icon>
       </div>
     </div>
+  </div>
+  <div class="action-group" *ngIf="!(isLoggedIn$ | async)">
+    <app-top-navigation-button
+      routerLink="/register"
+      class="nav-button"
+      title="ลงทะเบียน">
+      <!-- <app-svg-icon
+        src="assets/icons/new-chat.svg"
+        style="width: 20px;"
+        icon>
+      </app-svg-icon> -->
+    </app-top-navigation-button>
+    <app-top-navigation-button
+      routerLink="/"
+      class="nav-button"
+      title="เข้าสู่ระบบ">
+      <!-- <app-svg-icon
+        src="assets/icons/join-group.svg"
+        style="width: 25px;"
+        icon>
+      </app-svg-icon> -->
+    </app-top-navigation-button>
   </div>
 </div>

@@ -46,7 +46,7 @@ input.add {
 }
 
 .delete {
-  height: 34px;
+  height: 36px;
   padding-top: 0px;
   padding-bottom: 0px;
 }
@@ -62,7 +62,7 @@ button {
   transition: box-shadow 0.15s ease-out;
   background: $primary-color;
 
-  height: 34px;
+  height: 36px;
   padding-top: 0px;
   padding-bottom: 0px;
 
@@ -83,6 +83,7 @@ button {
 
 input {
   border-radius: 4px;
+  height: 36px;
 }
 
 .line {
