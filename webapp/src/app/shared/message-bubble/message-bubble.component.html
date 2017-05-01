@@ -9,7 +9,7 @@
         </app-profile-img>
       </div>
       <div class="message-wrapper" [class.-outgoing]="isOutgoing">
-        <span *ngIf="!isOutgoing" class="sender">{{ name }} ({{ username }})<br></span>
+        <span *ngIf="!isOutgoing" class="sender">{{ name }}<br></span>
         <div class="message-with-timestamp" [class.-inactive]="waitForServerResponse">
           <div class="message-bubble" [class.-outgoing]="isOutgoing">
             <ng-content select="[message-body]"></ng-content>

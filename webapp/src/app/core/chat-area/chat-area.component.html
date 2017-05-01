@@ -212,7 +212,7 @@
           [isOutgoing]="message.username === (currentUser$ | async).username"
           [name]="message.senderName"
           [username]="message.username"
-          userId="3"
+          [userId]="message.username"
           [timestamp]="message.sentTime | moment: 'time'">
           <span message-body>{{message.content}}</span>
         </app-message-bubble>
