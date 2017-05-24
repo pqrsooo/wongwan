@@ -1,7 +1,8 @@
 # Introduction
+This project is a messenger-like chat application designed for scalability. We use docker to simulate the environment of using multiple node for production deployemnt. 
 
-## Prerequisites
-
+We use Node.js as a back-end server to provide `api` for the front-end web application. MongoDB cluster is used as the main database and Redis is used as a temporally storage like cache and shared session. The engine for real-time chat is implemented on [Socket.io](https://github.com/socketio/socket.io)
+## Prerequisites\
 - [Node.js](https://nodejs.org) `7.9.0`
 
 > Note: [nvm](https://github.com/creationix/nvm#installation) is recommended, so you can run `nvm use` to use recommended version of Node.js.
@@ -30,3 +31,26 @@ Command | Description
 `yarn outdated` | List all the outdated package, i.e. the locally installed package that has a newer version.
 
 You can have a further read on the commands in [Yarn's Docs](https://yarnpkg.com/en/docs/cli/).
+
+## Getting Start
+To start front-end development, change directory into web app and then run yarn start
+```bash
+$ cd webapp   # change directory into webapp
+$ yarn start  # run front-end environment with yarn
+```
+For back-end side, we have to option for you.
+The first one is run all necessary container development. To run this, following the instruction below.
+```bash
+$ cd api   # change directory into webapp
+$ docker-compose up --build  # run front-end environment with yarn
+```
+The other option is running docker as distributed system. There are totally eight nodes of the server. The first one is NGINX which is load balancer of the system. The next one is web application server node which is implemented with Angular2. Besides, there are two api server implemented using Nodejs, api_primary and api_secondary. Also, cache is used in this as a share memory. It is run using Redis. Lastly, a permanent storage, mongodb cluster which contains the cluster of the replica for fault torelant reason.
+
+
+![Architecture](webapp/src/assets/images/wongwan-architecture.png)
+
+To run this environment, the commands has to be modified as followings.
+```bash
+$ cd api   # change directory into webapp
+$ docker-compose -f docker-compose.prod.yml up  # run production file
+```
